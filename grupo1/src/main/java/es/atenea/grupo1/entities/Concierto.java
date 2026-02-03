@@ -28,9 +28,6 @@ public class Concierto {
     private LocalDateTime fecha;
     private Double precioBase;
     private String estado;
-
-    @ManyToOne
-    @JoinColumn(name = "recintoId")
-    private Recinto recinto;
+    private Long recintoId;
 
 }

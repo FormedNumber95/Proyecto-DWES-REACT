@@ -1,5 +1,6 @@
 package es.atenea.grupo1.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +21,12 @@ public class Actuacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private Long artistaId;
+
     @ManyToOne
     @JoinColumn(name = "conciertoId")
     private Concierto concierto;
 
-    @ManyToOne
-    @JoinColumn(name = "artistaId")
-    private Artista artista;
 
 }
