@@ -45,32 +45,6 @@ public class MockDataService {
     );
 
     /* =====================================================
-       MÉTODOS GRUPO 1 - PARA QUE LOS DATOS NO SE REOMPAN
-       ===================================================== */
-
-    private final List<ArtistaDTO> artistas = List.of(
-        new ArtistaDTO(1L, "Artista A", "Rock", "España"),
-        new ArtistaDTO(2L, "Artista B", "Pop", "USA"),
-        new ArtistaDTO(3L, "Artista C", "Jazz", "Francia"),
-        new ArtistaDTO(4L, "Artista D", "Electrónica", "Alemania"),
-        new ArtistaDTO(5L, "Artista E", "Flamenco", "España")
-    );
-
-    private final List<CiudadDTO> ciudades = List.of(
-        new CiudadDTO(1L, "Madrid", "España"),
-        new CiudadDTO(2L, "Barcelona", "España"),
-        new CiudadDTO(3L, "Valencia", "España"),
-        new CiudadDTO(4L, "Sevilla", "España")
-    );
-
-    private final List<RecintoDTO> recintos = List.of(
-        new RecintoDTO(1L, "Palacio de Deportes", 3000, 1L),
-        new RecintoDTO(2L, "Sant Jordi Club", 4500, 2L),
-        new RecintoDTO(3L, "Ciudad de las Artes", 5000, 3L),
-        new RecintoDTO(4L, "FIB Arena", 6000, 4L)
-    );
-
-    /* =====================================================
        MÉTODOS GRUPO 1
        ===================================================== */
 
