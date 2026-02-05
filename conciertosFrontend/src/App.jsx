@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Login from './pages/Login'
 import Principal from './pages/Principal'
+import Err404 from './pages/Err404'
+import Editor from './pages/Editor'
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login />}></Route>
         <Route path='/home' element={<Principal />}></Route>
+        <Route path='/editar/:id' element={<Editor />}></Route>
+        <Route path='/*' element={<Err404 />}></Route>
       </Routes>
       </BrowserRouter>
     </>

@@ -1,8 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
-const Concierto = ({nombre, fecha, recintoId, precio, estado}) => {
+const Concierto = ({id, nombre, fecha, recintoId, precio, estado}) => {
+
+  let navigate = useNavigate()
 
   const [recinto, setRecinto] = useState([])
     async function getRecintos() {
@@ -33,6 +36,9 @@ const Concierto = ({nombre, fecha, recintoId, precio, estado}) => {
       </td>
       <td>
         {estado}
+      </td>
+      <td>
+        <button onClick={() => navigate("/editar/" + id)}>Editar</button>
       </td>
     </tr>
   )

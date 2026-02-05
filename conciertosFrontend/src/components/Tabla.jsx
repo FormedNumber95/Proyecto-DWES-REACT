@@ -34,12 +34,14 @@ const Tabla = () => {
                 <tbody>
                     {conciertos.map((concierto) => (
                         <Concierto key={concierto.id}
+                            id={concierto.id}
                             nombre={concierto.nombre}
                             fecha={concierto.fecha}
                             recintoId={concierto.recintoId}
                             precio={concierto.precioBase+"€"}
                             estado={concierto.estado}>
                         </Concierto>
+                    
                     ))}
                 </tbody>
             </table>

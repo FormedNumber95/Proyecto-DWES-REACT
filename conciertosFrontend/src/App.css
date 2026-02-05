@@ -3,7 +3,6 @@
   text-align: center;
 }
 
-
 h1{
   color: blueviolet;
   text-shadow: 1px 1px 2px plum;
@@ -18,6 +17,11 @@ th{
   color: white;
   padding-left: 1em;
   padding-right: 1em;
+}
+
+button{
+  background-color: blueviolet;
+  color: white;
 }
 
 .concierto{
