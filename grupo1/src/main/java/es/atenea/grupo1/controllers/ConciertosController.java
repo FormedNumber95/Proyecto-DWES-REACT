@@ -60,7 +60,7 @@ public class ConciertosController {
     }
 
     @PutMapping("/conciertos/{conciertoId}")
-    public ResponseEntity<ConciertoDTO> putMethodName(@PathVariable("conciertoId") Long conciertoId, @RequestBody ConciertoDTO conciertoDto) {
+    public ResponseEntity<ConciertoDTO> putConcierto(@PathVariable("conciertoId") Long conciertoId, @RequestBody ConciertoDTO conciertoDto) {
         ConciertoDTO conciertoUpdate = conciertoService.putConcierto(conciertoId, conciertoDto);
 
         if(conciertoUpdate == null){
