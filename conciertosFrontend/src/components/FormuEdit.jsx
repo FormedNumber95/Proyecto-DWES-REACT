@@ -33,7 +33,7 @@ const FormuEdit = ({ id, fecha, nombre, recintoId, precio, estado }) => {
                 <option value="CANCELADO">CANCELADO</option>
                 <option value="FINALIZADO">FINALIZADO</option>
             </select>
-            <input type="submit" id='submit' value='Crear' />
+            <button>Editar</button>
         </form >
     )
 }

@@ -24,12 +24,12 @@ const FormuAdd = () => {
       <input type="text" placeholder='Nombre' required/>
       <select name="recinto" id="recinto">
         {recintos.map((recinto) => (
-          <option value={recinto.id}>{recinto.nombre}</option>
+          <option key={recinto.id} value={recinto.id}>{recinto.nombre}</option>
         ))}
       </select>
       <input type="number" placeholder='Precio' step='0.01' min='0' required/>
       <input type="hidden" value='PROGRAMADO' />
-      <input type="submit" id='submit' value='Crear' />
+      <button>Añadir</button>
     </form >
   )
 }
