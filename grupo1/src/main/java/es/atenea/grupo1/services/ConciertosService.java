@@ -101,4 +101,25 @@ public class ConciertosService {
         return conciertoDtoUpdate;
     }
 
+    public ConciertoDTO deleteConcierto(Long conciertoId){
+        Optional<Concierto> conciertoOpt = repoConcierto.findById(conciertoId);
+
+        if(conciertoOpt.isEmpty()){
+            return null;
+        }
+
+        Concierto concierto = conciertoOpt.get();
+
+        repoConcierto.delete(concierto);
+
+        ConciertoDTO conciertoDtoDelete = new ConciertoDTO(concierto.getId(),
+                                                    concierto.getNombre(), 
+                                                    concierto.getFecha(), 
+                                                    concierto.getRecintoId(), 
+                                                    concierto.getPrecioBase(), 
+                                                    concierto.getEstado());
+
+        return conciertoDtoDelete;
+    }
+
 }
