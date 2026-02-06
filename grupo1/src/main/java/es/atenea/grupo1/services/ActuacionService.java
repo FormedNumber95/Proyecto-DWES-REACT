@@ -1,10 +1,12 @@
 package es.atenea.grupo1.services;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import es.atenea.grupo1.datos.ActuacionDTO;
+import es.atenea.grupo1.datos.InputActuacion;
 import es.atenea.grupo1.entities.Actuacion;
 import es.atenea.grupo1.entities.Concierto;
 import es.atenea.grupo1.repositories.RepoActuacion;
@@ -44,22 +46,45 @@ public class ActuacionService {
         return lstDevolver;
     }
 
-    public ActuacionDTO insertarActuacion(Actuacion actuacion){
-        if(actuacion==null){
+    public ActuacionDTO insertarActuacion(InputActuacion input){
+        if(input==null){
             return null;
         }
-        //TODO validar que el artista no este en otro concierto simultaneamente
-        repoActuacion.save(actuacion);
-        return new ActuacionDTO(actuacion.getId(),actuacion.getConcierto().getId(),actuacion.getArtistaId());
+        Optional<Concierto> op=repoConcierto.findById(input.getConciertoId());
+        if (op.isEmpty()){
+            return null;
+        }
+        Actuacion actuacion=new Actuacion();
+        actuacion.setArtistaId(input.getArtistaId());
+        actuacion.setConcierto(op.get());
+        //Un artista solo puede estar en un concierto al dia
+        //Lista de los conciertos de un dia concreto
+        List<Concierto> lst = repoConcierto.findByFechaBetween(actuacion.getConcierto().getFecha().toLocalDate().atStartOfDay(),
+                actuacion.getConcierto().getFecha().toLocalDate().atTime(LocalTime.MAX));
+        //comprobar si el artista esta en mas de una actuacion
+        boolean esta=false;
+        for(Concierto c:lst){
+            List<Actuacion> lstActuaciones=repoActuacion.findByConcierto(c);
+            for(Actuacion a:lstActuaciones){
+                if(a.getArtistaId()==actuacion.getArtistaId()){
+                    //marcar que se ha encontrado el artista
+                    esta=true;
+                }
+            }
+        }
+        //comprobar si el artista ya tenia un concierto ese dia
+        if(esta){
+            return null;
+        }
+        Actuacion devuleto = repoActuacion.save(actuacion);
+        return new ActuacionDTO(devuleto.getId(),devuleto.getConcierto().getId(),devuleto.getArtistaId());
     }
 
     public boolean borrarActuacion(Long id){
         if (!repoActuacion.existsById(id)) {
             return false;
         }
-        System.out.println("-------------------");
         repoActuacion.deleteById(id);
-        System.out.println("-------------------");
         return true;
     }
 
