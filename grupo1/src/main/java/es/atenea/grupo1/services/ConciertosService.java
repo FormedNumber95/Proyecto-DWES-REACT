@@ -1,0 +1,29 @@
+package es.atenea.grupo1.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import es.atenea.grupo1.datos.ConciertoDTO;
+import es.atenea.grupo1.entities.Concierto;
+import es.atenea.grupo1.repositories.RepoConcierto;
+
+@Service
+public class ConciertosService {
+
+    @Autowired
+    private RepoConcierto repoConcierto;
+
+
+    public List<ConciertoDTO> getConciertos(){
+        List<Concierto> conciertos = repoConcierto.findAll();
+        List<ConciertoDTO> conciertoDTOs = new ArrayList<>();
+        for(Concierto concierto : conciertos){
+            conciertoDTOs.add(new ConciertoDTO(concierto.getId(), concierto.getNombre(), concierto.getFecha(), concierto.getRecintoId(), concierto.getPrecioBase(), concierto.getEstado()));
+        }
+        return conciertoDTOs;
+    }
+
+}
