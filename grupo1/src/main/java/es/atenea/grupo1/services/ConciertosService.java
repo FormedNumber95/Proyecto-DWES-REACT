@@ -2,6 +2,7 @@ package es.atenea.grupo1.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,25 @@ public class ConciertosService {
             conciertoDTOs.add(new ConciertoDTO(concierto.getId(), concierto.getNombre(), concierto.getFecha(), concierto.getRecintoId(), concierto.getPrecioBase(), concierto.getEstado()));
         }
         return conciertoDTOs;
+    }
+
+    public ConciertoDTO getConciertoId(Long id){
+        Optional<Concierto> conciertoOpt = repoConcierto.findById(id);
+
+        if(conciertoOpt.isEmpty()){
+            return null;
+        }
+
+        Concierto concierto = conciertoOpt.get();
+
+        ConciertoDTO conciertoDto = new ConciertoDTO(concierto.getId(),
+                                                    concierto.getNombre(), 
+                                                    concierto.getFecha(), 
+                                                    concierto.getRecintoId(), 
+                                                    concierto.getPrecioBase(), 
+                                                    concierto.getEstado());
+
+        return conciertoDto;
     }
 
 }
