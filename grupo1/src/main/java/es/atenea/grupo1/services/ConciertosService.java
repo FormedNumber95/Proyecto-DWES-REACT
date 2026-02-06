@@ -70,4 +70,35 @@ public class ConciertosService {
         return conciertoDtoNew;
     }
 
+    public ConciertoDTO putConcierto(Long conciertoId, ConciertoDTO conciertoDto){
+        if(conciertoDto == null){
+            return null;
+        }
+
+        Optional<Concierto> conciertoOpt = repoConcierto.findById(conciertoId);
+
+        if(conciertoOpt.isEmpty()){
+            return null;
+        }
+
+        Concierto concierto = conciertoOpt.get();
+
+        concierto.setNombre(conciertoDto.nombre());
+        concierto.setFecha(conciertoDto.fecha());
+        concierto.setRecintoId(conciertoDto.recintoId());
+        concierto.setPrecioBase(conciertoDto.precioBase());
+        concierto.setEstado(conciertoDto.estado());
+
+        Concierto conciertoUpdate = repoConcierto.save(concierto);
+
+        ConciertoDTO conciertoDtoUpdate = new ConciertoDTO(conciertoUpdate.getId(),
+                                                    conciertoUpdate.getNombre(), 
+                                                    conciertoUpdate.getFecha(), 
+                                                    conciertoUpdate.getRecintoId(), 
+                                                    conciertoUpdate.getPrecioBase(), 
+                                                    conciertoUpdate.getEstado());
+
+        return conciertoDtoUpdate;
+    }
+
 }

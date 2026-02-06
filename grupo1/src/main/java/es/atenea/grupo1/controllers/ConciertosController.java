@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -36,7 +38,7 @@ public class ConciertosController {
 
     
     @GetMapping("/conciertos/{conciertoId}")
-    public ResponseEntity<ConciertoDTO> getConciertoId(@PathVariable Long conciertoId) {
+    public ResponseEntity<ConciertoDTO> getConciertoId(@PathVariable("conciertoId") Long conciertoId) {
         ConciertoDTO concierto = conciertoService.getConciertoId(conciertoId);
 
         if(concierto == null){
@@ -55,5 +57,16 @@ public class ConciertosController {
         }
 
         return ResponseEntity.ok().body(conciertoNew);
+    }
+
+    @PutMapping("/conciertos/{conciertoId}")
+    public ResponseEntity<ConciertoDTO> putMethodName(@PathVariable("conciertoId") Long conciertoId, @RequestBody ConciertoDTO conciertoDto) {
+        ConciertoDTO conciertoUpdate = conciertoService.putConcierto(conciertoId, conciertoDto);
+
+        if(conciertoUpdate == null){
+            return ResponseEntity.notFound().build();
+        }
+        
+        return ResponseEntity.ok().body(conciertoUpdate);
     }
 }
