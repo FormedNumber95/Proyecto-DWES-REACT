@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.atenea.grupo1.datos.ActuacionDTO;
 import es.atenea.grupo1.datos.InputActuacion;
-import es.atenea.grupo1.entities.Actuacion;
 import es.atenea.grupo1.services.ActuacionService;
 
 import org.springframework.web.bind.annotation.GetMapping;
