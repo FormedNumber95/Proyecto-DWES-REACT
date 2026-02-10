@@ -9,13 +9,17 @@ import org.springframework.stereotype.Service;
 
 import es.atenea.grupo1.datos.ConciertoDTO;
 import es.atenea.grupo1.entities.Concierto;
+import es.atenea.grupo1.repositories.RepoActuacion;
 import es.atenea.grupo1.repositories.RepoConcierto;
+import es.atenea.grupo1.repositories.RepoTipoEntrada;
 
 @Service
 public class ConciertosService {
 
     @Autowired
     private RepoConcierto repoConcierto;
+    @Autowired RepoActuacion repoActuacion;
+    @Autowired RepoTipoEntrada repoTipoEntrada;
 
 
     public List<ConciertoDTO> getConciertos(){
@@ -101,25 +105,17 @@ public class ConciertosService {
         return conciertoDtoUpdate;
     }
 
-    public ConciertoDTO deleteConcierto(Long conciertoId){
+    public boolean deleteConcierto(Long conciertoId){
         Optional<Concierto> conciertoOpt = repoConcierto.findById(conciertoId);
 
         if(conciertoOpt.isEmpty()){
-            return null;
+            return false;
         }
-
-        Concierto concierto = conciertoOpt.get();
-
-        repoConcierto.delete(concierto);
-
-        ConciertoDTO conciertoDtoDelete = new ConciertoDTO(concierto.getId(),
-                                                    concierto.getNombre(), 
-                                                    concierto.getFecha(), 
-                                                    concierto.getRecintoId(), 
-                                                    concierto.getPrecioBase(), 
-                                                    concierto.getEstado());
-
-        return conciertoDtoDelete;
+        Concierto c=conciertoOpt.get();
+        repoTipoEntrada.deleteAllByConcierto(c);
+        repoActuacion.deleteAllByConcierto(c);
+        repoConcierto.deleteById(conciertoId);
+        return true;
     }
 
 }

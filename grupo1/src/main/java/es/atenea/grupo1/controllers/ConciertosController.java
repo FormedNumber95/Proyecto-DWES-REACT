@@ -73,12 +73,10 @@ public class ConciertosController {
 
     @DeleteMapping("/conciertos/{conciertoId}")
     public ResponseEntity<ConciertoDTO> deleteConcierto(@PathVariable("conciertoId") Long conciertoId){
-        ConciertoDTO conciertoDto = conciertoService.deleteConcierto(conciertoId);
-
-        if(conciertoDto == null){
+        boolean existe = conciertoService.deleteConcierto(conciertoId);
+        if(!existe){
             return ResponseEntity.notFound().build();
         }
-
-        return ResponseEntity.ok().body(conciertoDto);
+        return ResponseEntity.noContent().build();
     }
 }
