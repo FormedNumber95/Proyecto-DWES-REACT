@@ -8,7 +8,7 @@ const Tabla = () => {
     const [conciertos, setConciertos] = useState([])
     async function getConciertos() {
         try {
-            const datos = await axios.get("http://localhost:8090/api/conciertos")
+            const datos = await axios.get("http://localhost:8080/api/conciertos")
             setConciertos(datos.data)
         } catch (error) {
             console.error(error)
