@@ -27,7 +27,7 @@ public class TipoEntradaService {
     // private RestTemplate restTemplate;
 
     public RecintoDTO obtenerRecinto(Long id) {
-        RestTemplate r=new RestTemplate();
+        RestTemplate r = new RestTemplate();
         String url = "http://localhost:8090/api/recintos/" + id;
         RecintoDTO recinto = r.getForObject(url, RecintoDTO.class);
         return recinto;
@@ -57,6 +57,9 @@ public class TipoEntradaService {
             return null;
         }
         Concierto c = op.get();
+        if (inputTipoEntrda.getPrecio() < c.getPrecioBase()) {
+            return null;
+        }
         RecintoDTO recinto = obtenerRecinto(c.getId());
         List<TipoEntrada> lst = repoTipoEntrada.findByConcierto(c);
         int cant = 0;
@@ -76,8 +79,8 @@ public class TipoEntradaService {
                 devolver.getPrecio(), devolver.getCupoMaximo());
     }
 
-    public TipoEntradaDTO actialuzarTipoEntrada(InputTipoEntrda inputTipoEntrda,Long id){
-        if(inputTipoEntrda==null){
+    public TipoEntradaDTO actialuzarTipoEntrada(InputTipoEntrda inputTipoEntrda, Long id) {
+        if (inputTipoEntrda == null) {
             return null;
         }
         Optional<Concierto> op = repoConcierto.findById(inputTipoEntrda.getConciertoId());
@@ -85,8 +88,11 @@ public class TipoEntradaService {
             return null;
         }
         Concierto c = op.get();
+        if (inputTipoEntrda.getPrecio() < c.getPrecioBase()) {
+            return null;
+        }
         RecintoDTO recinto = obtenerRecinto(c.getId());
-        List<TipoEntrada> lst = repoTipoEntrada.findByConciertoAndIdNot(c,id);
+        List<TipoEntrada> lst = repoTipoEntrada.findByConciertoAndIdNot(c, id);
         int cant = 0;
         for (TipoEntrada tipo : lst) {
             cant += tipo.getCupoMaximo();
