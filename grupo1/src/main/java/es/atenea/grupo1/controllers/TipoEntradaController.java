@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.atenea.grupo1.datos.InputTipoEntrda;
 import es.atenea.grupo1.datos.TipoEntradaDTO;
+import es.atenea.grupo1.entities.TipoEntrada;
 import es.atenea.grupo1.services.TipoEntradaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 
 @CrossOrigin(originPatterns = "http://localhost:*")
 @RestController
@@ -41,14 +42,24 @@ public class TipoEntradaController {
     }
 
     @PostMapping("conciertos/{concId}/tipos-entrada")
-    public ResponseEntity<TipoEntradaDTO> postTipoEntrada(@RequestBody InputTipoEntrda inputTipoEntrda,@PathVariable(name = "concId") Long concId) {
-        TipoEntradaDTO tipoEntradaDTO=tipoEntradaService.insertarTipoEntrada(inputTipoEntrda,concId);
+    public ResponseEntity<TipoEntradaDTO> postTipoEntrada(@RequestBody InputTipoEntrda inputTipoEntrda,
+            @PathVariable(name = "concId") Long concId) {
+        TipoEntradaDTO tipoEntradaDTO = tipoEntradaService.insertarTipoEntrada(inputTipoEntrda, concId);
         if (tipoEntradaDTO == null) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(tipoEntradaDTO);
     }
-    
+
+    @PutMapping("tipos-entrada/{tipoEntradaId}")
+    public ResponseEntity<TipoEntradaDTO> putTipoEntrada(@RequestBody InputTipoEntrda inputTipoEntrda,
+            @PathVariable(name = "tipoEntradaId") Long tipoEntradaId) {
+        TipoEntradaDTO tipoEntradaDTO=tipoEntradaService.actialuzarTipoEntrada(inputTipoEntrda, tipoEntradaId);
+        if (tipoEntradaDTO == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(tipoEntradaDTO);
+    }
 
     @DeleteMapping("tipos-entrada/{tipoEntradaId}")
     public ResponseEntity<TipoEntradaDTO> borrarTipoEntrada(@PathVariable(name = "tipoEntradaId") Long tipoEntradaId) {

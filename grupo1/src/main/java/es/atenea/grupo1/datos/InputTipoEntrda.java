@@ -12,4 +12,5 @@ public class InputTipoEntrda {
     private String nombre;
     private Double precio;
     private Integer cupoMaximo;
+    private Long conciertoId;
 }

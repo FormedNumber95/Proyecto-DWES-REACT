@@ -12,5 +12,6 @@ import es.atenea.grupo1.entities.Concierto;
 public interface RepoTipoEntrada extends JpaRepository<TipoEntrada, Long> {
 
     List<TipoEntrada> findByConcierto(Concierto concierto);
+    List<TipoEntrada> findByConciertoAndIdNot(Concierto concierto, Long id);
 
 }

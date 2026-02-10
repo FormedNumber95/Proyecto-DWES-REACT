@@ -76,6 +76,35 @@ public class TipoEntradaService {
                 devolver.getPrecio(), devolver.getCupoMaximo());
     }
 
+    public TipoEntradaDTO actialuzarTipoEntrada(InputTipoEntrda inputTipoEntrda,Long id){
+        if(inputTipoEntrda==null){
+            return null;
+        }
+        Optional<Concierto> op = repoConcierto.findById(inputTipoEntrda.getConciertoId());
+        if (op.isEmpty()) {
+            return null;
+        }
+        Concierto c = op.get();
+        RecintoDTO recinto = obtenerRecinto(c.getId());
+        List<TipoEntrada> lst = repoTipoEntrada.findByConciertoAndIdNot(c,id);
+        int cant = 0;
+        for (TipoEntrada tipo : lst) {
+            cant += tipo.getCupoMaximo();
+        }
+        if (inputTipoEntrda.getCupoMaximo() > recinto.aforo() - cant) {
+            return null;
+        }
+        TipoEntrada guardar = new TipoEntrada();
+        guardar.setConcierto(c);
+        guardar.setCupoMaximo(inputTipoEntrda.getCupoMaximo());
+        guardar.setNombre(inputTipoEntrda.getNombre());
+        guardar.setPrecio(inputTipoEntrda.getPrecio());
+        guardar.setId(id);
+        TipoEntrada devolver = repoTipoEntrada.save(guardar);
+        return new TipoEntradaDTO(devolver.getId(), devolver.getConcierto().getId(), devolver.getNombre(),
+                devolver.getPrecio(), devolver.getCupoMaximo());
+    }
+
     public boolean borrarTipoEntrada(Long id) {
         if (!repoTipoEntrada.existsById(id)) {
             return false;
