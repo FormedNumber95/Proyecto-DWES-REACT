@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.atenea.grupo1.datos.InputTipoEntrda;
 import es.atenea.grupo1.datos.TipoEntradaDTO;
-import es.atenea.grupo1.entities.TipoEntrada;
 import es.atenea.grupo1.services.TipoEntradaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
