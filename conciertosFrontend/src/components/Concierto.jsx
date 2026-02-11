@@ -41,6 +41,12 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
       <td>
         <button onClick={() => navigate("/editar/" + id)}>Editar</button>
       </td>
+      <td>
+        <button onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
+      </td>
+      <td>
+        <button onClick={() => navigate("/tiposEntradas/" + id)}>Tipos de entradas</button>
+      </td>
     </tr>
   )
 }
