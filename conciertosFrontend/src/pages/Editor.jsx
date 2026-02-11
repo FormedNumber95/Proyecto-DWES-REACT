@@ -9,25 +9,34 @@ const Editor = () => {
     let navigate = useNavigate();
 
     const { id } = useParams();
-    const [concierto, setConcierto] = useState(null);
+    const [concierto, setConcierto] = useState({});
     async function getConciertoPorId() {
         try {
-            const datos = await axios.get("http://localhost:5173/editar/" + id)
+            const datos = await axios.get("http://localhost:8080/api/conciertos/" + id)
             setConcierto(datos.data)
         } catch (error) {
             console.error(error)
         }
     }
+    
     useEffect(() => {
         getConciertoPorId()
         if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR") {
             navigate("/");
         }
     }, [])
+
     return (
         <div>
             <Navbar />
-            <FormuEdit />
+            <FormuEdit
+                id={id}
+                estado={concierto.estado} 
+                fecha={concierto.fecha} 
+                nombre={concierto.nombre} 
+                precio={concierto.precioBase} 
+                recintoId={concierto.recintoId}
+            />
         </div>
     )
 }

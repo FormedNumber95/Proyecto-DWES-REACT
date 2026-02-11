@@ -32,7 +32,8 @@ const Tabla = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {conciertos.map((concierto) => (
+                    {conciertos.length>0 && 
+                    conciertos.map((concierto) => (
                         <Concierto key={concierto.id}
                             id={concierto.id}
                             nombre={concierto.nombre}
@@ -40,9 +41,11 @@ const Tabla = () => {
                             recintoId={concierto.recintoId}
                             precio={concierto.precioBase+"€"}
                             estado={concierto.estado}>
-                        </Concierto>
-                    
-                    ))}
+                        </Concierto>  
+                    ))
+                    }
+
+                    {conciertos.length==0 && <span>No hay conciertos</span>}
                 </tbody>
             </table>
         </div>

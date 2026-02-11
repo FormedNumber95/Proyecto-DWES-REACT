@@ -3,22 +3,23 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 
-const Concierto = ({id, nombre, fecha, recintoId, precio, estado}) => {
+const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
 
   let navigate = useNavigate()
 
   const [recinto, setRecinto] = useState([])
-    async function getRecintos() {
-        try {
-            const datos = await axios.get("http://localhost:8090/api/recintos/"+recintoId)
-            setRecinto(datos.data)
-        } catch (error) {
-            console.error(error)
-        }
+  async function getRecintos() {
+    try {
+      const datos = await axios.get("http://localhost:8090/api/recintos/" + recintoId)
+      setRecinto(datos.data)
+    } catch (error) {
+      console.error(error)
     }
-    useEffect(() => {
-        getRecintos()
-    }, [])
+  }
+
+  useEffect(() => {
+    getRecintos()
+  }, [])
 
   return (
     <tr>

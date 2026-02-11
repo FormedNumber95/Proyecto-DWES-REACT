@@ -1,11 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-
 const FormuAdd = () => {
 
   const [recintos, setRecintos] = useState([])
   const [concierto, setConcierto] = useState({estado:"PROGRAMADO"})
+
+
   async function getRecintos() {
     try {
       const datos = await axios.get("http://localhost:8090/api/recintos")
@@ -22,7 +23,7 @@ const FormuAdd = () => {
   async function postConcierto() {
     try {
       const datos = await axios.post("http://localhost:8080/api/conciertos", concierto)
-      console.log(datos.data)
+      location.reload();
     } catch (error) {
       console.error(error)
     }
@@ -31,7 +32,7 @@ const FormuAdd = () => {
   async function crearConcierto(ev) {
     ev.preventDefault();
     await postConcierto();
-
+    
   }
 
 
