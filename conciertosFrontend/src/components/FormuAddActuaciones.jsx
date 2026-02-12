@@ -43,7 +43,7 @@ const FormuAddActuaciones = ({ conciertoId }) => {
 
     async function postActuacion() {
         try {
-            const datos = await axios.post("http://localhost:8080/api/actuaciones/", actuacion)
+            const datos = await axios.post("/api/actuaciones", actuacion)
             location.reload();
         } catch (error) {
             console.error(error)
