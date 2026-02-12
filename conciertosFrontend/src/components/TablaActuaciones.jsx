@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import Actuacion from './Actuacion'
 import axios from 'axios'
+import FormuAddActuaciones from './FormuAddActuaciones'
 
 const TablaActuaciones = ({id}) => {
 
@@ -22,6 +23,7 @@ const TablaActuaciones = ({id}) => {
     <div>
         <h2>ACTUACIONES</h2>
         <ul>
+            <FormuAddActuaciones conciertoId={id}></FormuAddActuaciones>
             {actuaciones.length>0 && actuaciones.map(
                 (actuacion) => (
                         <Actuacion key={actuacion.id}

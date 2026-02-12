@@ -22,7 +22,6 @@ const Tabla = () => {
             <h1>Nuestros conciertos</h1>
             <FormuAdd />
             <table>
-                <thead>
                     <tr>
                         <th>Fecha</th>
                         <th>Nombre</th>
@@ -30,8 +29,6 @@ const Tabla = () => {
                         <th>Precio Base</th>
                         <th>Estado</th>
                     </tr>
-                </thead>
-                <tbody>
                     {conciertos.length>0 && 
                     conciertos.map((concierto) => (
                         <Concierto key={concierto.id}
@@ -43,11 +40,9 @@ const Tabla = () => {
                             estado={concierto.estado}>
                         </Concierto>  
                     ))
-                    }
-
-                    {conciertos.length==0 && <span>No hay conciertos</span>}
-                </tbody>
+                    }   
             </table>
+            {conciertos.length==0 && <span>No hay conciertos</span>}
         </div>
     )
 }

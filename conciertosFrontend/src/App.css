@@ -3,35 +3,57 @@
   text-align: center;
 }
 
+:root {
+  --morado: blueviolet;
+  --blanco: white;
+  --plum: plum;
+  --rosa: lightpink;
+  --negro: black;
+}
+
+
 h1{
-  color: blueviolet;
-  text-shadow: 1px 1px 2px plum;
+  color: var(--morado);
+  text-shadow: 1px 1px 2px var(--plum);
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
 }
 
 table {
   margin: auto;
 }
 
+tr:nth-of-type(2n) { 
+  background-color: var(--rosa);
+}
+
+button > td { 
+  background-color: var(--blanco);
+}
+
 th{
-  background-color: blueviolet;
-  color: white;
+  background-color: var(--morado);
+  color: var(--blanco);
   padding-left: 1em;
   padding-right: 1em;
 }
 
 button{
-  background-color: blueviolet;
-  color: white;
+  background-color: var(--morado);
+  color: var(--blanco);
 }
 
 .concierto{
-  text-shadow: 1px 1px 2px plum;
+  text-shadow: 1px 1px 2px var(--plum);
 }
 
 #submit{
-  background-color: blueviolet;
-  color: white;
-  border: 1px solid blueviolet;
+  background-color: var(--morado);
+  color: var(--blanco);
+  border: 1px solid var(--morado);
   border-radius: 5%;
 }
 
@@ -39,8 +61,8 @@ button{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: blueviolet;
-  color: white;
+  background-color: var(--morado);
+  color: var(--blanco);
   padding: 1rem;
 }
 
@@ -56,7 +78,6 @@ button{
 }
 
 .navbar-center .nav-links a {
-  color: #fff;
+  color: var(--blanco);
   text-decoration: none;
 }
-
