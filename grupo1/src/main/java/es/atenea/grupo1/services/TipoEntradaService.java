@@ -118,4 +118,15 @@ public class TipoEntradaService {
         repoTipoEntrada.deleteById(id);
         return true;
     }
+
+    public TipoEntradaDTO buscarPorID(Long id){
+        Optional<TipoEntrada> op = repoTipoEntrada.findById(id);
+        if (op.isEmpty()) {
+            return null;
+        }
+
+        TipoEntrada tipo = op.get();
+        return new TipoEntradaDTO(tipo.getId(), tipo.getConcierto().getId(), tipo.getNombre(),
+                tipo.getPrecio(), tipo.getCupoMaximo());
+    }
 }

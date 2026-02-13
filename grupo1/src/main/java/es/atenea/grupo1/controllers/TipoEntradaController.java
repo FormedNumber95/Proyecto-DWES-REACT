@@ -60,6 +60,15 @@ public class TipoEntradaController {
         return ResponseEntity.ok().body(tipoEntradaDTO);
     }
 
+    @GetMapping("tipos-entrada/{tipoEntradaId}")
+    public ResponseEntity<TipoEntradaDTO> getTipoEntrada(@PathVariable(name = "tipoEntradaId") Long tipoEntradaId) {
+        TipoEntradaDTO tipoEntradaDTO=tipoEntradaService.buscarPorID(tipoEntradaId);
+        if (tipoEntradaDTO == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(tipoEntradaDTO);
+    }
+
     @DeleteMapping("tipos-entrada/{tipoEntradaId}")
     public ResponseEntity<TipoEntradaDTO> borrarTipoEntrada(@PathVariable(name = "tipoEntradaId") Long tipoEntradaId) {
         if (tipoEntradaService.borrarTipoEntrada(tipoEntradaId)) {
