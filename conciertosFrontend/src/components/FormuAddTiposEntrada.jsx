@@ -3,17 +3,22 @@ import React, { useState } from 'react'
 
 const FormuAddTiposEntrada = ({ conciertoId, precioBase }) => {
 
-  const [tipo, setTipo] = useState({ conciertoId:conciertoId, nombre:"General", precio:precioBase, cupoMaximo:1 })
+  const [tipo, setTipo] = useState({ conciertoId: conciertoId, nombre: "General", precio: precioBase, cupoMaximo: 1 })
 
 
   async function postTipoEntrada() {
-    try {
-      //Por errores de CORS hemos modificado vite.config.js
-      const datos = await axios.post("/api/conciertos/"+conciertoId+"/tipos-entrada", tipo)
-      location.reload();
-    } catch (error) {
-      alert("El cupo de entradas no puede superar la capacidad del recinto")
+    if (tipo.precio < precioBase) {
+      alert("El precio no puede ser inferior al precio base del concierto")
+    } else {
+      try {
+        //Por errores de CORS hemos modificado vite.config.js
+        const datos = await axios.post("/api/conciertos/" + conciertoId + "/tipos-entrada", tipo)
+        location.reload();
+      } catch (error) {
+        alert("El cupo de entradas no puede superar la capacidad del recinto")
+      }
     }
+
   }
 
   return (
