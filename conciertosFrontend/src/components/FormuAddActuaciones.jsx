@@ -43,6 +43,7 @@ const FormuAddActuaciones = ({ conciertoId }) => {
 
     async function postActuacion() {
         try {
+            //Por errores de CORS hemos modificado vite.config.js
             const datos = await axios.post("/api/actuaciones", actuacion)
             location.reload();
         } catch (error) {

@@ -8,6 +8,8 @@ import Principal from './pages/Principal'
 import Err404 from './pages/Err404'
 import Editor from './pages/Editor'
 import Actuaciones from './pages/Actuaciones'
+import TiposEntrada from './pages/TiposEntrada'
+import EditorTipoEntrada from './pages/EditorTipoEntrada'
 
 function App() {
 
@@ -19,7 +21,8 @@ function App() {
         <Route path='/home' element={<Principal />}></Route>
         <Route path='/editar/:id' element={<Editor />}></Route>
         <Route path='/actuaciones/:id' element={<Actuaciones />}></Route>
-        <Route path='/artistas/:id' element={<Err404 />}></Route>
+        <Route path='/tiposentrada/:id' element={<TiposEntrada />}></Route>
+        <Route path='/editartipo/:id' element={<EditorTipoEntrada />}></Route>
         <Route path='/*' element={<Err404 />}></Route>
       </Routes>
       </BrowserRouter>

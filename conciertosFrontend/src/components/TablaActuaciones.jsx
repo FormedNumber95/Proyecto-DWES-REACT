@@ -22,8 +22,8 @@ const TablaActuaciones = ({id}) => {
     return (
     <div>
         <h2>ACTUACIONES</h2>
+        <FormuAddActuaciones conciertoId={id}></FormuAddActuaciones>
         <ul>
-            <FormuAddActuaciones conciertoId={id}></FormuAddActuaciones>
             {actuaciones.length>0 && actuaciones.map(
                 (actuacion) => (
                         <Actuacion key={actuacion.id}
