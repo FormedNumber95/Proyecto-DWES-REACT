@@ -6,17 +6,16 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FormuEditTiposEntrada from '../components/FormuEditTiposEntrada';
 
 
-const EditorTipoEntrada = ({conciertoId}) => {
+const EditorTipoEntrada = () => {
     let navigate = useNavigate();
 
     const { id } = useParams();
-
-
+    const [tipo, setTipo] = useState({})
 
     async function getTiposEntrada() {
         try {
-            const datos = await axios.get("http://localhost:8080/api/conciertos/"+conciertoId+"/tipos-entrada")
-            setTipos(datos.data)
+            const datos = await axios.get("http://localhost:8080/api/tipos-entrada/"+id)
+            setTipo(datos.data)
         } catch (error) {
             console.error(error)
         }
@@ -34,10 +33,10 @@ const EditorTipoEntrada = ({conciertoId}) => {
             <Navbar />
             <FormuEditTiposEntrada
                 id={tipo.id}
-                conciertoId={id}
                 cupoMaximo={tipo.cupoMaximo} 
                 nombre={tipo.nombre} 
                 precio={tipo.precio} 
+                conciertoId={tipo.conciertoId}
             />
         </div>
     )

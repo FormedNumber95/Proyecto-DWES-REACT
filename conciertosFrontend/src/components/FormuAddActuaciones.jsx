@@ -47,7 +47,7 @@ const FormuAddActuaciones = ({ conciertoId }) => {
             const datos = await axios.post("/api/actuaciones", actuacion)
             location.reload();
         } catch (error) {
-            console.error(error)
+            alert("Un artista no puede estar en 2 conciertos el mismo día")
         }
     }
 

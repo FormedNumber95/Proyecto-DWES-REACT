@@ -7,6 +7,11 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
 
   let navigate = useNavigate()
 
+  let fechaActual = new Date()
+  let fechaDate = new Date(fecha)
+  const deshabilitar = fechaActual > fechaDate;
+
+
   const [recinto, setRecinto] = useState([])
   async function getRecintos() {
     try {
@@ -39,13 +44,13 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
         {estado}
       </td>
       <td>
-        <button onClick={() => navigate("/editar/" + id)}>Editar</button>
+        <button disabled={deshabilitar} onClick={() => navigate("/editar/" + id)}>Editar</button>
       </td>
       <td>
-        <button onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
+        <button disabled={deshabilitar} onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
       </td>
       <td>
-        <button onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
+        <button disabled={deshabilitar} onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
       </td>
     </tr>
   )

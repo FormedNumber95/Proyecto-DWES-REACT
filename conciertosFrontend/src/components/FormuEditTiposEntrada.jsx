@@ -2,42 +2,35 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const FormuEditTiposEntrada = ({ conciertoId, id, nombre, precio, cupoMaximo }) => {
+const FormuEditTiposEntrada = ({ id, nombre, precio, cupoMaximo, conciertoId }) => {
 
     let navigate = useNavigate()
+    const [tipo, setTipo] = useState({nombre:nombre, precio:precio, cupoMaximo:cupoMaximo, conciertoId: conciertoId})
 
-    const [tipo, setTipo] = useState({})
-    const [tipos, setTipos] = useState({})
-
-
-    useEffect(() => {
-        let filtro = tipos.filter(t => t.id === id).length === 1
-        if (filtro.length != 0) {
-            setTipo({ ...tipo })
-        }
-    })
-
-    async function putConcierto() {
+    async function putTipoEntrada() {
         try {
-            const datos = await axios.put("http://localhost:8080/api/conciertos/" + id, concierto)
+            const datos = await axios.put("http://localhost:8080/api/tipos-entrada/" + id, tipo)
             navigate("/home")
         } catch (error) {
-            console.error(error)
+            alert("El cupo de entradas no puede superar la capacidad del recinto")
         }
     }
 
-    async function editarConcierto(ev) {
-        ev.preventDefault();
-        await putConcierto();
+    useEffect(()=>{
+        setTipo({nombre:nombre, precio:precio, cupoMaximo:cupoMaximo, conciertoId: conciertoId})
+    }, [nombre, precio, cupoMaximo, conciertoId])
 
+    async function editarTipoEntrada(ev) {
+        ev.preventDefault();
+        await putTipoEntrada();
     }
     return (
         <div>
             <form action="" method='post'>
-                <input type="text" placeholder='Nombre' defaultValue={nombre} required />
-                <input type="number" placeholder='Precio' step='0.01' min='0' defaultValue={precio} required />
-                <input type="number" placeholder='Cupo Máximo' defaultValue={cupoMaximo} required />
-                <button>Editar</button>
+                <input type="text" value={tipo.nombre} required onChange={(ev) => setTipo({...tipo, nombre: ev.target.value})}/>
+                <input type="number" step='0.01' min='0' value={tipo.precio} required onChange={(ev) => setTipo({...tipo, precio: ev.target.value})}/>
+                <input type="number" value={tipo.cupoMaximo} required onChange={(ev) => setTipo({...tipo, cupoMaximo: ev.target.value})}/>
+                <button onClick={editarTipoEntrada}>Editar</button>
             </form >
         </div>
     )

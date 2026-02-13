@@ -12,7 +12,7 @@ const FormuAddTiposEntrada = ({ conciertoId, precioBase }) => {
       const datos = await axios.post("/api/conciertos/"+conciertoId+"/tipos-entrada", tipo)
       location.reload();
     } catch (error) {
-      console.error(error)
+      alert("El cupo de entradas no puede superar la capacidad del recinto")
     }
   }
 
