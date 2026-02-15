@@ -26,12 +26,23 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
     getRecintos()
   }, [])
 
+  const formatFecha = (fechaStr) => {
+    const d = new Date(fechaStr);
+    return new Intl.DateTimeFormat('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(d).replace(',', '');
+  }
+
   return (
     <tr>
-      <td>
-        {fecha}
+      <td className="fecha-concierto">
+        {formatFecha(fecha)}
       </td>
-      <td className='concierto'>
+      <td className='concierto-nombre'>
         {nombre}
       </td>
       <td>
@@ -44,16 +55,17 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
         {estado}
       </td>
       <td>
-        <button disabled={deshabilitar} onClick={() => navigate("/editar/" + id)}>Editar</button>
+        <button className="btn-action btn-editar" disabled={deshabilitar} onClick={() => navigate("/editar/" + id)}>Editar</button>
       </td>
       <td>
-        <button disabled={deshabilitar} onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
+        <button className="btn-action btn-actuaciones" disabled={deshabilitar} onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
       </td>
       <td>
-        <button disabled={deshabilitar} onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
+        <button className="btn-action btn-tipos" disabled={deshabilitar} onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
       </td>
     </tr>
   )
+
 }
 
 export default Concierto

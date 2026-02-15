@@ -18,7 +18,7 @@ const Editor = () => {
             console.error(error)
         }
     }
-    
+
     useEffect(() => {
         getConciertoPorId()
         if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR") {
@@ -27,18 +27,19 @@ const Editor = () => {
     }, [])
 
     return (
-        <div>
+        <div className="editor-container">
             <Navbar />
             <FormuEdit
                 id={id}
-                estado={concierto.estado} 
-                fecha={concierto.fecha} 
-                nombre={concierto.nombre} 
-                precio={concierto.precioBase} 
+                estado={concierto.estado}
+                fecha={concierto.fecha}
+                nombre={concierto.nombre}
+                precio={concierto.precioBase}
                 recintoId={concierto.recintoId}
             />
         </div>
     )
+
 }
 
 export default Editor
