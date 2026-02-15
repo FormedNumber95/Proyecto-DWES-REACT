@@ -60,7 +60,7 @@ public class TipoEntradaService {
         if (inputTipoEntrda.getPrecio() < c.getPrecioBase()) {
             return null;
         }
-        RecintoDTO recinto = obtenerRecinto(c.getId());
+        RecintoDTO recinto = obtenerRecinto(c.getRecintoId());
         List<TipoEntrada> lst = repoTipoEntrada.findByConcierto(c);
         int cant = 0;
         for (TipoEntrada tipo : lst) {
@@ -75,6 +75,7 @@ public class TipoEntradaService {
         guardar.setNombre(inputTipoEntrda.getNombre());
         guardar.setPrecio(inputTipoEntrda.getPrecio());
         TipoEntrada devolver = repoTipoEntrada.save(guardar);
+        System.out.println("Todo OK: GGs");
         return new TipoEntradaDTO(devolver.getId(), devolver.getConcierto().getId(), devolver.getNombre(),
                 devolver.getPrecio(), devolver.getCupoMaximo());
     }
