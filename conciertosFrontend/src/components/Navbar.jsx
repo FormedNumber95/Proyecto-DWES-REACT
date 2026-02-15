@@ -9,7 +9,6 @@ const Navbar = () => {
                     <li className="nav-item">
                         <Link to="/home">Principal</Link>
                     </li>
-                    {/* Puedes añadir más <li> aquí para otros enlaces */}
                 </ul>
             </nav>
         </header>

@@ -9,16 +9,18 @@
   --blanco: #FFFFFF;
   --azul: #3c94ff;
   --gris-oscuro: #1F2933;
+  --gris-fondo: #f0f2f5;
 }
 
 body {
   margin: 0;
   font-family: 'Figtree';
+  background-color: var(--gris-fondo);
 }
 
 .header {
   background-color: var(--azul);
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
   width: 100%;
   box-sizing: border-box;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
@@ -43,7 +45,6 @@ body {
 .nav-item a:hover {
   color: var(--blanco);
 }
-
 
 
 body.login-body {
@@ -111,4 +112,126 @@ body.login-body {
   font-weight: bold;
   margin-top: 1rem;
   font-size: 1rem;
+}
+
+/* Estilos para la tabla y sus componentes */
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.table-container h1 {
+  color: var(--gris-oscuro);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+}
+
+/* Centrar el formulario de añadir */
+.table-container .form-add-container {
+  background-color: var(--blanco);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  margin-bottom: 3rem;
+  box-sizing: border-box;
+}
+
+.table-container .form-add-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--gris-oscuro);
+  font-size: 1.4rem;
+  text-align: left;
+}
+
+.form-add {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.form-add input,
+.form-add select {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-add input:focus,
+.form-add select:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(60, 148, 255, 0.2);
+}
+
+.form-button button {
+  background-color: var(--azul);
+  color: white;
+  border: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.form-button button:hover {
+  background-color: #0070e0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  color: var(--gris-oscuro);
+}
+
+.table-container th,
+.table-container td {
+  padding: 1rem;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+.table-container th {
+  background-color: var(--azul);
+  color: white;
+  font-weight: 600;
+}
+
+.table-container tr:hover {
+  background-color: #f1f7ff;
 }

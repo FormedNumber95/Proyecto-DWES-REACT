@@ -18,31 +18,39 @@ const Tabla = () => {
         getConciertos()
     }, [])
     return (
-        <div>
+        <div className="table-container">
             <h1>Nuestros conciertos</h1>
             <FormuAdd />
             <table>
+                <thead>
                     <tr>
                         <th>Fecha</th>
                         <th>Nombre</th>
                         <th>Recinto</th>
                         <th>Precio Base</th>
                         <th>Estado</th>
+                        <th>Editar</th>
+                        <th>Actuaciones</th>
+                        <th>Tipos de Entrada</th>
                     </tr>
-                    {conciertos.length>0 && 
-                    conciertos.map((concierto) => (
-                        <Concierto key={concierto.id}
-                            id={concierto.id}
-                            nombre={concierto.nombre}
-                            fecha={concierto.fecha}
-                            recintoId={concierto.recintoId}
-                            precio={concierto.precioBase+"€"}
-                            estado={concierto.estado}>
-                        </Concierto>  
-                    ))
-                    }   
+                </thead>
+
+                <tbody>
+                    {conciertos.length > 0 &&
+                        conciertos.map((concierto) => (
+                            <Concierto key={concierto.id}
+                                id={concierto.id}
+                                nombre={concierto.nombre}
+                                fecha={concierto.fecha}
+                                recintoId={concierto.recintoId}
+                                precio={concierto.precioBase + "€"}
+                                estado={concierto.estado}>
+                            </Concierto>
+                        ))
+                    }
+                </tbody>
             </table>
-            {conciertos.length==0 && <span>No hay conciertos</span>}
+            {conciertos.length == 0 && <span>No hay conciertos</span>}
         </div>
     )
 }
