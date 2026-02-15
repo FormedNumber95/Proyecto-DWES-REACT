@@ -17,9 +17,9 @@ const Actuacion = ({ id, idArtista }) => {
         getArtista()
     }, [idArtista])
 
-    async function eliminarActuacion(){
+    async function eliminarActuacion() {
         try {
-            const datos = await axios.delete("http://localhost:8080/api/actuaciones/"+id)
+            const datos = await axios.delete("http://localhost:8080/api/actuaciones/" + id)
             location.reload()
         } catch (error) {
             console.error(error)
@@ -27,11 +27,16 @@ const Actuacion = ({ id, idArtista }) => {
     }
 
     return (
-        <li>
-            {artista.nombre}
-            <button className='btnDel' onClick={eliminarActuacion}>X</button>
-        </li>
+        <tr className="actuacion-row">
+            <td className="artista-nombre">
+                {artista.nombre}
+            </td>
+            <td className="actions-column">
+                <button className='btn-action btn-delete' onClick={eliminarActuacion}>Eliminar</button>
+            </td>
+        </tr>
     )
+
 }
 
 export default Actuacion

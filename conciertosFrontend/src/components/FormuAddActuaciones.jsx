@@ -35,7 +35,7 @@ const FormuAddActuaciones = ({ conciertoId }) => {
         let filtro = artistas.filter(artista =>
             actuaciones.filter(actuacion => actuacion.artistaId === artista.id).length === 0
         )
-        if (filtro.length!=0) {
+        if (filtro.length != 0) {
             setActuacion({ ...actuacion, artistaId: filtro[0].id })
         }
         setDisponibles(filtro)
@@ -56,15 +56,38 @@ const FormuAddActuaciones = ({ conciertoId }) => {
     }
 
     return (
-        <div>
-            <select name="artistas" id="artistas" onChange={(ev) => setActuacion({ ...actuacion, artistaId: ev.target.value })}>
-                {disponibles.map((artista) => (
-                    <option key={artista.id} value={artista.id}>{artista.nombre}</option>
-                ))}
-            </select>
-            <button onClick={() => crearActuacion()}>Crear</button>
+        <div className="form-add-actuacion-container">
+            <div className="form-add-actuacion">
+                <div className="form-group">
+                    <label htmlFor="artistas">Añadir Artista / Grupo</label>
+                    <div className="form-inline">
+                        <select
+                            name="artistas"
+                            id="artistas"
+                            className="select-artista"
+                            onChange={(ev) => setActuacion({ ...actuacion, artistaId: ev.target.value })}
+                        >
+                            {disponibles.length > 0 ? (
+                                disponibles.map((artista) => (
+                                    <option key={artista.id} value={artista.id}>{artista.nombre}</option>
+                                ))
+                            ) : (
+                                <option disabled>No hay más artistas disponibles</option>
+                            )}
+                        </select>
+                        <button
+                            className="btn-add-actuacion"
+                            disabled={disponibles.length === 0}
+                            onClick={() => crearActuacion()}
+                        >
+                            Añadir
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
+
 }
 
 export default FormuAddActuaciones

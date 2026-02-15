@@ -13,6 +13,7 @@
   --color-editar: #f39c12;
   --color-actuaciones: #8e44ad;
   --color-tipos: #27ae60;
+  --color-eliminar: #e74c3c;
   --color-disabled: #bdc3c7;
 }
 
@@ -405,4 +406,166 @@ body.login-body {
 
 .btn-tipos {
   background-color: var(--color-tipos);
+}
+
+/* Estilos para la sección de Actuaciones */
+.actuaciones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 80px);
+  /* Ajuste según altura del navbar */
+}
+
+.actuaciones-content {
+  background-color: var(--blanco);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
+}
+
+.actuaciones-content h2 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: var(--gris-oscuro);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.table-wrapper {
+  margin-top: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #eee;
+}
+
+.tabla-actuaciones {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-actuaciones th {
+  background-color: var(--gris-fondo);
+  color: var(--gris-oscuro);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+}
+
+.tabla-actuaciones .actions-column {
+  text-align: center;
+}
+
+.no-data {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  background-color: #fafafa;
+}
+
+/* Formulario Añadir Actuación */
+.form-add-actuacion-container {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+  margin-bottom: 2rem;
+}
+
+.form-add-actuacion .form-inline {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.select-artista {
+  flex: 1;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: white;
+}
+
+.btn-add-actuacion {
+  background-color: var(--azul);
+  color: white;
+  border: none;
+  padding: 0 1.5rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-add-actuacion:hover:not(:disabled) {
+  background-color: #0070e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add-actuacion:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Estilos para la fila de Actuación */
+.artista-nombre {
+  padding: 1rem;
+  font-weight: 600;
+  color: var(--gris-oscuro);
+}
+
+.btn-delete {
+  background-color: var(--color-eliminar);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+}
+
+.btn-delete:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(231, 76, 60, 0.3);
+}
+
+/* Footer y botón de volver */
+.actuaciones-footer {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #eee;
+  padding-top: 2rem;
+}
+
+.btn-back {
+  background-color: transparent;
+  color: #666;
+  border: 1px solid #ccc;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-back:hover {
+  background-color: #f5f5f5;
+  color: var(--azul);
+  border-color: var(--azul);
+  transform: translateX(-5px);
 }
