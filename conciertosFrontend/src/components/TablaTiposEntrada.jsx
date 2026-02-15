@@ -17,31 +17,52 @@ const TablaTiposEntrada = ({ id, precioBase }) => {
         getTiposEntrada()
     }, [])
     return (
-        <div>
-            <FormuAddTiposEntrada conciertoId={id} precioBase={precioBase}></FormuAddTiposEntrada>
-            <h2>Tipos de Entrada</h2>
+        <div className="tipos-entrada-container">
+            <div className="tipos-entrada-content">
+                <h2>Gestión de Tipos de Entrada</h2>
 
-            <table>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Cupo Máximo</th>
-                </tr>
-                {tipos.length > 0 &&
-                    tipos.map((tipo) => (
-                        <TipoEntrada key={tipo.id}
-                            id={tipo.id}
-                            nombre={tipo.nombre}
-                            precio={tipo.precio + "€"}
-                            cupoMaximo={tipo.cupoMaximo}>
-                        </TipoEntrada>
-                    ))
-                }
-            </table>
-            {tipos.length == 0 && <span>No hay conciertos</span>}
+                <FormuAddTiposEntrada conciertoId={id} precioBase={precioBase}></FormuAddTiposEntrada>
 
+                <div className="table-wrapper">
+                    <table className="tabla-tipos">
+                        <thead>
+                            <tr>
+                                <th>Nombre del Tipo</th>
+                                <th>Precio Final</th>
+                                <th>Cupo Máximo</th>
+                                <th className="actions-column">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tipos.length > 0 ? (
+                                tipos.map((tipo) => (
+                                    <TipoEntrada key={tipo.id}
+                                        id={tipo.id}
+                                        nombre={tipo.nombre}
+                                        precio={tipo.precio + "€"}
+                                        cupoMaximo={tipo.cupoMaximo}>
+                                    </TipoEntrada>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td colSpan="4" className="no-data">
+                                        No hay tipos de entrada definidos para este concierto
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className="actuaciones-footer">
+                    <button className="btn-back" onClick={() => window.history.back()}>
+                        ← Volver a la página principal
+                    </button>
+                </div>
+            </div>
         </div>
     )
+
 }
 
 export default TablaTiposEntrada

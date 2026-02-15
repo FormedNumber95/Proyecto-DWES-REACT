@@ -23,7 +23,6 @@ body {
   background-color: var(--gris-fondo);
 }
 
-/* Forzar herencia de fuente en elementos de formulario */
 input,
 select,
 button,
@@ -128,7 +127,6 @@ body.login-body {
   font-size: 1rem;
 }
 
-/* Estilos para la tabla y sus componentes */
 .table-container {
   display: flex;
   flex-direction: column;
@@ -147,7 +145,6 @@ body.login-body {
   font-size: 2.2rem;
 }
 
-/* Centrar el formulario de añadir */
 .table-container .form-add-container {
   background-color: var(--blanco);
   padding: 2rem;
@@ -250,7 +247,6 @@ body.login-body {
   background-color: #f1f7ff;
 }
 
-/* Estilos para la página de edición */
 .editor-container {
   display: flex;
   flex-direction: column;
@@ -350,9 +346,6 @@ body.login-body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
-/* Estilos para las celdas de la tabla */
 .fecha-concierto {
   font-weight: 600;
   color: #34495e;
@@ -364,7 +357,6 @@ body.login-body {
   color: var(--gris-oscuro);
 }
 
-/* Botones de acción */
 .btn-action {
   border: none;
   padding: 0.4rem 0.8rem;
@@ -408,14 +400,12 @@ body.login-body {
   background-color: var(--color-tipos);
 }
 
-/* Estilos para la sección de Actuaciones */
 .actuaciones-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem;
   min-height: calc(100vh - 80px);
-  /* Ajuste según altura del navbar */
 }
 
 .actuaciones-content {
@@ -470,7 +460,124 @@ body.login-body {
   background-color: #fafafa;
 }
 
-/* Formulario Añadir Actuación */
+.tipos-entrada-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  min-height: calc(100vh - 80px);
+}
+
+.tipos-entrada-content {
+  background-color: var(--blanco);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 1000px;
+  box-sizing: border-box;
+}
+
+.form-add-tipo-container {
+  background-color: #f8faff;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #e1e8f0;
+  margin-bottom: 2.5rem;
+}
+
+.form-add-tipo-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: var(--azul);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.form-add-tipo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  align-items: end;
+}
+
+.form-add-tipo input,
+.form-add-tipo select {
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.form-add-tipo input:focus,
+.form-add-tipo select:focus {
+  outline: none;
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(60, 148, 255, 0.1);
+}
+
+.btn-add-tipo {
+  background-color: var(--azul);
+  color: white;
+  border: none;
+  padding: 0.9rem;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-add-tipo:hover {
+  background-color: #0070e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.tipos-entrada-content h2 {
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--gris-oscuro);
+  text-align: left;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--azul);
+  padding-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.tabla-tipos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-tipos th {
+  background-color: var(--gris-fondo);
+  color: var(--gris-oscuro);
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid #ddd;
+}
+
+.tabla-tipos td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.tabla-tipos .actions-column {
+  text-align: center;
+}
+
+.actions-group {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
 .form-add-actuacion-container {
   background-color: #f9f9f9;
   padding: 1.5rem;
@@ -516,7 +623,6 @@ body.login-body {
   cursor: not-allowed;
 }
 
-/* Estilos para la fila de Actuación */
 .artista-nombre {
   padding: 1rem;
   font-weight: 600;
@@ -542,7 +648,6 @@ body.login-body {
   box-shadow: 0 2px 5px rgba(231, 76, 60, 0.3);
 }
 
-/* Footer y botón de volver */
 .actuaciones-footer {
   margin-top: 3rem;
   display: flex;

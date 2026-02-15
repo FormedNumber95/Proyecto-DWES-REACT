@@ -3,16 +3,16 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const TipoEntrada = ({ id, nombre, precio, cupoMaximo }) => {
-      let navigate = useNavigate()
+  let navigate = useNavigate()
 
-      async function eliminarTipoEntrada(){
-        try {
-            const datos = await axios.delete("http://localhost:8080/api/tipos-entrada/"+id)
-            location.reload()
-        } catch (error) {
-            console.error(error)
-        }
+  async function eliminarTipoEntrada() {
+    try {
+      const datos = await axios.delete("http://localhost:8080/api/tipos-entrada/" + id)
+      location.reload()
+    } catch (error) {
+      console.error(error)
     }
+  }
   return (
     <tr>
       <td>
@@ -24,11 +24,11 @@ const TipoEntrada = ({ id, nombre, precio, cupoMaximo }) => {
       <td>
         {cupoMaximo}
       </td>
-      <td>
-        <button onClick={() => navigate("/editartipo/" + id)}>Editar</button>
-      </td>
-      <td>
-        <button className='btnDel' onClick={eliminarTipoEntrada}>X</button>
+      <td className="actions-column">
+        <div className="actions-group">
+          <button className="btn-action btn-editar" onClick={() => navigate("/editartipo/" + id)}>Editar</button>
+          <button className="btn-action btn-delete" onClick={eliminarTipoEntrada}>Eliminar</button>
+        </div>
       </td>
     </tr>
   )

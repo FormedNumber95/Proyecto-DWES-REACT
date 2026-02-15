@@ -22,13 +22,31 @@ const FormuAddTiposEntrada = ({ conciertoId, precioBase }) => {
   }
 
   return (
-    <div>
-      <input type="text" placeholder="Nombre" onChange={(ev) => setTipo({ ...tipo, nombre: ev.target.value })} />
-      <input type="number" placeholder="Precio" step="0.01" min="0" onChange={(ev) => setTipo({ ...tipo, precio: ev.target.value })} />
-      <input type="number" placeholder="Cupo máximo" min="1" onChange={(ev) => setTipo({ ...tipo, cupoMaximo: ev.target.value })} />
-      <button onClick={postTipoEntrada}>Añadir</button>
+    <div className="form-add-tipo-container">
+      <h3>Crear Nuevo Tipo de Entrada</h3>
+      <div className="form-add-tipo">
+        <div className="form-group">
+          <label htmlFor="nombre">Nombre del Tipo</label>
+          <input id="nombre" type="text" placeholder="Ej: VIP, Golden, General" onChange={(ev) => setTipo({ ...tipo, nombre: ev.target.value })} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="precio">Precio (€)</label>
+          <input id="precio" type="number" placeholder="Precio final" step="0.01" min="0" defaultValue={precioBase} onChange={(ev) => setTipo({ ...tipo, precio: ev.target.value })} />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="cupo">Cupo Máximo</label>
+          <input id="cupo" type="number" placeholder="Cantidad de entradas" min="1" onChange={(ev) => setTipo({ ...tipo, cupoMaximo: ev.target.value })} />
+        </div>
+
+        <div className="form-button-tipo">
+          <button className="btn-add-tipo" onClick={postTipoEntrada}>Crear Tipo</button>
+        </div>
+      </div>
     </div>
   )
+
 }
 
 export default FormuAddTiposEntrada
