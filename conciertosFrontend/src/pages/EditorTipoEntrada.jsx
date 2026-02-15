@@ -14,13 +14,13 @@ const EditorTipoEntrada = () => {
 
     async function getTiposEntrada() {
         try {
-            const datos = await axios.get("http://localhost:8080/api/tipos-entrada/"+id)
+            const datos = await axios.get("http://localhost:8080/api/tipos-entrada/" + id)
             setTipo(datos.data)
         } catch (error) {
             console.error(error)
         }
     }
-    
+
     useEffect(() => {
         getTiposEntrada()
         if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR") {
@@ -29,17 +29,18 @@ const EditorTipoEntrada = () => {
     }, [])
 
     return (
-        <div>
+        <div className="editor-container">
             <Navbar />
             <FormuEditTiposEntrada
                 id={tipo.id}
-                cupoMaximo={tipo.cupoMaximo} 
-                nombre={tipo.nombre} 
-                precio={tipo.precio} 
+                cupoMaximo={tipo.cupoMaximo}
+                nombre={tipo.nombre}
+                precio={tipo.precio}
                 conciertoId={tipo.conciertoId}
             />
         </div>
     )
+
 }
 
 export default EditorTipoEntrada
