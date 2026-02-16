@@ -14,7 +14,7 @@ const TablaActuaciones = ({ id }) => {
             const datos = await axios.get("http://localhost:8080/api/conciertos/" + id + "/actuaciones")
             setActuaciones(datos.data)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
     useEffect(() => {
