@@ -23,7 +23,7 @@ const TiposEntrada = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <TablaTiposEntrada id={id}></TablaTiposEntrada>
+      <TablaTiposEntrada id={id} precioBase={concierto.precioBase}></TablaTiposEntrada>
     </div>
   )
 }

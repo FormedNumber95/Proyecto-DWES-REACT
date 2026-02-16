@@ -92,7 +92,7 @@ public class TipoEntradaService {
         if (inputTipoEntrda.getPrecio() < c.getPrecioBase()) {
             return null;
         }
-        RecintoDTO recinto = obtenerRecinto(c.getId());
+        RecintoDTO recinto = obtenerRecinto(c.getRecintoId());
         List<TipoEntrada> lst = repoTipoEntrada.findByConciertoAndIdNot(c, id);
         int cant = 0;
         for (TipoEntrada tipo : lst) {

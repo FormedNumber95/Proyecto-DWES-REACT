@@ -40,7 +40,8 @@ const TablaTiposEntrada = ({ id, precioBase }) => {
                                         id={tipo.id}
                                         nombre={tipo.nombre}
                                         precio={tipo.precio + "€"}
-                                        cupoMaximo={tipo.cupoMaximo}>
+                                        cupoMaximo={tipo.cupoMaximo}
+                                    >
                                     </TipoEntrada>
                                 ))
                             ) : (

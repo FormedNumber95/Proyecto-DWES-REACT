@@ -6,18 +6,36 @@ const FormuEditTiposEntrada = ({ id, nombre, precio, cupoMaximo, conciertoId }) 
 
     let navigate = useNavigate()
     const [tipo, setTipo] = useState({ nombre: nombre, precio: precio, cupoMaximo: cupoMaximo, conciertoId: conciertoId })
+    const [concierto, setConcierto] = useState({})
 
     async function putTipoEntrada() {
-        try {
-            const datos = await axios.put("http://localhost:8080/api/tipos-entrada/" + id, tipo)
-            navigate("/home")
-        } catch (error) {
-            alert("El cupo de entradas no puede superar la capacidad del recinto")
+        if (tipo.precio < concierto.precioBase) {
+            alert("El precio no puede ser inferior al precio base del concierto")
+        } else {
+            try {
+                const datos = await axios.put("http://localhost:8080/api/tipos-entrada/" + id, tipo)
+                navigate(-1)
+            } catch (error) {
+                console.error(error)
+                alert("El cupo de entradas no puede superar la capacidad del recinto")
+            }
         }
     }
 
+    async function obtenerConcierto() {
+        try {
+            const datos = await axios.get("http://localhost:8080/api/conciertos/" + conciertoId)
+            setConcierto(datos.data);
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
+
     useEffect(() => {
         setTipo({ nombre: nombre, precio: precio, cupoMaximo: cupoMaximo, conciertoId: conciertoId })
+        obtenerConcierto()
     }, [nombre, precio, cupoMaximo, conciertoId])
 
     async function editarTipoEntrada(ev) {
