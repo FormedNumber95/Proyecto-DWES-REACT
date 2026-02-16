@@ -60,7 +60,7 @@ public class TipoEntradaService {
         if (inputTipoEntrda.getPrecio() < c.getPrecioBase()) {
             return null;
         }
-        RecintoDTO recinto = obtenerRecinto(c.getId());
+        RecintoDTO recinto = obtenerRecinto(c.getRecintoId());
         List<TipoEntrada> lst = repoTipoEntrada.findByConcierto(c);
         int cant = 0;
         for (TipoEntrada tipo : lst) {
@@ -75,6 +75,7 @@ public class TipoEntradaService {
         guardar.setNombre(inputTipoEntrda.getNombre());
         guardar.setPrecio(inputTipoEntrda.getPrecio());
         TipoEntrada devolver = repoTipoEntrada.save(guardar);
+        System.out.println("Todo OK: GGs");
         return new TipoEntradaDTO(devolver.getId(), devolver.getConcierto().getId(), devolver.getNombre(),
                 devolver.getPrecio(), devolver.getCupoMaximo());
     }
@@ -91,7 +92,7 @@ public class TipoEntradaService {
         if (inputTipoEntrda.getPrecio() < c.getPrecioBase()) {
             return null;
         }
-        RecintoDTO recinto = obtenerRecinto(c.getId());
+        RecintoDTO recinto = obtenerRecinto(c.getRecintoId());
         List<TipoEntrada> lst = repoTipoEntrada.findByConciertoAndIdNot(c, id);
         int cant = 0;
         for (TipoEntrada tipo : lst) {
@@ -117,5 +118,16 @@ public class TipoEntradaService {
         }
         repoTipoEntrada.deleteById(id);
         return true;
+    }
+
+    public TipoEntradaDTO buscarPorID(Long id){
+        Optional<TipoEntrada> op = repoTipoEntrada.findById(id);
+        if (op.isEmpty()) {
+            return null;
+        }
+
+        TipoEntrada tipo = op.get();
+        return new TipoEntradaDTO(tipo.getId(), tipo.getConcierto().getId(), tipo.getNombre(),
+                tipo.getPrecio(), tipo.getCupoMaximo());
     }
 }
