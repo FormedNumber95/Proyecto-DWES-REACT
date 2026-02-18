@@ -2,7 +2,7 @@ import React from 'react'
 
 const Err404 = () => {
   return (
-    <div>Pagina no encontrada</div>
+    <div className='div-login' style={{margin:"auto",marginTop:"30vh"}}>Error 404. Página no encontrada</div>
   )
 }
 

@@ -17,6 +17,9 @@ const TiposEntrada = () => {
     }
   }
   useEffect(() => {
+    if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR"){
+        navigate("/");
+    }
     getConcierto()
   }, [])
 
