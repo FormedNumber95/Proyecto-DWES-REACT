@@ -7,18 +7,30 @@ const FormuAddTiposEntrada = ({ conciertoId, precioBase }) => {
 
 
   async function postTipoEntrada() {
+    if (tipo.precio == null) {
+      tipo.precio = precioBase;
+    }
     if (tipo.precio < precioBase) {
       alert("El precio no puede ser inferior al precio base del concierto")
     } else {
-      try {
-        //Por errores de CORS hemos modificado vite.config.js
-        const datos = await axios.post("/api/conciertos/" + conciertoId + "/tipos-entrada", tipo)
-        location.reload();
-      } catch (error) {
-        alert("El cupo de entradas no puede superar la capacidad del recinto")
+      if (!Number.isInteger(tipo.precio * 100)) {
+        alert("El precio puede contener hasta 2 decimales")
+      } else {
+        if (tipo.cupoMaximo < 1) {
+          tipo.cupoMaximo = 1
+        }
+        if (tipo.nombre.trim() == "") {
+          tipo.nombre = "General"
+        }
+        try {
+          //Por errores de CORS hemos modificado vite.config.js
+          const datos = await axios.post("/api/conciertos/" + conciertoId + "/tipos-entrada", tipo)
+          location.reload();
+        } catch (error) {
+          alert("El cupo de entradas no puede superar la capacidad del recinto")
+        }
       }
     }
-
   }
 
   return (

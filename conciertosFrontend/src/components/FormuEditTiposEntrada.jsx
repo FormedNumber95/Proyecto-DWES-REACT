@@ -9,15 +9,28 @@ const FormuEditTiposEntrada = ({ id, nombre, precio, cupoMaximo, conciertoId }) 
     const [concierto, setConcierto] = useState({})
 
     async function putTipoEntrada() {
+        if (tipo.precio == null) {
+            tipo.precio = precioBase;
+        }
         if (tipo.precio < concierto.precioBase) {
             alert("El precio no puede ser inferior al precio base del concierto")
         } else {
-            try {
-                const datos = await axios.put("http://localhost:8080/api/tipos-entrada/" + id, tipo)
-                navigate(-1)
-            } catch (error) {
-                console.error(error)
-                alert("El cupo de entradas no puede superar la capacidad del recinto")
+            if (!Number.isInteger(tipo.precio * 100)) {
+                alert("El precio puede contener hasta 2 decimales")
+            } else {
+                if (tipo.cupoMaximo < 1) {
+                    tipo.cupoMaximo = 1
+                }
+                if (tipo.nombre.trim() == "") {
+                    tipo.nombre = "General"
+                }
+                try {
+                    const datos = await axios.put("http://localhost:8080/api/tipos-entrada/" + id, tipo)
+                    navigate(-1)
+                } catch (error) {
+                    console.error(error)
+                    alert("El cupo de entradas no puede superar la capacidad del recinto")
+                }
             }
         }
     }

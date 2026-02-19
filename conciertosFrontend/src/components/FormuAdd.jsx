@@ -28,7 +28,7 @@ const FormuAdd = () => {
         alert("El precio de las entradas no puede ser negativo")
       } else {
         if (!Number.isInteger(concierto.precioBase * 100)) {
-          alert("El numero puede contener hasta 2 decimales")
+          alert("El precio puede contener hasta 2 decimales")
         } else {
           try {
             const datos = await axios.post("http://localhost:8080/api/conciertos", concierto)
