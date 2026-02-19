@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
-const Actuacion = ({ id, idArtista }) => {
+const Actuacion = ({ id, idArtista,disabled }) => {
 
     const [artista, setArtista] = useState([])
     async function getArtista() {
@@ -32,7 +32,7 @@ const Actuacion = ({ id, idArtista }) => {
                 {artista.nombre}
             </td>
             <td className="actions-column">
-                <button className='btn-action btn-delete' onClick={eliminarActuacion}>Eliminar</button>
+                <button className='btn-action btn-delete' disabled={disabled} onClick={eliminarActuacion}>Eliminar</button>
             </td>
         </tr>
     )

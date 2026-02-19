@@ -90,6 +90,7 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
                     key={actuacion.id}
                     id={actuacion.id}
                     idArtista={actuacion.artistaId}
+                    disabled={deshabilitar}
                   />
                 )
               )}
