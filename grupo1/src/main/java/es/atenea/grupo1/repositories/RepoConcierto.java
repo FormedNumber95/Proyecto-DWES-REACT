@@ -10,7 +10,7 @@ import es.atenea.grupo1.entities.Concierto;
 
 @Repository
 public interface RepoConcierto extends JpaRepository<Concierto, Long> {
-    List<Concierto> findByFechaBetween(LocalDateTime inicioDia,LocalDateTime finDia);
-
+    List<Concierto> findByFechaBetween(LocalDateTime inicioDia, LocalDateTime finDia);
+    List<Concierto> findAllByOrderByFechaDesc();
 
 }

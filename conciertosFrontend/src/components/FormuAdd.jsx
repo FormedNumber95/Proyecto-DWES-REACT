@@ -21,11 +21,24 @@ const FormuAdd = () => {
   }, [])
 
   async function postConcierto() {
-    try {
-      const datos = await axios.post("http://localhost:8080/api/conciertos", concierto)
-      location.reload();
-    } catch (error) {
-      console.error(error)
+    if (concierto.fecha == null || concierto.nombre == null || concierto.nombre.trim() == "" || concierto.precioBase == null||concierto.precioBase.trim() == "") {
+      alert("Debes completar todos los campos del formulario")
+    } else {
+      if (concierto.precioBase < 0) {
+        alert("El precio de las entradas no puede ser negativo")
+      } else {
+        if (!Number.isInteger(concierto.precioBase * 100)) {
+          alert("El numero puede contener hasta 2 decimales")
+        } else {
+          try {
+            const datos = await axios.post("http://localhost:8080/api/conciertos", concierto)
+            location.reload();
+          } catch (error) {
+            console.error(error)
+          }
+        }
+
+      }
     }
   }
 

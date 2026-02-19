@@ -23,7 +23,7 @@ public class ConciertosService {
 
 
     public List<ConciertoDTO> getConciertos(){
-        List<Concierto> conciertos = repoConcierto.findAll();
+        List<Concierto> conciertos = repoConcierto.findAllByOrderByFechaDesc();
         List<ConciertoDTO> conciertoDTOs = new ArrayList<>();
         for(Concierto concierto : conciertos){
             conciertoDTOs.add(new ConciertoDTO(concierto.getId(), concierto.getNombre(), concierto.getFecha(), concierto.getRecintoId(), concierto.getPrecioBase(), concierto.getEstado()));
@@ -54,7 +54,6 @@ public class ConciertosService {
         if(conciertoDto == null){
             return null;
         }
-        System.out.println("-------------------------------------------------------------------a");
         Concierto concierto = new Concierto();
         concierto.setNombre(conciertoDto.nombre());
         concierto.setFecha(conciertoDto.fecha());
@@ -62,10 +61,8 @@ public class ConciertosService {
         concierto.setPrecioBase(conciertoDto.precioBase());
         concierto.setEstado(conciertoDto.estado());
         System.out.println(concierto);
-        System.out.println("-------------------------------------------------------------------a");
 
         Concierto conciertoNew = repoConcierto.save(concierto);
-        System.out.println("-------------------------------------------------------------------a");
 
         ConciertoDTO conciertoDtoNew = new ConciertoDTO(conciertoNew.getId(),
                                                     conciertoNew.getNombre(), 
@@ -73,7 +70,6 @@ public class ConciertosService {
                                                     conciertoNew.getRecintoId(), 
                                                     conciertoNew.getPrecioBase(), 
                                                     conciertoNew.getEstado());
-        System.out.println("-------------------------------------------------------------------a");
 
         return conciertoDtoNew;
     }
