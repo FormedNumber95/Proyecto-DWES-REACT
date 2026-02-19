@@ -10,7 +10,7 @@ const EditorTipoEntrada = () => {
     let navigate = useNavigate();
 
     const { id } = useParams();
-    const [tipo, setTipo] = useState({})
+    const [tipo, setTipo] = useState({id:0,cupoMaximo:0,nombre:"",precio:0,conciertoId:1})
 
     async function getTiposEntrada() {
         try {
