@@ -54,7 +54,7 @@ const TablaActuaciones = ({ id }) => {
                 </div>
 
                 <div className="actuaciones-footer">
-                    <button className="btn-back" onClick={() => navigate("/home")}>
+                    <button className="btn-back" onClick={() => navigate("/conciertos")}>
                         ← Volver a la página principal
                     </button>
                 </div>

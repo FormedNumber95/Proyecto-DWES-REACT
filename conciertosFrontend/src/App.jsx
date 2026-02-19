@@ -18,7 +18,8 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path='/' element={<Login />}></Route>
-        <Route path='/home' element={<Principal />}></Route>
+        <Route path='/conciertos' element={<Principal />}></Route>
+        <Route path='/conciertos/:idConcierto' element={<Principal />}></Route>
         <Route path='/editar/:id' element={<Editor />}></Route>
         <Route path='/actuaciones/:id' element={<Actuaciones />}></Route>
         <Route path='/tiposentrada/:id' element={<TiposEntrada />}></Route>

@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import Actuacion from './Actuacion';
 
 
 const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
 
+  const { idConcierto } = useParams();
   let navigate = useNavigate()
 
   let fechaActual = new Date()
@@ -13,6 +15,7 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
 
 
   const [recinto, setRecinto] = useState([])
+  const [actuaciones, setActuaciones] = useState([])
   async function getRecintos() {
     try {
       const datos = await axios.get("http://localhost:8090/api/recintos/" + recintoId)
@@ -21,9 +24,20 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
       console.error(error)
     }
   }
+  async function getActuaciones() {
+    try {
+      const datos = await axios.get("http://localhost:8080/api/conciertos/" + idConcierto + "/actuaciones")
+      setActuaciones(datos.data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   useEffect(() => {
     getRecintos()
+    if (idConcierto != null) {
+      getActuaciones()
+    }
   }, [])
 
   const formatFecha = (fechaStr) => {
@@ -38,32 +52,58 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
   }
 
   return (
-    <tr>
-      <td className="fecha-concierto">
-        {formatFecha(fecha)}
-      </td>
-      <td className='concierto-nombre'>
-        {nombre}
-      </td>
-      <td>
-        {recinto.nombre}
-      </td>
-      <td>
-        {precio}
-      </td>
-      <td>
-        {estado}
-      </td>
-      <td>
-        <button className="btn-action btn-editar" disabled={deshabilitar} onClick={() => navigate("/editar/" + id)}>Editar</button>
-      </td>
-      <td>
-        <button className="btn-action btn-actuaciones" disabled={deshabilitar} onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
-      </td>
-      <td>
-        <button className="btn-action btn-tipos" disabled={deshabilitar} onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
-      </td>
-    </tr>
+    <>
+      <tr>
+        <td className="fecha-concierto">
+          {formatFecha(fecha)}
+        </td>
+        <td className='concierto-nombre'>
+          <a href={"/conciertos/" + id}>{nombre}</a>
+        </td>
+        <td>
+          {recinto.nombre}
+        </td>
+        <td>
+          {precio}
+        </td>
+        <td>
+          {estado}
+        </td>
+        <td>
+          <button className="btn-action btn-editar" disabled={deshabilitar} onClick={() => navigate("/editar/" + id)}>Editar</button>
+        </td>
+        <td>
+          <button className="btn-action btn-actuaciones" disabled={deshabilitar} onClick={() => navigate("/actuaciones/" + id)}>Actuaciones</button>
+        </td>
+        <td>
+          <button className="btn-action btn-tipos" disabled={deshabilitar} onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
+        </td>
+      </tr>
+      {idConcierto == id && (
+        <tr>
+          <td colSpan={8}>
+            <h2>ACTUACIONES</h2>
+            <table style={{ width: "100%" }}>
+              {actuaciones.length > 0 && actuaciones.map(
+                (actuacion) => (
+                  <Actuacion
+                    key={actuacion.id}
+                    id={actuacion.id}
+                    idArtista={actuacion.artistaId}
+                  />
+                )
+              )}
+              {actuaciones.length === 0 && (
+                <tr>
+                  <td>No tiene actuaciones</td>
+                </tr>
+              )}
+            </table>
+          </td>
+        </tr>
+      )}
+
+    </>
   )
 
 }

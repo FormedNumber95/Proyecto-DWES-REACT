@@ -32,7 +32,7 @@ const FormuEdit = ({ id, fecha, nombre, recintoId, precio, estado }) => {
     async function putConcierto() {
         try {
             const datos = await axios.put("http://localhost:8080/api/conciertos/" + id, concierto)
-            navigate("/home")
+            navigate("/conciertos")
         } catch (error) {
             console.error(error)
         }
@@ -82,7 +82,7 @@ const FormuEdit = ({ id, fecha, nombre, recintoId, precio, estado }) => {
                 </div>
 
                 <div className="form-actions">
-                    <button className="btn-cancel" type="button" onClick={() => navigate("/home")}>Cancelar</button>
+                    <button className="btn-cancel" type="button" onClick={() => navigate("/conciertos")}>Cancelar</button>
                     <button className="btn-save" onClick={editarConcierto}>Guardar Cambios</button>
                 </div>
             </form >

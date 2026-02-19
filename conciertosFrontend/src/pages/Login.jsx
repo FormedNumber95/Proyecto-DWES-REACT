@@ -27,7 +27,7 @@ const Login = () => {
       const datos = await axios.post("http://localhost:8090/api/auth/login", usu)
       localStorage.setItem("usuario", datos.data.rol)
       if (datos.data.rol == "ADMIN" || datos.data.rol == "PROMOTOR") {
-        navigate("/home")
+        navigate("/conciertos")
       }
     } catch (error) {
       setErr(error)
