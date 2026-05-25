@@ -1,6 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import ActuacionCliente from "./ActuacionCliente";
+import TipoEntradasDisponibles from "./TipoEntradasDisponibles";
 
 const ConciertoTablaCliente = ({
   id,
@@ -11,8 +13,10 @@ const ConciertoTablaCliente = ({
   estado,
 }) => {
   const { idConcierto } = useParams();
+  let navigate = useNavigate();
 
   const [recinto, setRecinto] = useState([]);
+  const [tiposDisponibles, setTiposDisponibles] = useState(new Map());
   const [entradasDisponibles, setEntradasDisponibles] = useState(0);
   const [actuaciones, setActuaciones] = useState([]);
   async function getRecintos() {
@@ -48,13 +52,29 @@ const ConciertoTablaCliente = ({
       let entradasDeConciertoData = entradasDeConcierto.data;
       let entradasTotales = 0;
       let entradasCompradas = 0;
-      tiposEntradaData.forEach((tipoentrada) => {
-        entradasTotales += tipoentrada.cupoMaximo;
-      });
-      entradasDeConciertoData.forEach((entrada) => {
-        entradasCompradas = entrada.cantidad;
-      });
-      setEntradasDisponibles(entradasTotales - entradasCompradas);
+      if (tiposEntradaData) {
+        tiposEntradaData.forEach((tipoentrada) => {
+          entradasTotales += tipoentrada.cupoMaximo;
+        });
+        entradasDeConciertoData.forEach((entrada) => {
+          entradasCompradas += entrada.cantidad;
+        });
+        setEntradasDisponibles(entradasTotales - entradasCompradas);
+
+        tiposEntradaData.forEach((tipo) => {
+          let cant = tipo.cupoMaximo;
+          entradasDeConciertoData.forEach((entrada) => {
+            if (tipo.id == entrada.tipo_entradaId) {
+              cant = cant - entrada.cantidad;
+            }
+            if (cant > 0) {
+              setTiposDisponibles((tiposDisponibles) =>
+                tiposDisponibles.set(tipo.nombre, cant),
+              );
+            }
+          });
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -83,20 +103,55 @@ const ConciertoTablaCliente = ({
 
   return (
     <>
-      <tr>
+      <tr style={{cursor: "pointer"}} onClick={() => navigate("/conciertosCliente/" + id)}>
         <td className="fecha-concierto">{formatFecha(fecha)}</td>
-        <td className="concierto-nombre">
-          <a href={"/conciertosCliente/" + id}>{nombre}</a>
-        </td>
+        <td className="concierto-nombre">{nombre}</td>
         <td>{recinto.nombre}</td>
         <td>{precio}</td>
         <td>{entradasDisponibles}</td>
       </tr>
       {idConcierto == id && (
         <tr>
-          <td colSpan={2}>HOLA</td>
+          <td colSpan={2}>
+            <h3>ACTUACIONES</h3>
+            <table style={{ width: "100%" }}>
+              <tbody>
+                {actuaciones.length > 0 &&
+                  actuaciones.map((actuacion) => (
+                    <ActuacionCliente
+                      key={actuacion.id}
+                      idArtista={actuacion.artistaId}
+                    />
+                  ))}
+                {actuaciones.length === 0 && (
+                  <tr>
+                    <td>No tiene actuaciones</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </td>
           <td></td>
-          <td colSpan={2}>PAKO</td>
+          <td colSpan={2}>
+            <h3>TIPOS DE ENTRADA DISPONIBLES</h3>
+            <table style={{ width: "100%" }}>
+              <tbody>
+                {entradasDisponibles > 0 &&
+                  Array.from(tiposDisponibles).map(([nombre, cantidad]) => (
+                    <TipoEntradasDisponibles
+                      key={nombre}
+                      nombre={nombre}
+                      cantidad={cantidad}
+                    />
+                  ))}
+                {entradasDisponibles === 0 && (
+                  <tr>
+                    <td>No tiene actuaciones</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </td>
         </tr>
       )}
       {/* {idConcierto == id && (
