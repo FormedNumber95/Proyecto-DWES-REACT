@@ -147,6 +147,10 @@ public class EntradaService {
         }
         TipoEntrada tipo = tipoOpt.get();
 
+        if(tipo.getConcierto().getEstado().equals("CANCELADO")){
+            return null;
+        }
+
         List<Entrada> entradas=repoEntrada.findAllByTipoEntrada(tipo);
         long cant=0;
         for(Entrada e:entradas){
