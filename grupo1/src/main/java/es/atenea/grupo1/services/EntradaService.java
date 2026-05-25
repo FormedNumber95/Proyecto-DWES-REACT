@@ -160,7 +160,7 @@ public class EntradaService {
      * Funcion para actualizar una entrada
      * 
      * @param entradaDto dto de la entrada a guardar
-     * @param entradaId id de la entrada a guardar
+     * @param entradaId  id de la entrada a guardar
      * @return la entrada guardada
      */
     public EntradaDTO putEntrada(EntradaDTO entradaDto, Long entradaId) {
@@ -172,7 +172,7 @@ public class EntradaService {
             return null;
         }
         TipoEntrada tipo = tipoOpt.get();
-        Optional<Entrada> entradaOpt=repoEntrada.findById(entradaId);
+        Optional<Entrada> entradaOpt = repoEntrada.findById(entradaId);
         if (entradaOpt.isEmpty()) {
             return null;
         }
@@ -185,5 +185,21 @@ public class EntradaService {
         Entrada entradaNew = repoEntrada.save(entrada);
         return new EntradaDTO(entradaNew.getId(), entradaNew.getTipoEntrada().getId(), entradaNew.getUsuarioId(),
                 entradaNew.getFecha_compra(), entradaNew.getCantidad());
+    }
+
+    /**
+     * Funcion para eliminar una entrada
+     * @param entradaId id de la entrada a eliminar
+     * @return si se ha eliminado la entrada
+     */
+    public boolean deleteEntrada(Long entradaId) {
+        Optional<Entrada> entradaOpt = repoEntrada.findById(entradaId);
+
+        if (entradaOpt.isEmpty()) {
+            return false;
+        }
+
+        repoEntrada.deleteById(entradaId);
+        return true;
     }
 }
