@@ -1,48 +1,13 @@
-const TipoEntradasDisponibles = ({ id, nombre, cantidad, funcion }) => {
-  function aniadirAlCarro(id) {
-    let items = localStorage.getItem("carro");
-    if (items) {
-      items = items.split(",");
-      let mapa = new Map();
-      items.forEach((item) => {
-        item = item.split(":");
-        mapa.set(parseInt(item[0]), parseInt(item[1]));
-      });
-      items = mapa;
-    } else {
-      items = new Map();
-    }
+import AniadirAlCarro from "./AniadirAlCarro";
 
-    console.log(items);
-    if (!items.get(id)) {
-      items.set(id, 0);
-    }
-    if(items.get(id)==cantidad){
-        return;
-    }
-    items.set(id, items.get(id) + 1);
-    console.log(items);
-    let strGuardar = "";
-    Array.from(items).map(
-      ([id, cantidad]) => (strGuardar += id + ":" + cantidad + ","),
-    );
-    strGuardar = strGuardar.substring(0, strGuardar.length - 1);
-    localStorage.setItem("carro", strGuardar);
-    funcion(strGuardar.length>0);
-  }
+const TipoEntradasDisponibles = ({ id, nombre, cantidad, funcion }) => {
 
   return (
     <tr className="actuacion-row">
       <td className="artista-nombre">{nombre}</td>
       <td className="artista-nombre">{cantidad}</td>
       <td>
-        <button
-          className="btn-add-actuacion"
-          style={{ padding: "1em" }}
-          onClick={() => aniadirAlCarro(id)}
-        >
-          Añadir al carro
-        </button>
+        <AniadirAlCarro id={id} cantidad={cantidad} funcion={funcion}></AniadirAlCarro>
       </td>
     </tr>
   );
