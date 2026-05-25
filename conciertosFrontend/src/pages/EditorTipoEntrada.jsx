@@ -23,7 +23,7 @@ const EditorTipoEntrada = () => {
 
     useEffect(() => {
         getTiposEntrada()
-        if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR") {
+        if (localStorage.getItem("rol") != "ADMIN" && localStorage.getItem("rol") != "PROMOTOR") {
             navigate("/");
         }
     }, [])

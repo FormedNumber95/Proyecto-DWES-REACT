@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar'
-import FormuAddTiposEntrada from '../components/FormuAddTiposEntrada'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import TablaTiposEntrada from '../components/TablaTiposEntrada';
@@ -17,7 +16,7 @@ const TiposEntrada = () => {
     }
   }
   useEffect(() => {
-    if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR"){
+    if (localStorage.getItem("rol") != "ADMIN" && localStorage.getItem("rol") != "PROMOTOR"){
         navigate("/");
     }
     getConcierto()

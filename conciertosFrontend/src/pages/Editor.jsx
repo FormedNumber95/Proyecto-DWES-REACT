@@ -21,7 +21,7 @@ const Editor = () => {
 
     useEffect(() => {
         getConciertoPorId()
-        if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR") {
+        if (localStorage.getItem("rol") != "ADMIN" && localStorage.getItem("rol") != "PROMOTOR") {
             navigate("/");
         }
     }, [])

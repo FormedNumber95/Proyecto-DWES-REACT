@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import TablaActuaciones from '../components/TablaActuaciones';
@@ -9,7 +9,7 @@ const Actuaciones = () => {
     let navigate = useNavigate();
 
     useEffect(() => {
-        if (localStorage.getItem("usuario") != "ADMIN" && localStorage.getItem("usuario") != "PROMOTOR") {
+        if (localStorage.getItem("rol") != "ADMIN" && localStorage.getItem("rol") != "PROMOTOR") {
             navigate("/");
         }
     }, [])

@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Login from './pages/Login'
@@ -10,6 +7,7 @@ import Editor from './pages/Editor'
 import Actuaciones from './pages/Actuaciones'
 import TiposEntrada from './pages/TiposEntrada'
 import EditorTipoEntrada from './pages/EditorTipoEntrada'
+import HomeCliente from './pages/cliente/HomeCliente'
 
 function App() {
 
@@ -17,6 +15,7 @@ function App() {
     <>
       <BrowserRouter>
       <Routes>
+        {/* ADMIN Y PROMOTOR */}
         <Route path='/' element={<Login />}></Route>
         <Route path='/conciertos' element={<Principal />}></Route>
         <Route path='/conciertos/:idConcierto' element={<Principal />}></Route>
@@ -24,6 +23,10 @@ function App() {
         <Route path='/actuaciones/:id' element={<Actuaciones />}></Route>
         <Route path='/tiposentrada/:id' element={<TiposEntrada />}></Route>
         <Route path='/editartipo/:id' element={<EditorTipoEntrada />}></Route>
+        {/* CLIENTE */}
+        <Route path='/conciertosCliente' element={<HomeCliente />}></Route>
+        <Route path='/conciertosCliente/:idConcierto' element={<HomeCliente />}></Route>
+        {/* ERROR 404 */}
         <Route path='/*' element={<Err404 />}></Route>
       </Routes>
       </BrowserRouter>
