@@ -120,6 +120,10 @@ public class EntradaController {
     public ResponseEntity<List<EntradaDTO>> postCompra(@RequestBody List<EntradaDTO> entradasDTO) {
         List<EntradaDTO> entradasNew = entradaService.postCompras(entradasDTO);
 
+        if (entradasNew == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
         if (entradasNew.isEmpty()) {
             return ResponseEntity.internalServerError().build();
         }

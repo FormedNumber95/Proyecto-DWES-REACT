@@ -146,6 +146,16 @@ public class EntradaService {
             return null;
         }
         TipoEntrada tipo = tipoOpt.get();
+
+        List<Entrada> entradas=repoEntrada.findAllByTipoEntrada(tipo);
+        long cant=0;
+        for(Entrada e:entradas){
+            cant+=e.getCantidad();
+        }
+        if(tipo.getCupoMaximo()<cant+entradaDto.getCantidad()){
+            return null;
+        }
+
         Entrada entrada = new Entrada();
         entrada.setId(entradaDto.getId());
         entrada.setTipoEntrada(tipo);
@@ -214,7 +224,9 @@ public class EntradaService {
         List<EntradaDTO> lstDevolver=new ArrayList<>();
 
         for(EntradaDTO e:entradasAAniadir){
-            postEntrada(e);
+            if(postEntrada(e)==null){
+                return null;
+            }
         }
 
         return lstDevolver;
