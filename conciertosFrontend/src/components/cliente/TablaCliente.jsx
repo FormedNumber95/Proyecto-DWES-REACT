@@ -4,12 +4,14 @@ import ConciertoTablaCliente from "./ConciertoTablaCliente";
 
 const TablaCliente = () => {
   const [conciertos, setConciertos] = useState([]);
+  const [hayCarrito, setHayCarrito] = useState(false);
+
   async function getConciertos() {
     try {
       const datos = await axios.get("http://localhost:8080/api/conciertos");
-      let conciertosFuturos=[];
-      datos.data.forEach(concierto => {
-        if(new Date()<new Date(concierto.fecha)){
+      let conciertosFuturos = [];
+      datos.data.forEach((concierto) => {
+        if (new Date() < new Date(concierto.fecha)) {
           conciertosFuturos.push(concierto);
         }
       });
@@ -20,12 +22,38 @@ const TablaCliente = () => {
   }
   useEffect(() => {
     getConciertos();
+    if (localStorage.getItem("carro")) {
+      setHayCarrito(true);
+    }
   }, []);
 
   return (
     <div>
       <div className="table-container">
-        <h1>Nuestros conciertos</h1>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100vw"
+          }}
+        >
+          <h1>Nuestros conciertos</h1>
+
+          {hayCarrito && (
+            <button
+            className="btn-action btn-tipos"
+              style={{
+                position: "absolute",
+                right: "1em",
+              }}
+            >
+              Carro
+            </button>
+          )}
+        </div>
+
         <table>
           <thead>
             <tr>
@@ -47,7 +75,7 @@ const TablaCliente = () => {
                   fecha={concierto.fecha}
                   recintoId={concierto.recintoId}
                   precio={concierto.precioBase + "€"}
-                  estado={concierto.estado}
+                  funcion={setHayCarrito}
                 ></ConciertoTablaCliente>
               ))}
           </tbody>

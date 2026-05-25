@@ -1,7 +1,6 @@
-const TipoEntradasDisponibles = ({ id, nombre, cantidad }) => {
+const TipoEntradasDisponibles = ({ id, nombre, cantidad, funcion }) => {
   function aniadirAlCarro(id) {
     let items = localStorage.getItem("carro");
-    //tener un array para el carrito
     if (items) {
       items = items.split(",");
       let mapa = new Map();
@@ -18,7 +17,10 @@ const TipoEntradasDisponibles = ({ id, nombre, cantidad }) => {
     if (!items.get(id)) {
       items.set(id, 0);
     }
-    items.set(id,items.get(id)+1);
+    if(items.get(id)==cantidad){
+        return;
+    }
+    items.set(id, items.get(id) + 1);
     console.log(items);
     let strGuardar = "";
     Array.from(items).map(
@@ -26,6 +28,7 @@ const TipoEntradasDisponibles = ({ id, nombre, cantidad }) => {
     );
     strGuardar = strGuardar.substring(0, strGuardar.length - 1);
     localStorage.setItem("carro", strGuardar);
+    funcion(strGuardar.length>0);
   }
 
   return (

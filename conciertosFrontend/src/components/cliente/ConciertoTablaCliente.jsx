@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ActuacionCliente from "./ActuacionCliente";
 import TipoEntradasDisponibles from "./TipoEntradasDisponibles";
 
@@ -10,7 +10,7 @@ const ConciertoTablaCliente = ({
   fecha,
   recintoId,
   precio,
-  estado,
+  funcion,
 }) => {
   const { idConcierto } = useParams();
   let navigate = useNavigate();
@@ -143,6 +143,7 @@ const ConciertoTablaCliente = ({
                       nombre={objeto.nombre}
                       id={id}
                       cantidad={objeto.cant}
+                      funcion={funcion}
                     />
                   ))}
                 {entradasDisponibles === 0 && (
