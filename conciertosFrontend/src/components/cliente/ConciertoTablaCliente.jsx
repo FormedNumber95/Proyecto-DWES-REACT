@@ -69,7 +69,7 @@ const ConciertoTablaCliente = ({
             }
             if (cant > 0) {
               setTiposDisponibles((tiposDisponibles) =>
-                tiposDisponibles.set(tipo.nombre, cant),
+                tiposDisponibles.set(tipo.id, {"cant":cant,"nombre":tipo.nombre}),
               );
             }
           });
@@ -137,11 +137,12 @@ const ConciertoTablaCliente = ({
             <table style={{ width: "100%" }}>
               <tbody>
                 {entradasDisponibles > 0 &&
-                  Array.from(tiposDisponibles).map(([nombre, cantidad]) => (
+                  Array.from(tiposDisponibles).map(([id, objeto]) => (
                     <TipoEntradasDisponibles
-                      key={nombre}
-                      nombre={nombre}
-                      cantidad={cantidad}
+                      key={id}
+                      nombre={objeto.nombre}
+                      id={id}
+                      cantidad={objeto.cant}
                     />
                   ))}
                 {entradasDisponibles === 0 && (
