@@ -132,6 +132,7 @@ public class EntradaService {
 
     /**
      * Funcion para insertar una nueva entrada en la db
+     * 
      * @param entradaDto dto de la entrada a guardar
      * @return la entrada guardada
      */
@@ -146,6 +147,37 @@ public class EntradaService {
         TipoEntrada tipo = tipoOpt.get();
         Entrada entrada = new Entrada();
         entrada.setId(entradaDto.getId());
+        entrada.setTipoEntrada(tipo);
+        entrada.setUsuarioId(entradaDto.getUsuarioId());
+        entrada.setFecha_compra(entradaDto.getFecha_compra());
+        entrada.setCantidad(entradaDto.getCantidad());
+        Entrada entradaNew = repoEntrada.save(entrada);
+        return new EntradaDTO(entradaNew.getId(), entradaNew.getTipoEntrada().getId(), entradaNew.getUsuarioId(),
+                entradaNew.getFecha_compra(), entradaNew.getCantidad());
+    }
+
+    /**
+     * Funcion para actualizar una entrada
+     * 
+     * @param entradaDto dto de la entrada a guardar
+     * @param entradaId id de la entrada a guardar
+     * @return la entrada guardada
+     */
+    public EntradaDTO putEntrada(EntradaDTO entradaDto, Long entradaId) {
+        if (entradaDto == null) {
+            return null;
+        }
+        Optional<TipoEntrada> tipoOpt = repoTipoEntrada.findById(entradaDto.getTipo_entradaId());
+        if (tipoOpt.isEmpty()) {
+            return null;
+        }
+        TipoEntrada tipo = tipoOpt.get();
+        Optional<Entrada> entradaOpt=repoEntrada.findById(entradaId);
+        if (entradaOpt.isEmpty()) {
+            return null;
+        }
+
+        Entrada entrada = entradaOpt.get();
         entrada.setTipoEntrada(tipo);
         entrada.setUsuarioId(entradaDto.getUsuarioId());
         entrada.setFecha_compra(entradaDto.getFecha_compra());
