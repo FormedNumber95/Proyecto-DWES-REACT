@@ -115,4 +115,15 @@ public class EntradaController {
         }
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/compras")
+    public ResponseEntity<List<EntradaDTO>> postCompra(@RequestBody List<EntradaDTO> entradasDTO) {
+        List<EntradaDTO> entradasNew = entradaService.postCompras(entradasDTO);
+
+        if (entradasNew.isEmpty()) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        return ResponseEntity.ok().body(entradasNew);
+    }
 }

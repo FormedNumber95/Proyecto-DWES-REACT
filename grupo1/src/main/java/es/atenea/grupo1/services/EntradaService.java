@@ -14,6 +14,7 @@ import es.atenea.grupo1.entities.TipoEntrada;
 import es.atenea.grupo1.repositories.RepoConcierto;
 import es.atenea.grupo1.repositories.RepoEntrada;
 import es.atenea.grupo1.repositories.RepoTipoEntrada;
+import jakarta.transaction.Transactional;
 
 @Service
 public class EntradaService {
@@ -201,5 +202,21 @@ public class EntradaService {
 
         repoEntrada.deleteById(entradaId);
         return true;
+    }
+
+    /**
+     * funcion para aniadir varias entradas en una sola operacion
+     * @param entradasAAniadir lista de las entradas a aniadir
+     * @return la lista de las entradas
+     */
+    @Transactional
+    public List<EntradaDTO> postCompras(List<EntradaDTO> entradasAAniadir){
+        List<EntradaDTO> lstDevolver=new ArrayList<>();
+
+        for(EntradaDTO e:entradasAAniadir){
+            postEntrada(e);
+        }
+
+        return lstDevolver;
     }
 }
