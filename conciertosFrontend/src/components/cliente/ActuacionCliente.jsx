@@ -20,7 +20,7 @@ const ActuacionCliente = ({idArtista}) => {
 
 
   return (
-    <tr className="actuacion-row">
+    <tr>
       <td className="artista-nombre">{artista.nombre}</td>
     </tr>
   );

@@ -69,7 +69,10 @@ const ConciertoTablaCliente = ({
             }
             if (cant > 0) {
               setTiposDisponibles((tiposDisponibles) =>
-                tiposDisponibles.set(tipo.id, {"cant":cant,"nombre":tipo.nombre}),
+                tiposDisponibles.set(tipo.id, {
+                  cant: cant,
+                  nombre: tipo.nombre,
+                }),
               );
             }
           });
@@ -103,7 +106,10 @@ const ConciertoTablaCliente = ({
 
   return (
     <>
-      <tr style={{cursor: "pointer"}} onClick={() => navigate("/conciertosCliente/" + id)}>
+      <tr
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate("/conciertosCliente/" + id)}
+      >
         <td className="fecha-concierto">{formatFecha(fecha)}</td>
         <td className="concierto-nombre">{nombre}</td>
         <td>{recinto.nombre}</td>
@@ -112,7 +118,7 @@ const ConciertoTablaCliente = ({
       </tr>
       {idConcierto == id && (
         <tr>
-          <td colSpan={2}>
+          <td colSpan={2} style={{ verticalAlign: "top" }}>
             <h3>ACTUACIONES</h3>
             <table style={{ width: "100%" }}>
               <tbody>
@@ -132,7 +138,7 @@ const ConciertoTablaCliente = ({
             </table>
           </td>
           <td></td>
-          <td colSpan={2}>
+          <td colSpan={2} style={{ verticalAlign: "top" }}>
             <h3>TIPOS DE ENTRADA DISPONIBLES</h3>
             <table style={{ width: "100%" }}>
               <tbody>
