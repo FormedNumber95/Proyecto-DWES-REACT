@@ -2,6 +2,8 @@ package es.atenea.grupo1.entities;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
@@ -30,6 +32,7 @@ public class Entrada {
 
     private Long usuarioId;
 
+    @CreationTimestamp
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fecha_compra;
 

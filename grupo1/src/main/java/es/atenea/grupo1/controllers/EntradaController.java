@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,8 +68,9 @@ public class EntradaController {
     }
 
     @GetMapping("/entradas/usuario/{usuarioId}/concierto/{conciertoId}")
-    public ResponseEntity<List<EntradaDTO>> getEntradasDeConciertoDeUsuario(@PathVariable Long usuarioId,@PathVariable Long conciertoId) {
-        List<EntradaDTO> entradas = entradaService.obtenerEntradasPorConciertoYUsuarioId(conciertoId,usuarioId);
+    public ResponseEntity<List<EntradaDTO>> getEntradasDeConciertoDeUsuario(@PathVariable Long usuarioId,
+            @PathVariable Long conciertoId) {
+        List<EntradaDTO> entradas = entradaService.obtenerEntradasPorConciertoYUsuarioId(conciertoId, usuarioId);
 
         if (entradas == null) {
             return ResponseEntity.notFound().build();
@@ -78,5 +81,16 @@ public class EntradaController {
         }
 
         return ResponseEntity.ok().body(entradas);
+    }
+
+    @PostMapping("/entradas")
+    public ResponseEntity<EntradaDTO> postEntrada(@RequestBody EntradaDTO entradaDTO) {
+        EntradaDTO entradaNew = entradaService.postEntrada(entradaDTO);
+
+        if (entradaNew == null) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        return ResponseEntity.ok().body(entradaNew);
     }
 }

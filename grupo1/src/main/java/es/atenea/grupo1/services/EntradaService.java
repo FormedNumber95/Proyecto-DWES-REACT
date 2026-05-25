@@ -102,14 +102,14 @@ public class EntradaService {
     }
 
     /**
-     * Funcion para obtener las entradas de un concierto  de un usuario
+     * Funcion para obtener las entradas de un concierto de un usuario
      * 
      * @param idConcierto id del concierto a buscar
-     * @param idUsuario id del usuario a buscar
+     * @param idUsuario   id del usuario a buscar
      * @return lista de las entradas de ese concierto o null si hay error con el id
      *         del concierto
      */
-    public List<EntradaDTO> obtenerEntradasPorConciertoYUsuarioId(Long idConcierto,Long idUsuario) {
+    public List<EntradaDTO> obtenerEntradasPorConciertoYUsuarioId(Long idConcierto, Long idUsuario) {
         Optional<Concierto> conciertoOpt = repoConcierto.findById(idConcierto);
         if (conciertoOpt.isEmpty()) {
             return null;
@@ -121,12 +121,37 @@ public class EntradaService {
         List<EntradaDTO> lstDevolver = new ArrayList<>();
         List<Entrada> lstEntradas = new ArrayList<>();
         for (TipoEntrada t : lstTiposEntrada) {
-            lstEntradas.addAll(repoEntrada.findAllByTipoEntradaAndUsuarioId(t,idUsuario));
+            lstEntradas.addAll(repoEntrada.findAllByTipoEntradaAndUsuarioId(t, idUsuario));
         }
         for (Entrada e : lstEntradas) {
             lstDevolver.add(new EntradaDTO(e.getId(), e.getTipoEntrada().getId(), e.getUsuarioId(), e.getFecha_compra(),
                     e.getCantidad()));
         }
         return lstDevolver;
+    }
+
+    /**
+     * Funcion para insertar una nueva entrada en la db
+     * @param entradaDto dto de la entrada a guardar
+     * @return la entrada guardada
+     */
+    public EntradaDTO postEntrada(EntradaDTO entradaDto) {
+        if (entradaDto == null) {
+            return null;
+        }
+        Optional<TipoEntrada> tipoOpt = repoTipoEntrada.findById(entradaDto.getTipo_entradaId());
+        if (tipoOpt.isEmpty()) {
+            return null;
+        }
+        TipoEntrada tipo = tipoOpt.get();
+        Entrada entrada = new Entrada();
+        entrada.setId(entradaDto.getId());
+        entrada.setTipoEntrada(tipo);
+        entrada.setUsuarioId(entradaDto.getUsuarioId());
+        entrada.setFecha_compra(entradaDto.getFecha_compra());
+        entrada.setCantidad(entradaDto.getCantidad());
+        Entrada entradaNew = repoEntrada.save(entrada);
+        return new EntradaDTO(entradaNew.getId(), entradaNew.getTipoEntrada().getId(), entradaNew.getUsuarioId(),
+                entradaNew.getFecha_compra(), entradaNew.getCantidad());
     }
 }

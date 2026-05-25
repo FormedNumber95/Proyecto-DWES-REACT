@@ -60,7 +60,6 @@ public class ConciertosService {
         concierto.setRecintoId(conciertoDto.recintoId());
         concierto.setPrecioBase(conciertoDto.precioBase());
         concierto.setEstado(conciertoDto.estado());
-        System.out.println(concierto);
 
         Concierto conciertoNew = repoConcierto.save(concierto);
 

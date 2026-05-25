@@ -75,7 +75,6 @@ public class TipoEntradaService {
         guardar.setNombre(inputTipoEntrda.getNombre());
         guardar.setPrecio(inputTipoEntrda.getPrecio());
         TipoEntrada devolver = repoTipoEntrada.save(guardar);
-        System.out.println("Todo OK: GGs");
         return new TipoEntradaDTO(devolver.getId(), devolver.getConcierto().getId(), devolver.getNombre(),
                 devolver.getPrecio(), devolver.getCupoMaximo());
     }
