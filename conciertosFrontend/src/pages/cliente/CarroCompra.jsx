@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EntradaTablaCarro from "../../components/cliente/EntradaTablaCarro";
+import axios from "axios";
 
 const CarroCompra = () => {
   let navigate = useNavigate();
@@ -23,6 +24,40 @@ const CarroCompra = () => {
     }
     setEntradas(items);
   }
+
+  async function pagar() {
+    let items = localStorage.getItem("carro");
+    items = items.split(",");
+    let arr = [];
+    items.forEach((item) => {
+      item = item.split(":");
+      let obj={"tipo_entradaId":parseInt(item[0]), "cantidad":parseInt(item[1]), "usuarioId":parseInt(localStorage.getItem("id"))}
+      arr.push(obj);
+    });
+    console.log(arr);
+    axios.post("http://localhost:8080/api/compras",arr);
+    localStorage.removeItem("carro");
+    location.href="http://localhost:5173/conciertosCliente";
+  }
+
+
+  // async function obtenerMaximoDeEntradas(id) {
+  //   const entradasDeTipo = await axios.get(
+  //     "http://localhost:8080/api/entradas/tipoEntrada/" + id,
+  //   );
+  //   const tipoEntrada = await axios.get(
+  //     "http://localhost:8080/api/tipos-entrada/" + id,
+  //   );
+  //   let tipoEntradaData = tipoEntrada.data;
+  //   let entradas = entradasDeTipo.data;
+  //   let cant = 0;
+  //   if (entradas) {
+  //     entradas.forEach((entrada) => {
+  //       cant += entrada.cantidad;
+  //     });
+  //   }
+  //   return (tipoEntradaData.cupoMaximo - cant);
+  // }
 
   useEffect(() => {
     if (localStorage.getItem("rol") != "CLIENTE") {
@@ -69,7 +104,11 @@ const CarroCompra = () => {
             )}
           </tbody>
         </table>
-        {entradas.size > 0 && <button className="btn-action btn-tipos">Pagar</button>}
+        {entradas.size > 0 && (
+          <button className="btn-action btn-tipos" onClick={pagar}>
+            Pagar
+          </button>
+        )}
       </div>
     </div>
   );

@@ -228,9 +228,11 @@ public class EntradaService {
         List<EntradaDTO> lstDevolver=new ArrayList<>();
 
         for(EntradaDTO e:entradasAAniadir){
-            if(postEntrada(e)==null){
+            EntradaDTO entrada=postEntrada(e);
+            if(entrada==null){
                 return null;
             }
+            lstDevolver.add(entrada);
         }
 
         return lstDevolver;

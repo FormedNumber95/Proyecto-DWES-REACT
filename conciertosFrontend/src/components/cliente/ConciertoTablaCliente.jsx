@@ -56,26 +56,30 @@ const ConciertoTablaCliente = ({
         tiposEntradaData.forEach((tipoentrada) => {
           entradasTotales += tipoentrada.cupoMaximo;
         });
-        entradasDeConciertoData.forEach((entrada) => {
-          entradasCompradas += entrada.cantidad;
-        });
+        if (entradasDeConciertoData) {
+          entradasDeConciertoData.forEach((entrada) => {
+            entradasCompradas += entrada.cantidad;
+          });
+        }
         setEntradasDisponibles(entradasTotales - entradasCompradas);
 
         tiposEntradaData.forEach((tipo) => {
           let cant = tipo.cupoMaximo;
-          entradasDeConciertoData.forEach((entrada) => {
-            if (tipo.id == entrada.tipo_entradaId) {
-              cant = cant - entrada.cantidad;
-            }
-            if (cant > 0) {
-              setTiposDisponibles((tiposDisponibles) =>
-                tiposDisponibles.set(tipo.id, {
-                  cant: cant,
-                  nombre: tipo.nombre,
-                }),
-              );
-            }
-          });
+          if (entradasDeConciertoData) {
+            entradasDeConciertoData.forEach((entrada) => {
+              if (tipo.id == entrada.tipo_entradaId) {
+                cant = cant - entrada.cantidad;
+              }
+            });
+          }
+          if (cant > 0) {
+            setTiposDisponibles((tiposDisponibles) =>
+              tiposDisponibles.set(tipo.id, {
+                cant: cant,
+                nombre: tipo.nombre,
+              }),
+            );
+          }
         });
       }
     } catch (error) {
@@ -89,7 +93,7 @@ const ConciertoTablaCliente = ({
     if (idConcierto != null) {
       getActuaciones();
     }
-  }, []);
+  }, [idConcierto]);
 
   const formatFecha = (fechaStr) => {
     const d = new Date(fechaStr);
@@ -154,7 +158,7 @@ const ConciertoTablaCliente = ({
                   ))}
                 {entradasDisponibles === 0 && (
                   <tr>
-                    <td>No tiene actuaciones</td>
+                    <td>No tiene entradas disponibles</td>
                   </tr>
                 )}
               </tbody>
