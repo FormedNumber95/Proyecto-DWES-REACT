@@ -91,6 +91,11 @@ const Historial = () => {
                   <td>{entrada.cantidad}</td>
                 </tr>
               ))}
+              {entradas.length == 0 &&
+              <tr>
+                <td colSpan={3}>No has realizado ninguna compra</td>
+              </tr>
+              }
           </tbody>
         </table>
       </div>
