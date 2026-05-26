@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import FormuEdit from '../components/FormuEdit'
+import Navbar from '../../components/Navbar'
+import FormuEdit from '../../components/grupo1/FormuEdit'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 

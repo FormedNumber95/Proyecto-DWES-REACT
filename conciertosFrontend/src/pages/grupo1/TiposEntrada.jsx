@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
+import Navbar from '../../components/Navbar'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import TablaTiposEntrada from '../components/TablaTiposEntrada';
+import TablaTiposEntrada from '../../components/grupo1/TablaTiposEntrada';
 
 const TiposEntrada = () => {
   const { id } = useParams();

@@ -74,7 +74,7 @@ const FormuEdit = ({ id, fecha, nombre, recintoId, precio, estado }) => {
 
                 <div className="form-group">
                     <label htmlFor="estado">Estado</label>
-                    <select name="estado" id="estado" onChange={(ev) => setConcierto({ ...concierto, estado: ev.target.value })}>
+                    <select name="estado" id="estado" onChange={(ev) => setConcierto({ ...concierto, estado: ev.target.value })} >
                         <option value="PROGRAMADO" selected={estado == "PROGRAMADO"}>PROGRAMADO</option>
                         <option value="CANCELADO" selected={estado == "CANCELADO"}>CANCELADO</option>
                         <option value="FINALIZADO" selected={estado == "FINALIZADO"}>FINALIZADO</option>

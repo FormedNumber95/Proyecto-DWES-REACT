@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EntradaTablaCarro from "../../components/cliente/EntradaTablaCarro";
+import EntradaTablaCarro from "../../components/grupo2/EntradaTablaCarro";
 import axios from "axios";
 import Navbar from "../../components/Navbar";
 

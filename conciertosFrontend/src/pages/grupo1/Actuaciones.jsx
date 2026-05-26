@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import TablaActuaciones from '../components/TablaActuaciones';
+import Navbar from '../../components/Navbar';
+import TablaActuaciones from '../../components/grupo1/TablaActuaciones';
 
 const Actuaciones = () => {
 

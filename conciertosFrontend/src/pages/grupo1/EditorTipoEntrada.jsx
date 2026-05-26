@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import FormuEdit from '../components/FormuEdit'
+import { useEffect, useState } from 'react'
+import Navbar from '../../components/Navbar'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import FormuEditTiposEntrada from '../components/FormuEditTiposEntrada';
+import FormuEditTiposEntrada from '../../components/grupo1/FormuEditTiposEntrada';
 
 
 const EditorTipoEntrada = () => {

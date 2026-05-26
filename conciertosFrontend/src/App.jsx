@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Login from './pages/Login'
-import Principal from './pages/Principal'
+import Principal from './pages/grupo1/Principal'
 import Err404 from './pages/Err404'
-import Editor from './pages/Editor'
-import Actuaciones from './pages/Actuaciones'
-import TiposEntrada from './pages/TiposEntrada'
-import EditorTipoEntrada from './pages/EditorTipoEntrada'
-import HomeCliente from './pages/cliente/HomeCliente'
-import CarroCompra from './pages/cliente/CarroCompra'
-import Historial from './pages/cliente/Historial'
+import Editor from './pages/grupo1/Editor'
+import Actuaciones from './pages/grupo1/Actuaciones'
+import TiposEntrada from './pages/grupo1/TiposEntrada'
+import EditorTipoEntrada from './pages/grupo1/EditorTipoEntrada'
+import HomeCliente from './pages/grupo2/HomeCliente'
+import CarroCompra from './pages/grupo2/CarroCompra'
+import Historial from './pages/grupo2/Historial'
 
 function App() {
 

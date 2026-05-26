@@ -1,5 +1,5 @@
 import { useEffect,  } from "react";
-import TablaCliente from "../../components/cliente/TablaCliente";
+import TablaCliente from "../../components/grupo2/TablaCliente";
 import { useNavigate } from 'react-router-dom'
 import Navbar from "../../components/Navbar";
 
