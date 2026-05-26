@@ -31,15 +31,18 @@ const CarroCompra = () => {
     let arr = [];
     items.forEach((item) => {
       item = item.split(":");
-      let obj={"tipo_entradaId":parseInt(item[0]), "cantidad":parseInt(item[1]), "usuarioId":parseInt(localStorage.getItem("id"))}
+      let obj = {
+        tipo_entradaId: parseInt(item[0]),
+        cantidad: parseInt(item[1]),
+        usuarioId: parseInt(localStorage.getItem("id")),
+      };
       arr.push(obj);
     });
     console.log(arr);
-    axios.post("http://localhost:8080/api/compras",arr);
+    axios.post("http://localhost:8080/api/compras", arr);
     localStorage.removeItem("carro");
-    location.href="http://localhost:5173/conciertosCliente";
+    location.href = "http://localhost:5173/conciertosCliente";
   }
-
 
   // async function obtenerMaximoDeEntradas(id) {
   //   const entradasDeTipo = await axios.get(
@@ -68,7 +71,29 @@ const CarroCompra = () => {
   return (
     <div>
       <div className="table-container">
-        <h1>Carro</h1>
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100vw",
+          }}
+        >
+          <h1>Carro</h1>
+
+          <a href="/conciertosCliente">
+            <button
+              className="btn-action btn-tipos"
+              style={{
+                position: "absolute",
+                left: "1em",
+              }}
+            >
+              Atras
+            </button>
+          </a>
+        </div>
         <table>
           <thead>
             <tr>
