@@ -45,24 +45,6 @@ const CarroCompra = () => {
     location.href = "http://localhost:5173/conciertosCliente";
   }
 
-  // async function obtenerMaximoDeEntradas(id) {
-  //   const entradasDeTipo = await axios.get(
-  //     "http://localhost:8080/api/entradas/tipoEntrada/" + id,
-  //   );
-  //   const tipoEntrada = await axios.get(
-  //     "http://localhost:8080/api/tipos-entrada/" + id,
-  //   );
-  //   let tipoEntradaData = tipoEntrada.data;
-  //   let entradas = entradasDeTipo.data;
-  //   let cant = 0;
-  //   if (entradas) {
-  //     entradas.forEach((entrada) => {
-  //       cant += entrada.cantidad;
-  //     });
-  //   }
-  //   return (tipoEntradaData.cupoMaximo - cant);
-  // }
-
   useEffect(() => {
     if (localStorage.getItem("rol") != "CLIENTE") {
       navigate("/");

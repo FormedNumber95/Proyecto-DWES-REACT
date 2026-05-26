@@ -1,9 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 const Historial = () => {
   const [entradas, setEntradas] = useState([]);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("rol") != "CLIENTE") {
+      navigate("/");
+    }
+  }, []);
 
   async function obtenerEntradasUsuario() {
     try {
@@ -53,7 +61,7 @@ const Historial = () => {
 
   return (
     <div>
-        <Navbar></Navbar>
+      <Navbar></Navbar>
       <div className="table-container">
         <div
           style={{
