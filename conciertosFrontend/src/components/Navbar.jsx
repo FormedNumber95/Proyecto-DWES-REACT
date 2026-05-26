@@ -1,11 +1,8 @@
-import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const location = useLocation();
   const rol = localStorage.getItem("rol");
-
-  useEffect(()=>{console.log(location.pathname)},[])
 
   return (
     <header className="header">

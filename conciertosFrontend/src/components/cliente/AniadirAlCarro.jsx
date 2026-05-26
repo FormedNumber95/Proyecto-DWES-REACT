@@ -1,5 +1,3 @@
-import React from "react";
-
 const AniadirAlCarro = ({ id, cantidad, funcion, cancelado }) => {
   function aniadirAlCarro(id) {
     let items = localStorage.getItem("carro");
@@ -35,8 +33,7 @@ const AniadirAlCarro = ({ id, cantidad, funcion, cancelado }) => {
     <button
       className="btn-add-actuacion"
       style={{ padding: "1em" }}
-      onClick={() => aniadirAlCarro(id)
-      }
+      onClick={() => aniadirAlCarro(id)}
       disabled={cancelado}
     >
       Añadir al carro
