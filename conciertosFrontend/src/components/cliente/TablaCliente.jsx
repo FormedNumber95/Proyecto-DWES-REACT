@@ -36,21 +36,23 @@ const TablaCliente = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            width: "100vw"
+            width: "100vw",
           }}
         >
           <h1>Nuestros conciertos</h1>
 
           {hayCarrito && (
-            <button
-            className="btn-action btn-tipos"
-              style={{
-                position: "absolute",
-                right: "1em",
-              }}
-            >
-              Carro
-            </button>
+            <a href="/carro">
+              <button
+                className="btn-action btn-tipos"
+                style={{
+                  position: "absolute",
+                  right: "1em",
+                }}
+              >
+                Carro
+              </button>
+            </a>
           )}
         </div>
 

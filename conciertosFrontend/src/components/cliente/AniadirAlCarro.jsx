@@ -15,7 +15,6 @@ const AniadirAlCarro = ({ id, cantidad, funcion }) => {
       items = new Map();
     }
 
-    console.log(items);
     if (!items.get(id)) {
       items.set(id, 0);
     }
@@ -23,7 +22,6 @@ const AniadirAlCarro = ({ id, cantidad, funcion }) => {
       return;
     }
     items.set(id, items.get(id) + 1);
-    console.log(items);
     let strGuardar = "";
     Array.from(items).map(
       ([id, cantidad]) => (strGuardar += id + ":" + cantidad + ","),

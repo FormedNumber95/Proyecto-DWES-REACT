@@ -162,31 +162,6 @@ const ConciertoTablaCliente = ({
           </td>
         </tr>
       )}
-      {/* {idConcierto == id && (
-        <tr>
-          <td colSpan={8}>
-            <h2>ACTUACIONES</h2>
-            <table style={{ width: "100%" }}>
-              <tbody>
-                {actuaciones.length > 0 &&
-                  actuaciones.map((actuacion) => (
-                    <Actuacion
-                      key={actuacion.id}
-                      id={actuacion.id}
-                      idArtista={actuacion.artistaId}
-                      disabled={deshabilitar}
-                    />
-                  ))}
-                {actuaciones.length === 0 && (
-                  <tr>
-                    <td>No tiene actuaciones</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      )} */}
     </>
   );
 };
