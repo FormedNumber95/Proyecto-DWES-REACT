@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const EntradaTablaCarro = ({ id, cantidad, funcion }) => {
+const EntradaTablaCarro = ({ id, cantidad, funcion, cambiarTotalCompra }) => {
   const [concierto, setConcierto] = useState({});
   const [tipoEntrada, setTipoEntrada] = useState({});
   const [maximoDeEntradas, setMaximoDeEntradas] = useState(
@@ -66,6 +66,7 @@ const EntradaTablaCarro = ({ id, cantidad, funcion }) => {
       ([id, cantidad]) => (strGuardar += id + ":" + cantidad + ","),
     );
     strGuardar = strGuardar.substring(0, strGuardar.length - 1);
+    cambiarTotalCompra(total=>total-tipoEntrada.precio * cantidad);
     funcion(Math.random());
     localStorage.setItem("carro", strGuardar);
   }
@@ -86,12 +87,13 @@ const EntradaTablaCarro = ({ id, cantidad, funcion }) => {
       });
     }
     setMaximoDeEntradas(tipoEntradaData.cupoMaximo - cant);
+    cambiarTotalCompra(total=>total+tipoEntradaData.precio * cantidad);
   }
 
   useEffect(() => {
     obtenerInfo();
     obtenerMaximoDeEntradas();
-  }, []);
+  }, [cantidad]);
 
   return (
     <tr>
@@ -112,11 +114,6 @@ const EntradaTablaCarro = ({ id, cantidad, funcion }) => {
           ? ""
           : tipoEntrada.precio * cantidad}
       </td>
-      {/* <td>
-        <a>
-          <button className="btn-action btn-editar">EDITAR</button>
-        </a>
-      </td> */}
       <td>
         <button className="btn-action btn-delete" onClick={eliminarEntradas}>
           ELIMINAR

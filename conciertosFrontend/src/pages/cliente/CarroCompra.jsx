@@ -6,6 +6,7 @@ const CarroCompra = () => {
   let navigate = useNavigate();
   const [entradas, setEntradas] = useState(new Map());
   const [actualizate, setActualizate] = useState(0);
+  const [totalCompra, setTotalCompra] = useState(0);
 
   function obtenerEntradasCarro() {
     let items = localStorage.getItem("carro");
@@ -20,7 +21,6 @@ const CarroCompra = () => {
     } else {
       items = new Map();
     }
-
     setEntradas(items);
   }
 
@@ -53,8 +53,15 @@ const CarroCompra = () => {
                   id={id}
                   key={id}
                   funcion={setActualizate}
+                  cambiarTotalCompra={setTotalCompra}
                 ></EntradaTablaCarro>
               ))}
+            {entradas.size > 0 && (
+              <tr>
+                <td colSpan={4}>TOTAL DE LA COMPRA</td>
+                <td colSpan={2}>{totalCompra}</td>
+              </tr>
+            )}
             {entradas.size == 0 && (
               <tr>
                 <td colSpan={5}>No hay entradas en el carro</td>
@@ -62,6 +69,7 @@ const CarroCompra = () => {
             )}
           </tbody>
         </table>
+        {entradas.size > 0 && <button className="btn-action btn-tipos">Pagar</button>}
       </div>
     </div>
   );
