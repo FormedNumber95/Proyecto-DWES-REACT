@@ -5,7 +5,7 @@ const EntradaTablaCarro = ({ id, cantidad, funcion, cambiarTotalCompra }) => {
   const [concierto, setConcierto] = useState({});
   const [tipoEntrada, setTipoEntrada] = useState({});
   const [maximoDeEntradas, setMaximoDeEntradas] = useState(
-    Number.MAX_SAFE_INTEGER,
+    100,
   );
 
   async function obtenerInfo() {
@@ -43,6 +43,7 @@ const EntradaTablaCarro = ({ id, cantidad, funcion, cambiarTotalCompra }) => {
       ([id, cantidad]) => (strGuardar += id + ":" + cantidad + ","),
     );
     strGuardar = strGuardar.substring(0, strGuardar.length - 1);
+    cambiarTotalCompra((total) => total - tipoEntrada.precio * cantidad);
     funcion(Math.random());
     localStorage.setItem("carro", strGuardar);
   }
@@ -66,7 +67,7 @@ const EntradaTablaCarro = ({ id, cantidad, funcion, cambiarTotalCompra }) => {
       ([id, cantidad]) => (strGuardar += id + ":" + cantidad + ","),
     );
     strGuardar = strGuardar.substring(0, strGuardar.length - 1);
-    cambiarTotalCompra(total=>total-tipoEntrada.precio * cantidad);
+    cambiarTotalCompra((total) => total - tipoEntrada.precio * cantidad);
     funcion(Math.random());
     localStorage.setItem("carro", strGuardar);
   }
@@ -87,7 +88,11 @@ const EntradaTablaCarro = ({ id, cantidad, funcion, cambiarTotalCompra }) => {
       });
     }
     setMaximoDeEntradas(tipoEntradaData.cupoMaximo - cant);
-    cambiarTotalCompra(total=>total+tipoEntradaData.precio * cantidad);
+    cambiarTotalCompra((total) =>
+      isNaN(total + tipoEntradaData.precio * cantidad)
+        ? 0
+        : total + tipoEntradaData.precio * cantidad,
+    );
   }
 
   useEffect(() => {
@@ -100,13 +105,15 @@ const EntradaTablaCarro = ({ id, cantidad, funcion, cambiarTotalCompra }) => {
       <td>{concierto.nombre}</td>
       <td>{tipoEntrada.nombre}</td>
       <td>
-        <input
-          type="number"
-          defaultValue={cantidad}
-          onChange={() => editarEntrada(event.target.value)}
-          min={0}
-          max={maximoDeEntradas}
-        />
+        <select name="select" id="select" onChange={() => editarEntrada(event.target.value)} value={cantidad}>
+          {Array.from({ length: maximoDeEntradas }, (_, i) =>  1+i).map(
+            (numero) => (
+              <option key={numero} value={numero} >
+                {numero}
+              </option>
+            ),
+          )}
+        </select>
       </td>
       <td>{tipoEntrada.precio}</td>
       <td>
