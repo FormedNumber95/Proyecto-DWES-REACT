@@ -11,6 +11,7 @@ const ConciertoTablaCliente = ({
   recintoId,
   precio,
   funcion,
+  cancelado
 }) => {
   const { idConcierto } = useParams();
   let navigate = useNavigate();
@@ -154,6 +155,7 @@ const ConciertoTablaCliente = ({
                       id={id}
                       cantidad={objeto.cant}
                       funcion={funcion}
+                      cancelado={cancelado}
                     />
                   ))}
                 {entradasDisponibles === 0 && (

@@ -89,6 +89,7 @@ const TablaCliente = () => {
                   recintoId={concierto.recintoId}
                   precio={concierto.precioBase + "€"}
                   funcion={setHayCarrito}
+                  cancelado={concierto.estado=="CANCELADO"}
                 ></ConciertoTablaCliente>
               ))}
           </tbody>
