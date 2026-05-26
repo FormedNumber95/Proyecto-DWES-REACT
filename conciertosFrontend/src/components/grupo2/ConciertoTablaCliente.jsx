@@ -160,7 +160,7 @@ const ConciertoTablaCliente = ({
                   ))}
                 {entradasDisponibles === 0 && (
                   <tr>
-                    <td>No tiene entradas disponibles</td>
+                    <td>No quedan entradas disponibles</td>
                   </tr>
                 )}
               </tbody>
