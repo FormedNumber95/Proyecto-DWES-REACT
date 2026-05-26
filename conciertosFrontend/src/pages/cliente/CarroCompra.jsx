@@ -42,7 +42,6 @@ const CarroCompra = () => {
               <th>Cantidad</th>
               <th>Precio por entrada</th>
               <th>Total</th>
-              <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>

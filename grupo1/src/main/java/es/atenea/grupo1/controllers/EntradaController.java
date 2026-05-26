@@ -130,4 +130,16 @@ public class EntradaController {
 
         return ResponseEntity.ok().body(entradasNew);
     }
+
+    @GetMapping("/entradas/tipoEntrada/{tipoEntradaId}")
+    public ResponseEntity<List<EntradaDTO>> getEntradasDeTipo(@PathVariable Long tipoEntradaId){
+        List<EntradaDTO> lstEntradas=entradaService.entradasDeTipo(tipoEntradaId);
+        if(lstEntradas==null){
+            return ResponseEntity.notFound().build();
+        }
+        if(lstEntradas.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(lstEntradas);
+    }
 }

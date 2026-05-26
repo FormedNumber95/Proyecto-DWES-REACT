@@ -219,7 +219,7 @@ public class EntradaService {
     }
 
     /**
-     * funcion para aniadir varias entradas en una sola operacion
+     * Funcion para aniadir varias entradas en una sola operacion
      * @param entradasAAniadir lista de las entradas a aniadir
      * @return la lista de las entradas
      */
@@ -233,6 +233,25 @@ public class EntradaService {
             }
         }
 
+        return lstDevolver;
+    }
+
+    /**
+     * Funcion para obtener todas las entradas de un mismo tipo
+     * @param idTipoEntrada id del tipo de la entrada
+     * @return lista de las entradas del tipo a buscar
+     */
+    public List<EntradaDTO> entradasDeTipo(Long idTipoEntrada){
+        Optional<TipoEntrada> tOptional=repoTipoEntrada.findById(idTipoEntrada);
+        if(tOptional.isEmpty()){
+            return null;
+        }
+        TipoEntrada t=tOptional.get();
+        List<Entrada> lstEntradas=repoEntrada.findAllByTipoEntrada(t);
+        List<EntradaDTO> lstDevolver=new ArrayList<>();
+        for(Entrada e:lstEntradas){
+            lstDevolver.add(new EntradaDTO(e.getId(),idTipoEntrada,e.getUsuarioId(),e.getFecha_compra(),e.getCantidad()));
+        }
         return lstDevolver;
     }
 }
