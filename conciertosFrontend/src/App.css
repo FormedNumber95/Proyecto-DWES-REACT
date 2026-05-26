@@ -60,6 +60,10 @@ textarea {
   color: var(--color-nav);
 }
 
+.nav-item-active a{
+  color: var(--color-nav);
+}
+
 
 body.login-body {
   background: linear-gradient(135deg, #0080ff, #004080);

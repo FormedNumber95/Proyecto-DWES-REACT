@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
 
 const Historial = () => {
   const [entradas, setEntradas] = useState([]);
@@ -52,6 +53,7 @@ const Historial = () => {
 
   return (
     <div>
+        <Navbar></Navbar>
       <div className="table-container">
         <div
           style={{
@@ -63,18 +65,6 @@ const Historial = () => {
           }}
         >
           <h1>Historial de compras</h1>
-
-          <a href="/conciertosCliente">
-            <button
-              className="btn-action btn-tipos"
-              style={{
-                position: "absolute",
-                left: "1em",
-              }}
-            >
-              Atras
-            </button>
-          </a>
         </div>
         <table>
           <thead>

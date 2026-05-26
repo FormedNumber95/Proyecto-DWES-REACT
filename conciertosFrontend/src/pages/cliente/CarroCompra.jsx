@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import EntradaTablaCarro from "../../components/cliente/EntradaTablaCarro";
 import axios from "axios";
+import Navbar from "../../components/Navbar";
 
 const CarroCompra = () => {
   let navigate = useNavigate();
@@ -70,6 +71,7 @@ const CarroCompra = () => {
   }, [actualizate]);
   return (
     <div>
+      <Navbar></Navbar>
       <div className="table-container">
         <div
           style={{

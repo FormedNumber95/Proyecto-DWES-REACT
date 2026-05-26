@@ -54,17 +54,6 @@ const TablaCliente = () => {
               </button>
             </a>
           )}
-          <a href="/historial">
-              <button
-                className="btn-action btn-tipos"
-                style={{
-                  position: "absolute",
-                  left: "1em",
-                }}
-              >
-                Historial de compras
-              </button>
-            </a>
         </div>
 
         <table>
