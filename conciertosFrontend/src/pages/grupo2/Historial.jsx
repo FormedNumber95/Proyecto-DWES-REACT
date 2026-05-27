@@ -22,7 +22,6 @@ const Historial = () => {
 
       const entradasData = data.data;
 
-      // Por cada entrada, obtener el tipo de entrada
       const entradasConTipo = await Promise.all(
         entradasData.map(async (entrada) => {
           const tipoResponse = await axios.get(
@@ -31,7 +30,7 @@ const Historial = () => {
 
           return {
             ...entrada,
-            nombreTipoEntrada: tipoResponse.data.nombre, // ajusta "nombre" según tu backend
+            nombreTipoEntrada: tipoResponse.data.nombre,
           };
         }),
       );

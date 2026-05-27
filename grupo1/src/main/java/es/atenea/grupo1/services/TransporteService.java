@@ -15,6 +15,7 @@ import es.atenea.grupo1.entities.Concierto;
 import es.atenea.grupo1.entities.Entrada;
 import es.atenea.grupo1.entities.Transporte;
 import es.atenea.grupo1.repositories.RepoBillete;
+import es.atenea.grupo1.repositories.RepoConcierto;
 import es.atenea.grupo1.repositories.RepoEntrada;
 import es.atenea.grupo1.repositories.RepoTransporte;
 
@@ -27,6 +28,8 @@ public class TransporteService {
     private RepoTransporte repoTransporte;
     @Autowired
     private RepoEntrada repoEntrada;
+    @Autowired
+    private RepoConcierto repoConcierto;
 
     /**
      * Funcion para obtener todos los billetes
@@ -178,5 +181,23 @@ public class TransporteService {
         Transporte t = tOptional.get();
         return new TransporteDTO(t.getId(), t.getTipo(), t.getPrecio(), t.getLugarSalida(),
                 t.getHoraSalida(), t.getPlazas(), t.getConcierto().getId());
+    }
+
+    /**
+     * Funcion para obtener todos los transportes de un concierto
+     * @param idConcierto id del concierto
+     * @return lista con los transportes del concierto
+     */
+    public List<TransporteDTO> obtenerTransportesConcierto(Long idConcierto){
+        Optional<Concierto> conciertoOptional=repoConcierto.findById(idConcierto);
+        if(conciertoOptional.isEmpty()){
+            return null;
+        }
+        List<Transporte> lstTransportes=repoTransporte.findAllByConcierto(conciertoOptional.get());
+        List<TransporteDTO> lstTransporteDTOs=new ArrayList<>();
+        for(Transporte t:lstTransportes){
+            lstTransporteDTOs.add(new TransporteDTO(t.getId(),t.getTipo(),t.getPrecio(),t.getLugarSalida(),t.getHoraSalida(),t.getPlazas(), idConcierto));
+        }
+        return lstTransporteDTOs;
     }
 }

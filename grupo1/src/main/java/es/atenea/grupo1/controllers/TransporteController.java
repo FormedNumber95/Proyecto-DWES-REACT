@@ -100,4 +100,16 @@ public class TransporteController {
         }
         return ResponseEntity.ok().body(transporte);
     }
+
+    @GetMapping("/transportes/conciertos/{id}")
+    public ResponseEntity<List<TransporteDTO>> obtenerTransportesConcierto(@PathVariable Long id) {
+        List<TransporteDTO> lstTransporte = transporteService.obtenerTransportesConcierto(id);
+        if (lstTransporte == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if(lstTransporte.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstTransporte);
+    }
 }

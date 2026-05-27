@@ -8,7 +8,6 @@ const Navbar = () => {
     <header className="header">
       <nav className="navbar">
         <ul className="nav-menu">
-          
           {(rol === "ADMIN" || rol === "PROMOTOR") && (
             <li
               className={`nav-item ${
@@ -20,7 +19,6 @@ const Navbar = () => {
               <Link to="/conciertos">Conciertos</Link>
             </li>
           )}
-
           {rol === "CLIENTE" && (
             <li
               className={`nav-item ${
@@ -32,7 +30,6 @@ const Navbar = () => {
               <Link to="/conciertosCliente">Conciertos</Link>
             </li>
           )}
-
           {rol === "CLIENTE" && (
             <li
               className={`nav-item ${
@@ -43,8 +40,7 @@ const Navbar = () => {
             >
               <Link to="/historial">Historial de Compras</Link>
             </li>
-          )} 
-
+          )}
           {rol === "CLIENTE" && (
             <li
               className={`nav-item ${
@@ -55,7 +51,18 @@ const Navbar = () => {
             >
               <Link to="/tablaBilletes">Billetes comprados</Link>
             </li>
-          )}         
+          )}
+          {rol === "CLIENTE" && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/comprarBillete")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/comprarBillete">Comprar Billetes</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
