@@ -1,6 +1,6 @@
 package es.atenea.grupo1.entities;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +25,7 @@ public class Transporte {
     private String tipo;
     private Double precio;
     private String lugarSalida;
-    private LocalTime horaSalida;
+    private LocalDateTime horaSalida;
     private int plazas;
 
     @ManyToOne

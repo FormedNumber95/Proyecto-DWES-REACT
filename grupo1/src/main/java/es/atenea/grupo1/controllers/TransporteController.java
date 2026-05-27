@@ -1,0 +1,63 @@
+package es.atenea.grupo1.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import es.atenea.grupo1.datos.BilleteDTO;
+import es.atenea.grupo1.services.TransporteService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@CrossOrigin(originPatterns = "http://localhost:*")
+@RestController
+@RequestMapping("/api")
+public class TransporteController {
+
+    @Autowired
+    private TransporteService transporteService;
+
+    @GetMapping("/billetes")
+    public ResponseEntity<List<BilleteDTO>> obtenerTodosBilletes() {
+        List<BilleteDTO> lst = transporteService.obtenerTodosBilletes();
+        if (lst.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lst);
+    }
+
+    @GetMapping("/billetes/{id}")
+    public ResponseEntity<BilleteDTO> obtenerBillete(@PathVariable Long id) {
+        BilleteDTO billete = transporteService.obtenerBillete(id);
+        if (billete == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(billete);
+    }
+
+    @GetMapping("/billetes/usuario/{usuarioId}")
+    public ResponseEntity<List<BilleteDTO>> obtenerBilletesUsuario(@PathVariable Long usuarioId) {
+        List<BilleteDTO> lst = transporteService.obtenerBilletesUsuario(usuarioId);
+        if (lst.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lst);
+    }
+
+    @GetMapping("/transportes/{transporteId}/billetes")
+    public ResponseEntity<List<BilleteDTO>> obtenerBilletesTransporte(@PathVariable Long transporteId) {
+        List<BilleteDTO> lst = transporteService.obtenerBilletesTransporte(transporteId);
+        if(lst==null){
+            return ResponseEntity.notFound().build();
+        }
+        if (lst.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lst);
+    }
+
+}

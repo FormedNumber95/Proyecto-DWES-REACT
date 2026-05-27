@@ -1,6 +1,6 @@
 package es.atenea.grupo1.datos;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +16,7 @@ public class TransporteDTO {
     private String tipo;
     private Double precio;
     private String lugarSalida;
-    private LocalTime horaSalida;
+    private LocalDateTime horaSalida;
     private int plazas;
     private Long conciertoId;
 }

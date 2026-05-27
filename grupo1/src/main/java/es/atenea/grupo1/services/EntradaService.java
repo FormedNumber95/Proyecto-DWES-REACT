@@ -147,16 +147,16 @@ public class EntradaService {
         }
         TipoEntrada tipo = tipoOpt.get();
 
-        if(tipo.getConcierto().getEstado().equals("CANCELADO")){
+        if (tipo.getConcierto().getEstado().equals("CANCELADO")) {
             return null;
         }
 
-        List<Entrada> entradas=repoEntrada.findAllByTipoEntrada(tipo);
-        long cant=0;
-        for(Entrada e:entradas){
-            cant+=e.getCantidad();
+        List<Entrada> entradas = repoEntrada.findAllByTipoEntrada(tipo);
+        long cant = 0;
+        for (Entrada e : entradas) {
+            cant += e.getCantidad();
         }
-        if(tipo.getCupoMaximo()<cant+entradaDto.getCantidad()){
+        if (tipo.getCupoMaximo() < cant + entradaDto.getCantidad()) {
             return null;
         }
 
@@ -204,6 +204,7 @@ public class EntradaService {
 
     /**
      * Funcion para eliminar una entrada
+     * 
      * @param entradaId id de la entrada a eliminar
      * @return si se ha eliminado la entrada
      */
@@ -220,16 +221,17 @@ public class EntradaService {
 
     /**
      * Funcion para aniadir varias entradas en una sola operacion
+     * 
      * @param entradasAAniadir lista de las entradas a aniadir
      * @return la lista de las entradas
      */
     @Transactional
-    public List<EntradaDTO> postCompras(List<EntradaDTO> entradasAAniadir){
-        List<EntradaDTO> lstDevolver=new ArrayList<>();
+    public List<EntradaDTO> postCompras(List<EntradaDTO> entradasAAniadir) {
+        List<EntradaDTO> lstDevolver = new ArrayList<>();
 
-        for(EntradaDTO e:entradasAAniadir){
-            EntradaDTO entrada=postEntrada(e);
-            if(entrada==null){
+        for (EntradaDTO e : entradasAAniadir) {
+            EntradaDTO entrada = postEntrada(e);
+            if (entrada == null) {
                 return null;
             }
             lstDevolver.add(entrada);
@@ -240,19 +242,21 @@ public class EntradaService {
 
     /**
      * Funcion para obtener todas las entradas de un mismo tipo
+     * 
      * @param idTipoEntrada id del tipo de la entrada
      * @return lista de las entradas del tipo a buscar
      */
-    public List<EntradaDTO> entradasDeTipo(Long idTipoEntrada){
-        Optional<TipoEntrada> tOptional=repoTipoEntrada.findById(idTipoEntrada);
-        if(tOptional.isEmpty()){
+    public List<EntradaDTO> entradasDeTipo(Long idTipoEntrada) {
+        Optional<TipoEntrada> tOptional = repoTipoEntrada.findById(idTipoEntrada);
+        if (tOptional.isEmpty()) {
             return null;
         }
-        TipoEntrada t=tOptional.get();
-        List<Entrada> lstEntradas=repoEntrada.findAllByTipoEntrada(t);
-        List<EntradaDTO> lstDevolver=new ArrayList<>();
-        for(Entrada e:lstEntradas){
-            lstDevolver.add(new EntradaDTO(e.getId(),idTipoEntrada,e.getUsuarioId(),e.getFecha_compra(),e.getCantidad()));
+        TipoEntrada t = tOptional.get();
+        List<Entrada> lstEntradas = repoEntrada.findAllByTipoEntrada(t);
+        List<EntradaDTO> lstDevolver = new ArrayList<>();
+        for (Entrada e : lstEntradas) {
+            lstDevolver.add(
+                    new EntradaDTO(e.getId(), idTipoEntrada, e.getUsuarioId(), e.getFecha_compra(), e.getCantidad()));
         }
         return lstDevolver;
     }
