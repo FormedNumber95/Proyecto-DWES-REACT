@@ -7,8 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.atenea.grupo1.datos.PedidoDTO;
 import es.atenea.grupo1.datos.ProductoDTO;
 import es.atenea.grupo1.entities.Concierto;
+import es.atenea.grupo1.entities.Pedido;
 import es.atenea.grupo1.entities.Producto;
 import es.atenea.grupo1.repositories.RepoConcierto;
 import es.atenea.grupo1.repositories.RepoLineapedido;
@@ -98,15 +100,46 @@ public class PedidoService {
 
     /**
      * Funcion para eliminar un producto
+     * 
      * @param id id del producto
      * @return si se ha eliminado o no
      */
-    public boolean deleteProducto(Long id){
-        Optional<Producto> productoOptional=repoProducto.findById(id);
-        if(productoOptional.isEmpty()){
+    public boolean deleteProducto(Long id) {
+        Optional<Producto> productoOptional = repoProducto.findById(id);
+        if (productoOptional.isEmpty()) {
             return false;
         }
         repoProducto.delete(productoOptional.get());
         return true;
+    }
+
+    /**
+     * Funcion para obtener la lista de los pedidos de un usuario
+     * 
+     * @param id id del usuario
+     * @return la lista de los pedidos del usuario
+     */
+    public List<PedidoDTO> obtenerPedidosUsuario(Long id) {
+        List<Pedido> lstPedidos = repoPedido.findAllByUsuarioId(id);
+        List<PedidoDTO> lstPedidoDTOs = new ArrayList<>();
+        for (Pedido pedido : lstPedidos) {
+            lstPedidoDTOs.add(new PedidoDTO(pedido.getId(), pedido.getUsuarioId(), pedido.getFecha()));
+        }
+        return lstPedidoDTOs;
+    }
+
+    /**
+     * Funcion para obtener la informacion del pedido
+     * 
+     * @param id id del pedido
+     * @return el pedido
+     */
+    public PedidoDTO obtenerPedido(Long id) {
+        Optional<Pedido> pedidoOptional = repoPedido.findById(id);
+        if (pedidoOptional.isEmpty()) {
+            return null;
+        }
+        Pedido pedido = pedidoOptional.get();
+        return new PedidoDTO(pedido.getId(), pedido.getUsuarioId(), pedido.getFecha());
     }
 }
