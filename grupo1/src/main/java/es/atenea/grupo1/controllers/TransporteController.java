@@ -112,4 +112,13 @@ public class TransporteController {
         }
         return ResponseEntity.ok().body(lstTransporte);
     }
+
+    @PostMapping("/transportes")
+    public ResponseEntity<TransporteDTO> postTransporte(@RequestBody TransporteDTO transporteDTO) {
+        TransporteDTO transporteDevolver = transporteService.postTransporte(transporteDTO);
+        if (transporteDevolver == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(transporteDevolver);
+    }
 }

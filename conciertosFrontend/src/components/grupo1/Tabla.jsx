@@ -31,6 +31,7 @@ const Tabla = () => {
                         <th>Editar</th>
                         <th>Actuaciones</th>
                         <th>Tipos de Entrada</th>
+                        <th>Transportes</th>
                     </tr>
                 </thead>
 

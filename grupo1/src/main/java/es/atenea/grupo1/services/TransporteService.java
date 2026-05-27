@@ -200,4 +200,19 @@ public class TransporteService {
         }
         return lstTransporteDTOs;
     }
+
+    /**
+     * Funcion para aniadir un transporte
+     * @param transporte el transporte a aniadir
+     * @return el transporte aniadido
+     */
+    public TransporteDTO postTransporte(TransporteDTO transporte){
+        Optional<Concierto> c=repoConcierto.findById(transporte.getConciertoId());
+        if(c.isEmpty()){
+            return null;
+        }
+        Transporte t=new Transporte(transporte.getId(),transporte.getTipo(),transporte.getPrecio(),transporte.getLugarSalida(),transporte.getHoraSalida(), transporte.getPlazas(),c.get());
+        Transporte tNew=repoTransporte.save(t);
+        return new TransporteDTO(t.getId(),tNew.getTipo(),tNew.getPrecio(),tNew.getLugarSalida(),tNew.getHoraSalida(),tNew.getPlazas(),tNew.getConcierto().getId());
+    }
 }

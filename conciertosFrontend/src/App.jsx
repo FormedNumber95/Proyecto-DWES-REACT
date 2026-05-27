@@ -12,6 +12,7 @@ import CarroCompra from './pages/grupo2/CarroCompra'
 import Historial from './pages/grupo2/Historial'
 import TablaBilletes from './pages/grupo3/cliente/TablaBilletes'
 import TablaCompraBillete from './pages/grupo3/cliente/TablaCompraBillete'
+import TablaTransportes from './pages/grupo3/admin/TablaTransportes'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/actuaciones/:id' element={<Actuaciones />}></Route>
         <Route path='/tiposentrada/:id' element={<TiposEntrada />}></Route>
         <Route path='/editartipo/:id' element={<EditorTipoEntrada />}></Route>
+        <Route path='/transportesConcierto/:id' element={<TablaTransportes />}></Route>
         {/* CLIENTE */}
         <Route path='/conciertosCliente' element={<HomeCliente />}></Route>
         <Route path='/conciertosCliente/:idConcierto' element={<HomeCliente />}></Route>

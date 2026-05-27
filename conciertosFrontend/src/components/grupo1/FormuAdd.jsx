@@ -31,7 +31,7 @@ const FormuAdd = () => {
           alert("El precio puede contener hasta 2 decimales")
         } else {
           try {
-            const datos = await axios.post("http://localhost:8080/api/conciertos", concierto)
+            await axios.post("http://localhost:8080/api/conciertos", concierto)
             location.reload();
           } catch (error) {
             console.error(error)
