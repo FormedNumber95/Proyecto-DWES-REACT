@@ -42,11 +42,12 @@ const TablaCompraBillete = () => {
             nombreConcierto: conciertoResponse.data.nombre,
             fechaConcierto: conciertoResponse.data.fecha,
             idConcierto: conciertoResponse.data.id,
+            estadoConcierto: conciertoResponse.data.estado,
           };
         }),
       );
       entradasConTipo = entradasConTipo.filter((entrada) => {
-        return new Date() < new Date(entrada.fechaConcierto);
+        return new Date() < new Date(entrada.fechaConcierto)&&entrada.estadoConcierto!="CANCELADO"&&entrada.estadoConcierto!="FINALIZADO";
       });
       setEntradas(entradasConTipo);
     } catch (error) {
