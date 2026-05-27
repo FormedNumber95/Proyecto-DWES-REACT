@@ -87,4 +87,14 @@ public class TransporteService {
         }
         return lstBilleteDTOs;
     }
+
+    public BilleteDTO postBillete(BilleteDTO billete){
+        Optional<Transporte> transporteOptional=repoTransporte.findById(billete.getTransporteId());
+        if(transporteOptional.isEmpty()){
+            return null;
+        }
+        Billete b=new Billete(billete.getId(),billete.getFechaCompra(),billete.getUsuarioId(),transporteOptional.get());
+        Billete bNew=repoBillete.save(b);
+        return new BilleteDTO(bNew.getId(),bNew.getFechaCompra(),bNew.getUsuarioId(),bNew.getTransporte().getId());
+    }
 }

@@ -90,7 +90,7 @@ public class EntradaController {
         EntradaDTO entradaNew = entradaService.postEntrada(entradaDTO);
 
         if (entradaNew == null) {
-            return ResponseEntity.internalServerError().build();
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok().body(entradaNew);

@@ -12,6 +12,8 @@ import es.atenea.grupo1.datos.BilleteDTO;
 import es.atenea.grupo1.services.TransporteService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(originPatterns = "http://localhost:*")
 @RestController
@@ -58,6 +60,15 @@ public class TransporteController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(lst);
+    }
+
+    @PostMapping("/billetes")
+    public ResponseEntity<BilleteDTO> postBillete(@RequestBody BilleteDTO billeteDTO) {
+        BilleteDTO billeteDevolver = transporteService.postBillete(billeteDTO);
+        if(billeteDevolver==null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(billeteDevolver);
     }
 
 }
