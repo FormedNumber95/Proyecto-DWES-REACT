@@ -79,7 +79,7 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
           <button className="btn-action btn-tipos" disabled={deshabilitar} onClick={() => navigate("/tiposentrada/" + id)}>Tipos de entrada</button>
         </td>
         <td>
-          <button className="btn-action btn-save" disabled={deshabilitar} onClick={() => navigate("/transportesConcierto/" + id)}>Transportes</button>
+          <button className="btn-action btn-save" disabled={deshabilitar||estado=="CANCELADO"} onClick={() => navigate("/transportesConcierto/" + id)}>Transportes</button>
         </td>
       </tr>
       {idConcierto == id && (

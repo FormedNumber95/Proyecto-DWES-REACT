@@ -1,8 +1,20 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const FormuAddTransporte = ({ idConcierto }) => {
   const [transporte, setTransporte] = useState({ conciertoId: idConcierto });
+  const [concierto, setConcierto] = useState({});
+
+  async function obtenerinfoConcierto() {
+    try {
+      const datos = await axios.get(
+        "http://localhost:8080/api/conciertos/" + idConcierto,
+      );
+      setConcierto(datos.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   async function postTransporte() {
     let error = "";
@@ -19,6 +31,9 @@ const FormuAddTransporte = ({ idConcierto }) => {
     ) {
       alert("Debes completar todos los campos del formulario");
     } else {
+      if (new Date(transporte.horaSalida) > new Date(concierto.fecha)) {
+        error += "La hora de salida no puede ser posteriror a la del concierto";
+      }
       if (transporte.plazas < 1) {
         error += "Las plazas del transporte no pueden ser menores a 1\n";
       }
@@ -34,7 +49,6 @@ const FormuAddTransporte = ({ idConcierto }) => {
           console.log(transporte);
           await axios.post("http://localhost:8080/api/transportes", transporte);
           location.reload();
-          console.log("HECHO");
         } catch (error) {
           console.error(error);
         }
@@ -45,7 +59,6 @@ const FormuAddTransporte = ({ idConcierto }) => {
   }
 
   function fechaFormateada(fecha) {
-    console.log(fecha.replace("T", " ") + ":00");
     return fecha.replace("T", " ") + ":00";
   }
 
@@ -53,6 +66,10 @@ const FormuAddTransporte = ({ idConcierto }) => {
     event.preventDefault();
     await postTransporte();
   }
+
+  useEffect(() => {
+    obtenerinfoConcierto();
+  }, []);
 
   return (
     <div className="form-add-container">
@@ -72,7 +89,7 @@ const FormuAddTransporte = ({ idConcierto }) => {
             }
           />
         </div>
-        <br />
+
         <div className="form-group">
           <label htmlFor="lugarSalida">Lugar de salida</label>
           <input
@@ -85,7 +102,7 @@ const FormuAddTransporte = ({ idConcierto }) => {
             }
           />
         </div>
-        <br />
+
         <div className="form-group">
           <label htmlFor="tipo">Tipo</label>
           <input
@@ -98,7 +115,7 @@ const FormuAddTransporte = ({ idConcierto }) => {
             }
           />
         </div>
-        <br />
+
         <div className="form-group">
           <label htmlFor="plazas">Plazas</label>
           <input
@@ -112,7 +129,7 @@ const FormuAddTransporte = ({ idConcierto }) => {
             }
           />
         </div>
-        <br />
+
         <div className="form-group">
           <label htmlFor="precio">Precio (€)</label>
           <input
@@ -127,7 +144,7 @@ const FormuAddTransporte = ({ idConcierto }) => {
             }
           />
         </div>
-        <br />
+
         <div className="form-button">
           <button onClick={crearTransporte}>Añadir Concierto</button>
         </div>
