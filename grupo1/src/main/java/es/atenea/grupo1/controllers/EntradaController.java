@@ -3,6 +3,7 @@ package es.atenea.grupo1.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -93,7 +94,7 @@ public class EntradaController {
             return ResponseEntity.badRequest().build();
         }
 
-        return ResponseEntity.ok().body(entradaNew);
+        return ResponseEntity.status(HttpStatus.CREATED).body(entradaNew);
     }
 
     @PutMapping("/entradas/{entradaId}")
@@ -128,7 +129,7 @@ public class EntradaController {
             return ResponseEntity.internalServerError().build();
         }
 
-        return ResponseEntity.ok().body(entradasNew);
+        return ResponseEntity.status(HttpStatus.CREATED).body(entradasNew);
     }
 
     @GetMapping("/entradas/tipoEntrada/{tipoEntradaId}")

@@ -3,6 +3,7 @@ package es.atenea.grupo1.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -70,7 +71,7 @@ public class TransporteController {
         if (billeteDevolver == null) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().body(billeteDevolver);
+        return ResponseEntity.status(HttpStatus.CREATED).body(billeteDevolver);
     }
 
     @DeleteMapping("/billetes/{id}")
@@ -119,7 +120,7 @@ public class TransporteController {
         if (transporteDevolver == null) {
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok().body(transporteDevolver);
+        return ResponseEntity.status(HttpStatus.CREATED).body(transporteDevolver);
     }
 
     @DeleteMapping("/transportes/conciertos/{id}")
