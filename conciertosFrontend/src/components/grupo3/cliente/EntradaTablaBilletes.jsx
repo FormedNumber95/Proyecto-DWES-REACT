@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const EntradaTablaBilletes = ({ id, lugarSalida, fechaCompra, horaSalida }) => {
+const EntradaTablaBilletes = ({ id, lugarSalida, fechaCompra, horaSalida, tipoTransporte }) => {
   const formatFecha = (fechaStr) => {
     const d = new Date(fechaStr);
     return new Intl.DateTimeFormat("es-ES", {
@@ -26,6 +26,7 @@ const EntradaTablaBilletes = ({ id, lugarSalida, fechaCompra, horaSalida }) => {
   return (
     <tr key={id}>
       <td>{lugarSalida}</td>
+      <td>{tipoTransporte}</td>
       <td>{formatFecha(fechaCompra)}</td>
       <td>
         <button

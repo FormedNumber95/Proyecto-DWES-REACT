@@ -26,6 +26,7 @@ const TablaBilletes = () => {
             ...billete,
             lugarSalida: transporte.data.lugarSalida,
             horaSalida: transporte.data.horaSalida,
+            tipoTransporte: transporte.data.tipo,
           };
         }),
       );
@@ -60,8 +61,9 @@ const TablaBilletes = () => {
         <table>
           <thead>
             <tr>
-              <th>Transporte</th>
-              <th>Fecha</th>
+              <th>Lugar de salida</th>
+              <th>Tipo de transporte</th>
+              <th>Fecha de compra</th>
               <th>Cancelar</th>
             </tr>
           </thead>
@@ -70,6 +72,7 @@ const TablaBilletes = () => {
               billetes.map((billete) => (
                 <EntradaTablaBilletes
                   key={billete.id}
+                  tipoTransporte={billete.tipoTransporte}
                   fechaCompra={billete.fechaCompra}
                   horaSalida={billete.horaSalida}
                   id={billete.id}
