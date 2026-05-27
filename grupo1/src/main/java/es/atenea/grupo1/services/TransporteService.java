@@ -217,6 +217,11 @@ public class TransporteService {
         return new TransporteDTO(t.getId(),tNew.getTipo(),tNew.getPrecio(),tNew.getLugarSalida(),tNew.getHoraSalida(),tNew.getPlazas(),tNew.getConcierto().getId());
     }
 
+    /**
+     * Funcion para eliminar los transportes de un concierto
+     * @param idConcierto i del concierto
+     * @return si se han eliminado o no
+     */
     @Transactional
     public boolean eliminarTransportesDeConcierto(Long idConcierto){
         Optional<Concierto> c=repoConcierto.findById(idConcierto);
