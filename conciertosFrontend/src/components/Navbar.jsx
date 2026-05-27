@@ -43,7 +43,19 @@ const Navbar = () => {
             >
               <Link to="/historial">Historial de Compras</Link>
             </li>
-          )}          
+          )} 
+
+          {rol === "CLIENTE" && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/tablaBilletes")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/tablaBilletes">Billetes comprados</Link>
+            </li>
+          )}         
         </ul>
       </nav>
     </header>

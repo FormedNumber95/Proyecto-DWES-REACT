@@ -10,6 +10,7 @@ import EditorTipoEntrada from './pages/grupo1/EditorTipoEntrada'
 import HomeCliente from './pages/grupo2/HomeCliente'
 import CarroCompra from './pages/grupo2/CarroCompra'
 import Historial from './pages/grupo2/Historial'
+import TablaBilletes from './pages/grupo3/cliente/TablaBilletes'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <Route path='/conciertosCliente/:idConcierto' element={<HomeCliente />}></Route>
         <Route path='/carro' element={<CarroCompra />}></Route>
         <Route path='/historial' element={<Historial />}></Route>
+        <Route path='/tablaBilletes' element={<TablaBilletes />}></Route>
         {/* ERROR 404 */}
         <Route path='/*' element={<Err404 />}></Route>
       </Routes>

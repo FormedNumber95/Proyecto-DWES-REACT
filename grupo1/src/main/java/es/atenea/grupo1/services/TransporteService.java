@@ -2,7 +2,6 @@ package es.atenea.grupo1.services;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,14 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.atenea.grupo1.datos.BilleteDTO;
+import es.atenea.grupo1.datos.TransporteDTO;
 import es.atenea.grupo1.entities.Billete;
 import es.atenea.grupo1.entities.Concierto;
 import es.atenea.grupo1.entities.Entrada;
-import es.atenea.grupo1.entities.TipoEntrada;
 import es.atenea.grupo1.entities.Transporte;
 import es.atenea.grupo1.repositories.RepoBillete;
 import es.atenea.grupo1.repositories.RepoEntrada;
-import es.atenea.grupo1.repositories.RepoTipoEntrada;
 import es.atenea.grupo1.repositories.RepoTransporte;
 
 @Service
@@ -29,8 +27,6 @@ public class TransporteService {
     private RepoTransporte repoTransporte;
     @Autowired
     private RepoEntrada repoEntrada;
-    @Autowired
-    private RepoTipoEntrada repoTipoEntrada;
 
     /**
      * Funcion para obtener todos los billetes
@@ -144,11 +140,43 @@ public class TransporteService {
             return false;
         }
         LocalDateTime ahora = LocalDateTime.now();
-        if (ahora.plusHours(2).isAfter(billeteOptional.get().getFechaCompra())) {
+        if (ahora.plusHours(2).isAfter(billeteOptional.get().getTransporte().getHoraSalida())) {
             return false;
         }
         repoBillete.deleteById(id);
         return true;
+    }
 
+    // INVENTADOS
+
+    /**
+     * Funcion para obtener todos los tranportes
+     * 
+     * @return lista de todos los transportes
+     */
+    public List<TransporteDTO> obtenerTodosTransportes() {
+        List<Transporte> lstTransportes = repoTransporte.findAll();
+        List<TransporteDTO> lstTransporteDTOs = new ArrayList<>();
+        for (Transporte t : lstTransportes) {
+            lstTransporteDTOs.add(new TransporteDTO(t.getId(), t.getTipo(), t.getPrecio(), t.getLugarSalida(),
+                    t.getHoraSalida(), t.getPlazas(), t.getConcierto().getId()));
+        }
+        return lstTransporteDTOs;
+    }
+
+    /**
+     * Funcion para obtener un transporte por su id
+     * 
+     * @param id id del transporte
+     * @return el transporte
+     */
+    public TransporteDTO obtenerTransporte(Long id) {
+        Optional<Transporte> tOptional = repoTransporte.findById(id);
+        if (tOptional.isEmpty()) {
+            return null;
+        }
+        Transporte t = tOptional.get();
+        return new TransporteDTO(t.getId(), t.getTipo(), t.getPrecio(), t.getLugarSalida(),
+                t.getHoraSalida(), t.getPlazas(), t.getConcierto().getId());
     }
 }

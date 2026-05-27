@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.atenea.grupo1.datos.BilleteDTO;
+import es.atenea.grupo1.datos.TransporteDTO;
 import es.atenea.grupo1.services.TransporteService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,7 +55,7 @@ public class TransporteController {
     @GetMapping("/transportes/{transporteId}/billetes")
     public ResponseEntity<List<BilleteDTO>> obtenerBilletesTransporte(@PathVariable Long transporteId) {
         List<BilleteDTO> lst = transporteService.obtenerBilletesTransporte(transporteId);
-        if(lst==null){
+        if (lst == null) {
             return ResponseEntity.notFound().build();
         }
         if (lst.isEmpty()) {
@@ -66,18 +67,37 @@ public class TransporteController {
     @PostMapping("/billetes")
     public ResponseEntity<BilleteDTO> postBillete(@RequestBody BilleteDTO billeteDTO) {
         BilleteDTO billeteDevolver = transporteService.postBillete(billeteDTO);
-        if(billeteDevolver==null){
+        if (billeteDevolver == null) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(billeteDevolver);
     }
 
     @DeleteMapping("/billetes/{id}")
-    public ResponseEntity<BilleteDTO> deleteBillete(@PathVariable Long id){
-        if(transporteService.deleteBillete(id)){
+    public ResponseEntity<BilleteDTO> deleteBillete(@PathVariable Long id) {
+        if (transporteService.deleteBillete(id)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
     }
 
+    // INVENTADOS
+
+    @GetMapping("/transportes")
+    public ResponseEntity<List<TransporteDTO>> obtenerTodosTransportes() {
+        List<TransporteDTO> lst = transporteService.obtenerTodosTransportes();
+        if (lst.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lst);
+    }
+
+    @GetMapping("/transportes/{id}")
+    public ResponseEntity<TransporteDTO> obtenerTransporte(@PathVariable Long id) {
+        TransporteDTO transporte = transporteService.obtenerTransporte(id);
+        if (transporte == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(transporte);
+    }
 }
