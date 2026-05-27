@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,6 +70,14 @@ public class TransporteController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(billeteDevolver);
+    }
+
+    @DeleteMapping("/billetes/{id}")
+    public ResponseEntity<BilleteDTO> deleteBillete(@PathVariable Long id){
+        if(transporteService.deleteBillete(id)){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

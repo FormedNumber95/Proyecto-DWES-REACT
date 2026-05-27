@@ -88,13 +88,35 @@ public class TransporteService {
         return lstBilleteDTOs;
     }
 
-    public BilleteDTO postBillete(BilleteDTO billete){
-        Optional<Transporte> transporteOptional=repoTransporte.findById(billete.getTransporteId());
-        if(transporteOptional.isEmpty()){
+    /**
+     * Funcion para aniadir un billete a la db
+     * 
+     * @param billete el billeta a aniadir
+     * @return el billete aniadido
+     */
+    public BilleteDTO postBillete(BilleteDTO billete) {
+        Optional<Transporte> transporteOptional = repoTransporte.findById(billete.getTransporteId());
+        if (transporteOptional.isEmpty()) {
             return null;
         }
-        Billete b=new Billete(billete.getId(),billete.getFechaCompra(),billete.getUsuarioId(),transporteOptional.get());
-        Billete bNew=repoBillete.save(b);
-        return new BilleteDTO(bNew.getId(),bNew.getFechaCompra(),bNew.getUsuarioId(),bNew.getTransporte().getId());
+        Billete b = new Billete(billete.getId(), billete.getFechaCompra(), billete.getUsuarioId(),
+                transporteOptional.get());
+        Billete bNew = repoBillete.save(b);
+        return new BilleteDTO(bNew.getId(), bNew.getFechaCompra(), bNew.getUsuarioId(), bNew.getTransporte().getId());
+    }
+
+    /**
+     * Funcion para eliminar un billete
+     * @param id id del billete a eliminar
+     * @return si se ha podido eliminar o no
+     */
+    public boolean deleteBillete(Long id){
+        Optional<Billete> billeteOptional=repoBillete.findById(id);
+        if(billeteOptional.isEmpty()){
+            return false;
+        }
+        repoBillete.deleteById(id);
+        return true;
+
     }
 }
