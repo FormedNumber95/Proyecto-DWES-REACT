@@ -121,4 +121,12 @@ public class TransporteController {
         }
         return ResponseEntity.ok().body(transporteDevolver);
     }
+
+    @DeleteMapping("/transportes/conciertos/{id}")
+    public ResponseEntity<List<TransporteDTO>> eliminarTransportesDeConcierto(@PathVariable Long id){
+        if(transporteService.eliminarTransportesDeConcierto(id)){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

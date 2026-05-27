@@ -13,6 +13,16 @@ const Tabla = () => {
             console.error(error)
         }
     }
+
+    async function eliminarTransportesDeCancelsdos(){
+        conciertos.forEach(async (concierto) => {
+            if(concierto.estado=="CANCELADO"){
+                await axios.delete("http://localhost:8080/api/transportes/conciertos/"+concierto.id);
+                location.reload();
+            }
+        });
+    }
+
     useEffect(() => {
         getConciertos()
     }, [])
@@ -20,6 +30,7 @@ const Tabla = () => {
         <div className="table-container">
             <h1>Nuestros conciertos</h1>
             <FormuAdd />
+            <button className='btn-action btn-delete' onClick={eliminarTransportesDeCancelsdos}>ELIMINAR TRANSPORTES DE CANCELADOS</button>
             <table>
                 <thead>
                     <tr>

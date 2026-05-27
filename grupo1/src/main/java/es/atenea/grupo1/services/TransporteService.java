@@ -18,6 +18,7 @@ import es.atenea.grupo1.repositories.RepoBillete;
 import es.atenea.grupo1.repositories.RepoConcierto;
 import es.atenea.grupo1.repositories.RepoEntrada;
 import es.atenea.grupo1.repositories.RepoTransporte;
+import jakarta.transaction.Transactional;
 
 @Service
 public class TransporteService {
@@ -214,5 +215,15 @@ public class TransporteService {
         Transporte t=new Transporte(transporte.getId(),transporte.getTipo(),transporte.getPrecio(),transporte.getLugarSalida(),transporte.getHoraSalida(), transporte.getPlazas(),c.get());
         Transporte tNew=repoTransporte.save(t);
         return new TransporteDTO(t.getId(),tNew.getTipo(),tNew.getPrecio(),tNew.getLugarSalida(),tNew.getHoraSalida(),tNew.getPlazas(),tNew.getConcierto().getId());
+    }
+
+    @Transactional
+    public boolean eliminarTransportesDeConcierto(Long idConcierto){
+        Optional<Concierto> c=repoConcierto.findById(idConcierto);
+        if(c.isEmpty()){
+            return false;
+        }
+        repoTransporte.deleteByConcierto(c.get());
+        return true;
     }
 }

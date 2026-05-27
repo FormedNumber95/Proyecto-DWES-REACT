@@ -7,7 +7,7 @@ const TipoEntrada = ({ id, nombre, precio, cupoMaximo }) => {
 
   async function eliminarTipoEntrada() {
     try {
-      const datos = await axios.delete("http://localhost:8080/api/tipos-entrada/" + id)
+      await axios.delete("http://localhost:8080/api/tipos-entrada/" + id)
       location.reload()
     } catch (error) {
       console.error(error)

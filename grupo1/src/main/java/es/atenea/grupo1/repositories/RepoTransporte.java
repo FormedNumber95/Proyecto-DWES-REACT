@@ -12,4 +12,5 @@ import es.atenea.grupo1.entities.Concierto;
 public interface RepoTransporte extends JpaRepository<Transporte, Long> {
 
     List<Transporte> findAllByConcierto(Concierto concierto);
+    void deleteByConcierto(Concierto concierto);
 }

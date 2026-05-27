@@ -19,7 +19,7 @@ const Actuacion = ({ id, idArtista,disabled }) => {
 
     async function eliminarActuacion() {
         try {
-            const datos = await axios.delete("http://localhost:8080/api/actuaciones/" + id)
+            await axios.delete("http://localhost:8080/api/actuaciones/" + id)
             location.reload()
         } catch (error) {
             console.error(error)
