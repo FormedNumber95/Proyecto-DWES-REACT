@@ -191,4 +191,19 @@ public class PedidoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/compras/productos/{pedidoId}")
+    public ResponseEntity<List<LineapedidoDTO>> postCompra(@PathVariable Long pedidoId, @RequestBody List<LineapedidoDTO> lineapedidoDTOs) {
+        List<LineapedidoDTO> lineasNew = pedidoService.postCompras(pedidoId,lineapedidoDTOs);
+
+        if (lineasNew == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        if (lineasNew.isEmpty()) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(lineasNew);
+    }
 }

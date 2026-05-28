@@ -71,7 +71,7 @@ const Historial = () => {
             width: "100vw",
           }}
         >
-          <h1>Historial de compras</h1>
+          <h1>Entradas compradas</h1>
         </div>
         <table>
           <thead>

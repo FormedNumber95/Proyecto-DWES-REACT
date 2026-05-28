@@ -64,6 +64,7 @@ public class PedidoService {
 
     /**
      * Funcion para obtener los productos de un concierto
+     * 
      * @param idConcierto id del concierto
      * @return lista de los productos
      */
@@ -319,7 +320,7 @@ public class PedidoService {
         return true;
     }
 
-        /**
+    /**
      * Funcion para eliminar las lineas de pedido de un producto
      * 
      * @param idProducto id del producto
@@ -333,5 +334,24 @@ public class PedidoService {
         }
         repoLineapedido.deleteAllByProducto(productoOptional.get());
         return true;
+    }
+
+    /**
+     * Funcion para aniadir una serie de lineas de pedido
+     * 
+     * @param lstLineapedidoDTOs la lista de lineas de pedido
+     * @return la lista de las lineas aniadidas
+     */
+    @Transactional
+    public List<LineapedidoDTO> postCompras(Long idPedido, List<LineapedidoDTO> lstLineapedidoDTOs) {
+        List<LineapedidoDTO> lstDevolver = new ArrayList<>();
+        for (LineapedidoDTO lineapedidoDTO : lstLineapedidoDTOs) {
+            LineapedidoDTO linea = postLineapedido(idPedido, lineapedidoDTO);
+            if(linea==null){
+                return null;
+            }
+            lstDevolver.add(linea);
+        }
+        return lstDevolver;
     }
 }

@@ -38,7 +38,7 @@ const Navbar = () => {
                   : ""
               }`}
             >
-              <Link to="/historial">Historial de Compras</Link>
+              <Link to="/historial">Entradas compradas</Link>
             </li>
           )}
           {rol === "CLIENTE" && (
@@ -61,6 +61,17 @@ const Navbar = () => {
               }`}
             >
               <Link to="/comprarBillete">Comprar Billetes</Link>
+            </li>
+          )}
+          {rol === "CLIENTE" && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/conciertosFuturos")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/conciertosFuturos">Conciertos Con entrada</Link>
             </li>
           )}
         </ul>
