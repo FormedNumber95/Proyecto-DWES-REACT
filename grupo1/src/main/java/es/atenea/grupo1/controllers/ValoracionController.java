@@ -18,9 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
-
-
-
 @CrossOrigin(originPatterns = "http://localhost:*")
 @RestController
 @RequestMapping("/api")
@@ -31,8 +28,8 @@ public class ValoracionController {
 
     @GetMapping("/valoraciones")
     public ResponseEntity<List<ValoracionDTO>> getValoraciones() {
-        List<ValoracionDTO>lstValoracionDTOs=valoracionService.getValoraciones();
-        if(lstValoracionDTOs.isEmpty()){
+        List<ValoracionDTO> lstValoracionDTOs = valoracionService.getValoraciones();
+        if (lstValoracionDTOs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(lstValoracionDTOs);
@@ -40,8 +37,8 @@ public class ValoracionController {
 
     @GetMapping("/valoraciones/{id}")
     public ResponseEntity<ValoracionDTO> getValoracion(@PathVariable Long id) {
-        ValoracionDTO lstValoracionDTO=valoracionService.getValoracion(id);
-        if(lstValoracionDTO == null){
+        ValoracionDTO lstValoracionDTO = valoracionService.getValoracion(id);
+        if (lstValoracionDTO == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(lstValoracionDTO);
@@ -49,17 +46,18 @@ public class ValoracionController {
 
     @PostMapping("/valoraciones")
     public ResponseEntity<ValoracionDTO> postValoracion(@RequestBody ValoracionDTO valoracionDTO) {
-        ValoracionDTO valoracion=this.valoracionService.postValoracion(valoracionDTO);
-        if(valoracion==null){
+        ValoracionDTO valoracion = this.valoracionService.postValoracion(valoracionDTO);
+        if (valoracion == null) {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(valoracion);
     }
-    
+
     @PutMapping("valoraciones/{id}")
-    public ResponseEntity<ValoracionDTO> putValoracion(@PathVariable Long id, @RequestBody ValoracionDTO valoracionDTO) {
-        ValoracionDTO valoracion=this.valoracionService.putValoracion(id,valoracionDTO);
-        if(valoracion==null){
+    public ResponseEntity<ValoracionDTO> putValoracion(@PathVariable Long id,
+            @RequestBody ValoracionDTO valoracionDTO) {
+        ValoracionDTO valoracion = this.valoracionService.putValoracion(id, valoracionDTO);
+        if (valoracion == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body(valoracion);
@@ -67,10 +65,22 @@ public class ValoracionController {
 
     @DeleteMapping("valoraciones/{id}")
     public ResponseEntity<ValoracionDTO> deleteValoracion(@PathVariable Long id) {
-        if(this.valoracionService.deleteValoracion(id)){
+        if (this.valoracionService.deleteValoracion(id)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/conciertos/{conciertoId}/valoraciones")
+    public ResponseEntity<List<ValoracionDTO>> obtenerValoracionesDeConcierto(@PathVariable Long conciertoId) {
+        List<ValoracionDTO> lstValoracionDTOs = valoracionService.obtenerValoracionesDeConcierto(conciertoId);
+        if(lstValoracionDTOs==null){
+            return ResponseEntity.notFound().build();
+        }
+        if (lstValoracionDTOs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstValoracionDTOs);
     }
 
 }

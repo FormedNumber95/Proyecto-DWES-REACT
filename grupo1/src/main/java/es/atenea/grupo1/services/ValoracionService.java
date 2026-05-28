@@ -85,7 +85,7 @@ public class ValoracionService {
             return null;
         }
         Valoracion valoracion = valoracionOptional.get();
-        if(valoracion.getFecha().isAfter(LocalDateTime.now().plusHours(2))){
+        if (valoracion.getFecha().isAfter(LocalDateTime.now().plusHours(2))) {
             return null;
         }
         Valoracion valoracionEditada = this.repoValoracion
@@ -97,15 +97,30 @@ public class ValoracionService {
 
     /**
      * Funcion para borrar una valoracion
+     * 
      * @param id id de la valoracion
      * @return si se ha borrado
      */
-    public boolean deleteValoracion(Long id){
+    public boolean deleteValoracion(Long id) {
         Optional<Valoracion> valoracionOptional = this.repoValoracion.findById(id);
         if (valoracionOptional.isEmpty()) {
             return false;
         }
         this.repoValoracion.delete(valoracionOptional.get());
         return true;
+    }
+
+    public List<ValoracionDTO> obtenerValoracionesDeConcierto(Long conciertoId) {
+        Optional<Concierto> conciertoOptional = this.repoConcierto.findById(conciertoId);
+        if (conciertoOptional.isEmpty()) {
+            return null;
+        }
+        List<Valoracion> lstValoracions = this.repoValoracion.findAllByConcierto(conciertoOptional.get());
+        List<ValoracionDTO> lstValoracionDTOs = new ArrayList<>();
+        for (Valoracion valoracion : lstValoracions) {
+            lstValoracionDTOs.add(new ValoracionDTO(valoracion.getId(), conciertoId, valoracion.getUsuarioId(),
+                    valoracion.getPuntuacion(), valoracion.getComentario(), valoracion.getFecha()));
+        }
+        return lstValoracionDTOs;
     }
 }
