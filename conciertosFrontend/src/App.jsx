@@ -19,6 +19,7 @@ import TablaConciertosPropios from './pages/grupo4/cliente/TablaConciertosPropio
 import TablaCompraProductos from './pages/grupo4/cliente/TablaCompraProductos'
 import CarroCompraProductos from './pages/grupo4/cliente/CarroCompraProductos'
 import HistorialProductos from './pages/grupo4/cliente/HistorialProductos'
+import TablaConciertosPasados from './pages/grupo5/admin/TablaConciertosPasados'
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
         {/* ADMIN */}
         <Route path='/productos/:id' element={<TablaProductos />}></Route>
         <Route path='/editarProducto/:id' element={<EditarProducto />}></Route>
+        <Route path='/tablaConciertosPasados' element={<TablaConciertosPasados />}></Route>
         {/* CLIENTE */}
         <Route path='/conciertosCliente' element={<HomeCliente />}></Route>
         <Route path='/conciertosCliente/:idConcierto' element={<HomeCliente />}></Route>

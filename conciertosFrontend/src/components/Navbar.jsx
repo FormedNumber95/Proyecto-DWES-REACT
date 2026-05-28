@@ -16,7 +16,18 @@ const Navbar = () => {
                   : ""
               }`}
             >
-              <Link to="/conciertos">Conciertos</Link>
+              <Link to="/conciertos">Todos los Conciertos</Link>
+            </li>
+          )}
+          {(rol === "ADMIN" || rol === "PROMOTOR") && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/tablaConciertosPasados")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/tablaConciertosPasados">Conciertos pasados</Link>
             </li>
           )}
           {rol === "CLIENTE" && (

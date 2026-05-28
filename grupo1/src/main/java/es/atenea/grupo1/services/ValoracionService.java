@@ -112,6 +112,7 @@ public class ValoracionService {
 
     /**
      * Funcion para obtener las valoraciones de un concierto
+     * 
      * @param conciertoId id del concierto
      * @return lista de las actuaciones del concierto
      */
@@ -131,6 +132,7 @@ public class ValoracionService {
 
     /**
      * Funcion para obtener la media de las puntuaciones de un concierto
+     * 
      * @param conciertoId id del concierto
      * @return la puntuacion media
      */
@@ -151,10 +153,11 @@ public class ValoracionService {
 
     /**
      * Funcion para obtener las valoraciones de un usuario
+     * 
      * @param usuarioId id del usuario
      * @return lista de las valoraciones
      */
-    public List<ValoracionDTO> obtenerValoracionesDeUusario(Long usuarioId) {
+    public List<ValoracionDTO> obtenerValoracionesDeUsuario(Long usuarioId) {
         List<Valoracion> lstValoracions = this.repoValoracion.findAllByUsuarioId(usuarioId);
         List<ValoracionDTO> lstValoracionDTOs = new ArrayList<>();
         for (Valoracion valoracion : lstValoracions) {

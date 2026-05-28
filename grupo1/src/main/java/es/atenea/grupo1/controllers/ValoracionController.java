@@ -1,13 +1,16 @@
 package es.atenea.grupo1.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.atenea.grupo1.datos.ValoracionDTO;
@@ -93,12 +96,28 @@ public class ValoracionController {
     }
 
     @GetMapping("/usuarios/{usuarioId}/valoraciones")
-    public ResponseEntity<List<ValoracionDTO>> obtenerValoracionesDeUusario(@PathVariable Long usuarioId) {
-        List<ValoracionDTO> lstValoracionDTOs = valoracionService.obtenerValoracionesDeUusario(usuarioId);
+    public ResponseEntity<List<ValoracionDTO>> obtenerValoracionesDeUsuario(@PathVariable Long usuarioId) {
+        List<ValoracionDTO> lstValoracionDTOs = valoracionService.obtenerValoracionesDeUsuario(usuarioId);
         if (lstValoracionDTOs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(lstValoracionDTOs);
+    }
+
+    //TODO acabar
+    @GetMapping("/valoraciones/estadisticas")
+    public ResponseEntity<List<ValoracionDTO>> obtenerEstadisticas(
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate desde,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate hasta,
+            @RequestParam(required = false) Long conciertoId,
+            @RequestParam(required = false) Long artistaId,
+            @RequestParam(required = false) Long ciudadId) {
+        // List<ValoracionDTO> lstValoracionDTOs = valoracionService.obtenerValoracionesDeUusario(usuarioId);
+        // if (lstValoracionDTOs.isEmpty()) {
+            // return ResponseEntity.noContent().build();
+        // }
+        // return ResponseEntity.ok().body(lstValoracionDTOs);
+        return null;
     }
 
 }
