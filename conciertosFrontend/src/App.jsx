@@ -13,6 +13,7 @@ import Historial from './pages/grupo2/Historial'
 import TablaBilletes from './pages/grupo3/cliente/TablaBilletes'
 import TablaCompraBillete from './pages/grupo3/cliente/TablaCompraBillete'
 import TablaTransportes from './pages/grupo3/admin/TablaTransportes'
+import TablaProductos from './pages/grupo4/admin/TablaProductos'
 
 function App() {
 
@@ -20,8 +21,9 @@ function App() {
     <>
       <BrowserRouter>
       <Routes>
-        {/* ADMIN Y PROMOTOR */}
+        {/* GENERAL */}
         <Route path='/' element={<Login />}></Route>
+        {/* ADMIN Y PROMOTOR */}
         <Route path='/conciertos' element={<Principal />}></Route>
         <Route path='/conciertos/:idConcierto' element={<Principal />}></Route>
         <Route path='/editar/:id' element={<Editor />}></Route>
@@ -29,6 +31,8 @@ function App() {
         <Route path='/tiposentrada/:id' element={<TiposEntrada />}></Route>
         <Route path='/editartipo/:id' element={<EditorTipoEntrada />}></Route>
         <Route path='/transportesConcierto/:id' element={<TablaTransportes />}></Route>
+        {/* ADMIN */}
+        <Route path='/productos/:id' element={<TablaProductos />}></Route>
         {/* CLIENTE */}
         <Route path='/conciertosCliente' element={<HomeCliente />}></Route>
         <Route path='/conciertosCliente/:idConcierto' element={<HomeCliente />}></Route>

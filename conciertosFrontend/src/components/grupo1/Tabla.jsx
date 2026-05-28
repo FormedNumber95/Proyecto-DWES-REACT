@@ -43,6 +43,7 @@ const Tabla = () => {
                         <th>Actuaciones</th>
                         <th>Tipos de Entrada</th>
                         <th>Transportes</th>
+                        <th>Productos</th>
                     </tr>
                 </thead>
 

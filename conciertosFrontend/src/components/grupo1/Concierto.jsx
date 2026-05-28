@@ -81,10 +81,13 @@ const Concierto = ({ id, nombre, fecha, recintoId, precio, estado }) => {
         <td>
           <button className="btn-action btn-save" disabled={deshabilitar||estado=="CANCELADO"} onClick={() => navigate("/transportesConcierto/" + id)}>Transportes</button>
         </td>
+        <td>
+          <button className="btn-action btn-productos" disabled={deshabilitar||estado=="CANCELADO"} onClick={() => navigate("/productos/" + id)}>Productos</button>
+        </td>
       </tr>
       {idConcierto == id && (
         <tr>
-          <td colSpan={9}>
+          <td colSpan={10}>
             <h2>ACTUACIONES</h2>
             <table style={{ width: "100%" }}>
               <tbody>

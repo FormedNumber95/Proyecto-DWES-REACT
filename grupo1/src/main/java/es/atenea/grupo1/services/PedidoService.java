@@ -63,6 +63,25 @@ public class PedidoService {
     }
 
     /**
+     * Funcion para obtener los productos de un concierto
+     * @param idConcierto id del concierto
+     * @return lista de los productos
+     */
+    public List<ProductoDTO> obtenerProductosDeConcierto(Long idConcierto) {
+        Optional<Concierto> conciertoOptional = repoConcierto.findById(idConcierto);
+        if (conciertoOptional.isEmpty()) {
+            return null;
+        }
+        List<Producto> lstProductos = repoProducto.findAllByConcierto(conciertoOptional.get());
+        List<ProductoDTO> lstProductoDTOs = new ArrayList<>();
+        for (Producto p : lstProductos) {
+            lstProductoDTOs.add(
+                    new ProductoDTO(p.getId(), p.getNombre(), p.getPrecio(), p.getStock(), p.getConcierto().getId()));
+        }
+        return lstProductoDTOs;
+    }
+
+    /**
      * Funcion para aniadir un nuevo producto
      * 
      * @param productoDTO el producto a aniadir
@@ -256,7 +275,7 @@ public class PedidoService {
         if ((producto.getStock() + lineapedido.getCantidad() - lineapedidoDTO.getCantidad()) < 0) {
             return null;
         }
-        long cantidadOriginal=lineapedido.getCantidad();
+        long cantidadOriginal = lineapedido.getCantidad();
         Lineapedido lineapedidoEditada = repoLineapedido
                 .save(new Lineapedido(lineapedido.getId(), lineapedido.getPedido(), lineapedido.getProducto(),
                         lineapedidoDTO.getCantidad()));

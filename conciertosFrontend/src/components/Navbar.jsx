@@ -19,6 +19,17 @@ const Navbar = () => {
               <Link to="/conciertos">Conciertos</Link>
             </li>
           )}
+          {(rol === "ADMIN") && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/productos")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/productos">Productos</Link>
+            </li>
+          )}
           {rol === "CLIENTE" && (
             <li
               className={`nav-item ${

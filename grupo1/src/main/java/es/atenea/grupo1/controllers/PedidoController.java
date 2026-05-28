@@ -48,6 +48,15 @@ public class PedidoController {
         return ResponseEntity.ok().body(productoDTO);
     }
 
+    @GetMapping("/productos/conciertos/{id}")
+    public ResponseEntity<List<ProductoDTO>> obtenerProductosDeConcierto(@PathVariable Long id) {
+        List<ProductoDTO> lstProductoDTOs = pedidoService.obtenerProductosDeConcierto(id);
+        if (lstProductoDTOs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstProductoDTOs);
+    }
+
     @PostMapping("/productos")
     public ResponseEntity<ProductoDTO> postProducto(@RequestBody ProductoDTO productoDTO) {
         ProductoDTO producto = pedidoService.postProducto(productoDTO);
