@@ -227,9 +227,15 @@ public class PedidoService {
         if (productoOptional.isEmpty()) {
             return null;
         }
+        Producto producto = productoOptional.get();
+        if (producto.getStock() < lineapedidoDTO.getCantidad()) {
+            return null;
+        }
         Lineapedido lineapedidoNew = repoLineapedido
-                .save(new Lineapedido(lineapedidoDTO.getId(), pedidoOptional.get(), productoOptional.get(),
+                .save(new Lineapedido(lineapedidoDTO.getId(), pedidoOptional.get(), producto,
                         lineapedidoDTO.getCantidad()));
+        putProducto(producto.getId(), new ProductoDTO(producto.getId(), producto.getNombre(), producto.getPrecio(),
+                producto.getStock() - lineapedidoNew.getCantidad(), producto.getConcierto().getId()));
         return new LineapedidoDTO(lineapedidoNew.getId(), pedidoId, lineapedidoNew.getProducto().getId(),
                 lineapedidoNew.getCantidad());
     }
@@ -246,9 +252,17 @@ public class PedidoService {
             return null;
         }
         Lineapedido lineapedido = lineaPedidoOptional.get();
+        Producto producto = repoProducto.findById(lineapedido.getProducto().getId()).get();
+        if ((producto.getStock() + lineapedido.getCantidad() - lineapedidoDTO.getCantidad()) < 0) {
+            return null;
+        }
+        long cantidadOriginal=lineapedido.getCantidad();
         Lineapedido lineapedidoEditada = repoLineapedido
                 .save(new Lineapedido(lineapedido.getId(), lineapedido.getPedido(), lineapedido.getProducto(),
                         lineapedidoDTO.getCantidad()));
+        putProducto(producto.getId(), new ProductoDTO(producto.getId(), producto.getNombre(), producto.getPrecio(),
+                producto.getStock() + cantidadOriginal - lineapedidoEditada.getCantidad(),
+                producto.getConcierto().getId()));
         return new LineapedidoDTO(lineapedidoEditada.getId(), lineapedidoEditada.getPedido().getId(),
                 lineapedidoEditada.getProducto().getId(),
                 lineapedidoEditada.getCantidad());
