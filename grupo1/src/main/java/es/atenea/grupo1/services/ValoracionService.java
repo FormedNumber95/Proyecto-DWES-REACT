@@ -1,5 +1,6 @@
 package es.atenea.grupo1.services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,5 +70,28 @@ public class ValoracionService {
                         valoracionDTO.getPuntuacion(), valoracionDTO.getComentario(), valoracionDTO.getFecha()));
         return new ValoracionDTO(valoracion.getId(), valoracion.getConcierto().getId(), valoracion.getUsuarioId(),
                 valoracion.getPuntuacion(), valoracion.getComentario(), valoracion.getFecha());
+    }
+
+    /**
+     * Funcion para editar una valoracion
+     * 
+     * @param id            id de la valoracion a editar
+     * @param valoracionDTO la valoracion con la edicion
+     * @return la valoracion editada
+     */
+    public ValoracionDTO putValoracion(Long id, ValoracionDTO valoracionDTO) {
+        Optional<Valoracion> valoracionOptional = this.repoValoracion.findById(id);
+        if (valoracionOptional.isEmpty()) {
+            return null;
+        }
+        Valoracion valoracion = valoracionOptional.get();
+        if(valoracion.getFecha().isAfter(LocalDateTime.now().plusHours(2))){
+            return null;
+        }
+        Valoracion valoracionEditada = this.repoValoracion
+                .save(new Valoracion(id, valoracion.getConcierto(), valoracion.getUsuarioId(),
+                        valoracionDTO.getPuntuacion(), valoracionDTO.getComentario(), valoracionDTO.getFecha()));
+        return new ValoracionDTO(id, valoracionEditada.getConcierto().getId(), valoracionEditada.getUsuarioId(),
+                valoracionEditada.getPuntuacion(), valoracionEditada.getComentario(), valoracionEditada.getFecha());
     }
 }

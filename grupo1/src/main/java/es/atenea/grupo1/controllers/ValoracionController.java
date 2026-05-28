@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -36,7 +38,7 @@ public class ValoracionController {
     }
 
     @GetMapping("/valoraciones/{id}")
-    public ResponseEntity<ValoracionDTO> getValoracion(@PathVariable long id) {
+    public ResponseEntity<ValoracionDTO> getValoracion(@PathVariable Long id) {
         ValoracionDTO lstValoracionDTO=valoracionService.getValoracion(id);
         if(lstValoracionDTO == null){
             return ResponseEntity.notFound().build();
@@ -53,6 +55,13 @@ public class ValoracionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(valoracion);
     }
     
-    
+    @PutMapping("valoraciones/{id}")
+    public ResponseEntity<ValoracionDTO> putValoracion(@PathVariable Long id, @RequestBody ValoracionDTO valoracionDTO) {
+        ValoracionDTO valoracion=this.valoracionService.putValoracion(id,valoracionDTO);
+        if(valoracion==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(valoracion);
+    }
 
 }
