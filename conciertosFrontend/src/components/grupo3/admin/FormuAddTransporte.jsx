@@ -146,7 +146,7 @@ const FormuAddTransporte = ({ idConcierto }) => {
         </div>
 
         <div className="form-button">
-          <button onClick={crearTransporte}>Añadir Concierto</button>
+          <button onClick={crearTransporte}>Añadir Transporte</button>
         </div>
       </form>
     </div>

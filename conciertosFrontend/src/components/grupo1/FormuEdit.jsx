@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const FormuEdit = ({ id, fecha, nombre, recintoId, precio, estado }) => {
@@ -31,7 +31,7 @@ const FormuEdit = ({ id, fecha, nombre, recintoId, precio, estado }) => {
 
     async function putConcierto() {
         try {
-            const datos = await axios.put("http://localhost:8080/api/conciertos/" + id, concierto)
+            await axios.put("http://localhost:8080/api/conciertos/" + id, concierto)
             navigate("/conciertos")
         } catch (error) {
             console.error(error)

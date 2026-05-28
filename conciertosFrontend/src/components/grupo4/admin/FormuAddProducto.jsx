@@ -92,7 +92,7 @@ const FormuAddProducto = ({ idConcierto }) => {
         </div>
 
         <div className="form-button">
-          <button onClick={crearProducto}>Añadir Concierto</button>
+          <button onClick={crearProducto}>Añadir Producto</button>
         </div>
       </form>
     </div>

@@ -3,19 +3,19 @@ import Navbar from "../../../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import FormuAddProducto from "../../../components/grupo4/admin/FormuAddProducto";
-import EntradaTablaProducto from "../../../components/grupo3/admin/EntradaTablaProducto";
+import EntradaTablaProducto from "../../../components/grupo4/admin/EntradaTablaProducto";
 
 const TablaProductos = () => {
   let navigate = useNavigate();
   const { id } = useParams();
-  const [productos, setproductos] = useState([]);
+  const [productos, setProductos] = useState([]);
 
   async function getProductos() {
     try {
       const datos = await axios.get(
         "http://localhost:8080/api/productos/conciertos/" + id,
       );
-      setproductos(datos.data);
+      setProductos(datos.data);
     } catch (error) {
       console.error(error);
     }
@@ -39,17 +39,24 @@ const TablaProductos = () => {
               <th>Nombre</th>
               <th>Precio</th>
               <th>Stock</th>
+              <th>Editar</th>
               <th>Eliminar</th>
             </tr>
           </thead>
           <tbody>
             {productos.length > 0 &&
               productos.map((producto) => (
-                <EntradaTablaProducto key={producto.id} id={producto.id} nombre={producto.nombre} precio={producto.precio} stock={producto.stock}></EntradaTablaProducto>
+                <EntradaTablaProducto
+                  key={producto.id}
+                  id={producto.id}
+                  nombre={producto.nombre}
+                  precio={producto.precio}
+                  stock={producto.stock}
+                ></EntradaTablaProducto>
               ))}
             {productos.length == 0 && (
               <tr>
-                <td colSpan={3}>No hay productos para este concierto</td>
+                <td colSpan={5}>No hay productos para este concierto</td>
               </tr>
             )}
           </tbody>
