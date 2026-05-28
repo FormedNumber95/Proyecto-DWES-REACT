@@ -31,34 +31,39 @@ const TablaConciertosPasados = () => {
     getConciertos();
   }, []);
   return (
-    <div className="table-container">
-        <Navbar></Navbar>
-      <h1>Nuestros conciertos</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Nombre</th>
-            <th>Recinto</th>
-            <th>Valoraciones</th>
-          </tr>
-        </thead>
+    <div>
+      <Navbar></Navbar>
+      <div className="table-container">
+        <h1>Nuestros conciertos</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Nombre</th>
+              <th>Recinto</th>
+              <th>Valoraciones</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {conciertos.length > 0 &&
-            conciertos.map((concierto) => (
-              <ConciertoPasado
-                key={concierto.id}
-                id={concierto.id}
-                nombre={concierto.nombre}
-                fecha={concierto.fecha}
-                recintoId={concierto.recintoId}
-              ></ConciertoPasado>
-            ))}
-            {conciertos.length == 0 && <tr>
-                <td colSpan={10}>No hay conciertos</td></tr>}
-        </tbody>
-      </table>
+          <tbody>
+            {conciertos.length > 0 &&
+              conciertos.map((concierto) => (
+                <ConciertoPasado
+                  key={concierto.id}
+                  id={concierto.id}
+                  nombre={concierto.nombre}
+                  fecha={concierto.fecha}
+                  recintoId={concierto.recintoId}
+                ></ConciertoPasado>
+              ))}
+            {conciertos.length == 0 && (
+              <tr>
+                <td colSpan={10}>No hay conciertos</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
