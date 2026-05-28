@@ -1,0 +1,44 @@
+package es.atenea.grupo1.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import es.atenea.grupo1.datos.ValoracionDTO;
+import es.atenea.grupo1.services.ValoracionService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
+@CrossOrigin(originPatterns = "http://localhost:*")
+@RestController
+@RequestMapping("/api")
+public class ValoracionController {
+
+    @Autowired
+    ValoracionService valoracionService;
+
+    @GetMapping("/valoraciones")
+    public ResponseEntity<List<ValoracionDTO>> getValoraciones() {
+        List<ValoracionDTO>lstValoracionDTOs=valoracionService.getValoraciones();
+        if(lstValoracionDTOs.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstValoracionDTOs);
+    }
+
+    @GetMapping("/valoraciones/{id}")
+    public ResponseEntity<ValoracionDTO> getValoracion(@PathVariable long id) {
+        ValoracionDTO lstValoracionDTO=valoracionService.getValoracion(id);
+        if(lstValoracionDTO == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(lstValoracionDTO);
+    }
+    
+
+}
