@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Navbar from "../../../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import FormuAddProducto from "../../../components/grupo4/admin/FormuAddProducto";
 
 const TablaProductos = () => {
   let navigate = useNavigate();
@@ -30,7 +31,7 @@ const TablaProductos = () => {
       <Navbar></Navbar>
       <div className="table-container">
         <h1>Productos</h1>
-        {/* ANIADIR FORMUADDPRODUCTO */}
+        <FormuAddProducto idConcierto={id}></FormuAddProducto>
         <table>
           <thead>
             <tr>
