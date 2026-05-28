@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.atenea.grupo1.datos.LineapedidoDTO;
 import es.atenea.grupo1.datos.PedidoDTO;
 import es.atenea.grupo1.datos.ProductoDTO;
-import es.atenea.grupo1.entities.Pedido;
 import es.atenea.grupo1.services.PedidoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @CrossOrigin(originPatterns = "http://localhost:*")
 @RestController
@@ -28,6 +27,8 @@ public class PedidoController {
 
     @Autowired
     private PedidoService pedidoService;
+
+    // PRODUCTOS
 
     @GetMapping("/productos")
     public ResponseEntity<List<ProductoDTO>> obtenerProductos() {
@@ -74,6 +75,8 @@ public class PedidoController {
         return ResponseEntity.notFound().build();
     }
 
+    // PEDIDOS
+
     @GetMapping("pedidos/usuario/{usuarioId}")
     public ResponseEntity<List<PedidoDTO>> obtenerPedidosUsuario(@PathVariable Long usuarioId) {
         List<PedidoDTO> lstPedidoDTOs = pedidoService.obtenerPedidosUsuario(usuarioId);
@@ -119,4 +122,46 @@ public class PedidoController {
         return ResponseEntity.notFound().build();
     }
 
+    // LINEA PEDIDO
+
+    @GetMapping("pedidos/{pedidoId}/lineas")
+    public ResponseEntity<List<LineapedidoDTO>> obtenerLineapedidosDePedido(@PathVariable Long pedidoId) {
+        List<LineapedidoDTO> lstLineapedidoDTOs = pedidoService.obtenerLineapedidosDePedido(pedidoId);
+        if (lstLineapedidoDTOs == null) {
+            return ResponseEntity.notFound().build();
+        }
+        if (lstLineapedidoDTOs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstLineapedidoDTOs);
+    }
+
+    @PostMapping("/pedidos/{pedidoId}/lineas")
+    public ResponseEntity<LineapedidoDTO> postPedido(@PathVariable Long pedidoId,
+            @RequestBody LineapedidoDTO lineapedidoDTO) {
+        LineapedidoDTO lineapedido = pedidoService.postLineapedido(pedidoId, lineapedidoDTO);
+        if (lineapedido == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(lineapedido);
+    }
+
+    @PutMapping("lineas/{lineaId}")
+    public ResponseEntity<LineapedidoDTO> putLineapedido(@PathVariable Long lineaId,
+            @RequestBody LineapedidoDTO lineapedidoDTO) {
+        LineapedidoDTO lineapedido = pedidoService.putLineapedido(lineaId, lineapedidoDTO);
+        if (lineapedido == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(lineapedido);
+    }
+
+    @DeleteMapping("lineas/{lineaId}")
+    public ResponseEntity<ProductoDTO> deleteLineapedido(@PathVariable Long lineaId) {
+        if (pedidoService.deleteLineapedido(lineaId)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

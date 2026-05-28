@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.atenea.grupo1.datos.LineapedidoDTO;
 import es.atenea.grupo1.datos.PedidoDTO;
 import es.atenea.grupo1.datos.ProductoDTO;
 import es.atenea.grupo1.entities.Concierto;
+import es.atenea.grupo1.entities.Lineapedido;
 import es.atenea.grupo1.entities.Pedido;
 import es.atenea.grupo1.entities.Producto;
 import es.atenea.grupo1.repositories.RepoConcierto;
@@ -163,7 +165,7 @@ public class PedidoService {
      * @param pedidoDTO el pedido a editar
      * @return el pedido editado
      */
-    public PedidoDTO putPedido(Long id,PedidoDTO pedidoDTO) {
+    public PedidoDTO putPedido(Long id, PedidoDTO pedidoDTO) {
         Optional<Pedido> pedidoOptional = repoPedido.findById(id);
         if (pedidoOptional.isEmpty()) {
             return null;
@@ -175,16 +177,112 @@ public class PedidoService {
 
     /**
      * Funcion para eliminar un pedido
-     * @param id
-     * @return
+     * 
+     * @param id id del pedido a eliminar
+     * @return si se ha eliminado el pedido
      */
     @Transactional
-    public boolean deletePedido(Long id){
-        Optional<Pedido> pedidoOptional=repoPedido.findById(id);
-        if(pedidoOptional.isEmpty()){
+    public boolean deletePedido(Long id) {
+        Optional<Pedido> pedidoOptional = repoPedido.findById(id);
+        if (pedidoOptional.isEmpty()) {
             return false;
         }
         repoPedido.deleteById(id);
+        return true;
+    }
+
+    /**
+     * Funcion para obtener las lineas de pedido de un pedido
+     * 
+     * @param idPedido id del pedido
+     * @return
+     *         lista de las lineas de pedido
+     */
+    public List<LineapedidoDTO> obtenerLineapedidosDePedido(Long idPedido) {
+        Optional<Pedido> pedidoOptional = repoPedido.findById(idPedido);
+        if (pedidoOptional.isEmpty()) {
+            return null;
+        }
+        List<Lineapedido> lstLineapedidos = repoLineapedido.findAllByPedido(pedidoOptional.get());
+        List<LineapedidoDTO> lstLineapedidoDTOs = new ArrayList<>();
+        for (Lineapedido linea : lstLineapedidos) {
+            lstLineapedidoDTOs.add(new LineapedidoDTO(linea.getId(), linea.getPedido().getId(),
+                    linea.getProducto().getId(), linea.getCantidad()));
+        }
+        return lstLineapedidoDTOs;
+    }
+
+    /**
+     * Funcion para aniadir una linea de pedido
+     * 
+     * @param lineapedidoDTO la linea de pedido a aniadir
+     * @return la linea de pedido aniadida
+     */
+    public LineapedidoDTO postLineapedido(Long pedidoId, LineapedidoDTO lineapedidoDTO) {
+        Optional<Pedido> pedidoOptional = repoPedido.findById(pedidoId);
+        if (pedidoOptional.isEmpty()) {
+            return null;
+        }
+        Optional<Producto> productoOptional = repoProducto.findById(lineapedidoDTO.getProductoId());
+        if (productoOptional.isEmpty()) {
+            return null;
+        }
+        Lineapedido lineapedidoNew = repoLineapedido
+                .save(new Lineapedido(lineapedidoDTO.getId(), pedidoOptional.get(), productoOptional.get(),
+                        lineapedidoDTO.getCantidad()));
+        return new LineapedidoDTO(lineapedidoNew.getId(), pedidoId, lineapedidoNew.getProducto().getId(),
+                lineapedidoNew.getCantidad());
+    }
+
+    /**
+     * Funcion para editar una linea de pedido
+     * 
+     * @param pedidoDTO linea de pedido a editar
+     * @return linea de pedido editada
+     */
+    public LineapedidoDTO putLineapedido(Long id, LineapedidoDTO lineapedidoDTO) {
+        Optional<Lineapedido> lineaPedidoOptional = repoLineapedido.findById(id);
+        if (lineaPedidoOptional.isEmpty()) {
+            return null;
+        }
+        Lineapedido lineapedido = lineaPedidoOptional.get();
+        Lineapedido lineapedidoEditada = repoLineapedido
+                .save(new Lineapedido(lineapedido.getId(), lineapedido.getPedido(), lineapedido.getProducto(),
+                        lineapedidoDTO.getCantidad()));
+        return new LineapedidoDTO(lineapedidoEditada.getId(), lineapedidoEditada.getPedido().getId(),
+                lineapedidoEditada.getProducto().getId(),
+                lineapedidoEditada.getCantidad());
+    }
+
+    /**
+     * Funcion para eliminar una linea de pedido
+     * 
+     * @param id id de la linea de pedido
+     * @return si se ha elimnado
+     */
+    @Transactional
+    public boolean deleteLineapedido(Long id) {
+        Optional<Lineapedido> lineaPedidoOptional = repoLineapedido.findById(id);
+        if (lineaPedidoOptional.isEmpty()) {
+            return false;
+        }
+        repoLineapedido.deleteById(id);
+        return true;
+    }
+
+    /**
+     * Funcion para eliminar las lineas de pedido de un pedido
+     * 
+     * @param idPedido id del pedido
+     * @return si se ha elimnado
+     */
+    @Transactional
+    public boolean deleteLineapedidoDePedido(Long idPedido) {
+        Optional<Pedido> pedidoOptional = repoPedido.findById(idPedido);
+        if (pedidoOptional.isEmpty()) {
+            return false;
+        }
+        repoLineapedido.deleteAllByPedido(pedidoOptional.get());
         return true;
     }
 }
