@@ -3,6 +3,7 @@ package es.atenea.grupo1.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,9 @@ import es.atenea.grupo1.datos.ValoracionDTO;
 import es.atenea.grupo1.services.ValoracionService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @CrossOrigin(originPatterns = "http://localhost:*")
@@ -39,6 +43,16 @@ public class ValoracionController {
         }
         return ResponseEntity.ok().body(lstValoracionDTO);
     }
+
+    @PostMapping("/valoraciones")
+    public ResponseEntity<ValoracionDTO> postValoracion(@RequestBody ValoracionDTO valoracionDTO) {
+        ValoracionDTO valoracion=this.valoracionService.postValoracion(valoracionDTO);
+        if(valoracion==null){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(valoracion);
+    }
+    
     
 
 }

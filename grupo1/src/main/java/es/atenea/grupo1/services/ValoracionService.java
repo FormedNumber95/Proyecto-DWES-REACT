@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.atenea.grupo1.datos.ValoracionDTO;
+import es.atenea.grupo1.entities.Concierto;
 import es.atenea.grupo1.entities.Valoracion;
+import es.atenea.grupo1.repositories.RepoConcierto;
 import es.atenea.grupo1.repositories.RepoValoracion;
 
 @Service
@@ -16,6 +18,8 @@ public class ValoracionService {
 
     @Autowired
     RepoValoracion repoValoracion;
+    @Autowired
+    RepoConcierto repoConcierto;
 
     /**
      * Funcion para obtener todas las valoraciones
@@ -35,6 +39,7 @@ public class ValoracionService {
 
     /**
      * Funcion para obtener la informacion de una valoracion
+     * 
      * @param idValoracion id de la valoracion
      * @return la valoracion
      */
@@ -44,6 +49,24 @@ public class ValoracionService {
             return null;
         }
         Valoracion valoracion = valoracionOptional.get();
+        return new ValoracionDTO(valoracion.getId(), valoracion.getConcierto().getId(), valoracion.getUsuarioId(),
+                valoracion.getPuntuacion(), valoracion.getComentario(), valoracion.getFecha());
+    }
+
+    /**
+     * Funcion para aniadur una nueva valoracion
+     * 
+     * @param valoracionDTO la valoraciona aniadir
+     * @return la valoracion aniadida
+     */
+    public ValoracionDTO postValoracion(ValoracionDTO valoracionDTO) {
+        Optional<Concierto> concioertoOptional = repoConcierto.findById(valoracionDTO.getConciertoId());
+        if (concioertoOptional.isEmpty()) {
+            return null;
+        }
+        Valoracion valoracion = repoValoracion.save(
+                new Valoracion(valoracionDTO.getId(), concioertoOptional.get(), valoracionDTO.getUsuarioId(),
+                        valoracionDTO.getPuntuacion(), valoracionDTO.getComentario(), valoracionDTO.getFecha()));
         return new ValoracionDTO(valoracion.getId(), valoracion.getConcierto().getId(), valoracion.getUsuarioId(),
                 valoracion.getPuntuacion(), valoracion.getComentario(), valoracion.getFecha());
     }
