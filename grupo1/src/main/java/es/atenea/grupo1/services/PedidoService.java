@@ -16,6 +16,7 @@ import es.atenea.grupo1.repositories.RepoConcierto;
 import es.atenea.grupo1.repositories.RepoLineapedido;
 import es.atenea.grupo1.repositories.RepoPedido;
 import es.atenea.grupo1.repositories.RepoProducto;
+import jakarta.transaction.Transactional;
 
 @Service
 public class PedidoService {
@@ -104,6 +105,7 @@ public class PedidoService {
      * @param id id del producto
      * @return si se ha eliminado o no
      */
+    @Transactional
     public boolean deleteProducto(Long id) {
         Optional<Producto> productoOptional = repoProducto.findById(id);
         if (productoOptional.isEmpty()) {
@@ -141,5 +143,48 @@ public class PedidoService {
         }
         Pedido pedido = pedidoOptional.get();
         return new PedidoDTO(pedido.getId(), pedido.getUsuarioId(), pedido.getFecha());
+    }
+
+    /**
+     * Funcion para aniadir un pedido
+     * 
+     * @param pedidoDTO el pedido a aniadir
+     * @return el pedido aniadido
+     */
+    public PedidoDTO postPedido(PedidoDTO pedidoDTO) {
+        Pedido pedidoNew = repoPedido
+                .save(new Pedido(pedidoDTO.getId(), pedidoDTO.getUsuarioId(), pedidoDTO.getFecha()));
+        return new PedidoDTO(pedidoNew.getId(), pedidoNew.getUsuarioId(), pedidoNew.getFecha());
+    }
+
+    /**
+     * Funcion para editar un pedido
+     * 
+     * @param pedidoDTO el pedido a editar
+     * @return el pedido editado
+     */
+    public PedidoDTO putPedido(Long id,PedidoDTO pedidoDTO) {
+        Optional<Pedido> pedidoOptional = repoPedido.findById(id);
+        if (pedidoOptional.isEmpty()) {
+            return null;
+        }
+        Pedido pedidoEditado = repoPedido
+                .save(new Pedido(id, pedidoDTO.getUsuarioId(), pedidoDTO.getFecha()));
+        return new PedidoDTO(id, pedidoEditado.getUsuarioId(), pedidoEditado.getFecha());
+    }
+
+    /**
+     * Funcion para eliminar un pedido
+     * @param id
+     * @return
+     */
+    @Transactional
+    public boolean deletePedido(Long id){
+        Optional<Pedido> pedidoOptional=repoPedido.findById(id);
+        if(pedidoOptional.isEmpty()){
+            return false;
+        }
+        repoPedido.deleteById(id);
+        return true;
     }
 }

@@ -92,4 +92,31 @@ public class PedidoController {
         return ResponseEntity.ok().body(pedidoDTO);
     }
 
+    @PostMapping("/pedidos")
+    public ResponseEntity<PedidoDTO> postPedido(@RequestBody PedidoDTO pedidoDTO) {
+        PedidoDTO pedido = pedidoService.postPedido(pedidoDTO);
+        if (pedido == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedido);
+    }
+
+    @PutMapping("pedidos/{idPedido}")
+    public ResponseEntity<PedidoDTO> putPedido(@PathVariable Long idPedido, @RequestBody PedidoDTO pedidoDTO) {
+        PedidoDTO pedido = pedidoService.putPedido(idPedido, pedidoDTO);
+        if (pedido == null) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok().body(pedido);
+    }
+
+    @DeleteMapping("pedidos/{idPedido}")
+    public ResponseEntity<ProductoDTO> deletePedido(@PathVariable Long idPedido) {
+        if (pedidoService.deletePedido(idPedido)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
 }
