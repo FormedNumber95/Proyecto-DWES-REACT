@@ -110,6 +110,11 @@ public class ValoracionService {
         return true;
     }
 
+    /**
+     * Funcion para obtener las valoraciones de un concierto
+     * @param conciertoId id del concierto
+     * @return lista de las actuaciones del concierto
+     */
     public List<ValoracionDTO> obtenerValoracionesDeConcierto(Long conciertoId) {
         Optional<Concierto> conciertoOptional = this.repoConcierto.findById(conciertoId);
         if (conciertoOptional.isEmpty()) {
@@ -124,6 +129,11 @@ public class ValoracionService {
         return lstValoracionDTOs;
     }
 
+    /**
+     * Funcion para obtener la media de las puntuaciones de un concierto
+     * @param conciertoId id del concierto
+     * @return la puntuacion media
+     */
     public Double obtenerMediaDeConcierto(Long conciertoId) {
         Optional<Concierto> conciertoOptional = this.repoConcierto.findById(conciertoId);
         if (conciertoOptional.isEmpty()) {
@@ -137,5 +147,20 @@ public class ValoracionService {
             media += valoracion.getPuntuacion();
         }
         return media / cont;
+    }
+
+    /**
+     * Funcion para obtener las valoraciones de un usuario
+     * @param usuarioId id del usuario
+     * @return lista de las valoraciones
+     */
+    public List<ValoracionDTO> obtenerValoracionesDeUusario(Long usuarioId) {
+        List<Valoracion> lstValoracions = this.repoValoracion.findAllByUsuarioId(usuarioId);
+        List<ValoracionDTO> lstValoracionDTOs = new ArrayList<>();
+        for (Valoracion valoracion : lstValoracions) {
+            lstValoracionDTOs.add(new ValoracionDTO(valoracion.getId(), usuarioId, valoracion.getUsuarioId(),
+                    valoracion.getPuntuacion(), valoracion.getComentario(), valoracion.getFecha()));
+        }
+        return lstValoracionDTOs;
     }
 }

@@ -92,4 +92,13 @@ public class ValoracionController {
         return ResponseEntity.ok().body(media);
     }
 
+    @GetMapping("/usuarios/{usuarioId}/valoraciones")
+    public ResponseEntity<List<ValoracionDTO>> obtenerValoracionesDeUusario(@PathVariable Long usuarioId) {
+        List<ValoracionDTO> lstValoracionDTOs = valoracionService.obtenerValoracionesDeUusario(usuarioId);
+        if (lstValoracionDTOs.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstValoracionDTOs);
+    }
+
 }

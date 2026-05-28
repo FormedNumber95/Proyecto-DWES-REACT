@@ -12,4 +12,5 @@ import es.atenea.grupo1.entities.Concierto;
 @Repository
 public interface RepoValoracion extends JpaRepository<Valoracion, Long>{
 List<Valoracion> findAllByConcierto(Concierto concierto);
+List<Valoracion> findAllByUsuarioId(Long usuarioId);
 }
