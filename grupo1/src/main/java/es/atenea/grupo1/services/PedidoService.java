@@ -318,4 +318,20 @@ public class PedidoService {
         repoLineapedido.deleteAllByPedido(pedidoOptional.get());
         return true;
     }
+
+        /**
+     * Funcion para eliminar las lineas de pedido de un producto
+     * 
+     * @param idProducto id del producto
+     * @return si se ha elimnado
+     */
+    @Transactional
+    public boolean deleteLineapedidoDeProducto(Long idProducto) {
+        Optional<Producto> productoOptional = repoProducto.findById(idProducto);
+        if (productoOptional.isEmpty()) {
+            return false;
+        }
+        repoLineapedido.deleteAllByProducto(productoOptional.get());
+        return true;
+    }
 }

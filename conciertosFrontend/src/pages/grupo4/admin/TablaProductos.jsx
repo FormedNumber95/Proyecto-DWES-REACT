@@ -3,6 +3,7 @@ import Navbar from "../../../components/Navbar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import FormuAddProducto from "../../../components/grupo4/admin/FormuAddProducto";
+import EntradaTablaProducto from "../../../components/grupo3/admin/EntradaTablaProducto";
 
 const TablaProductos = () => {
   let navigate = useNavigate();
@@ -44,12 +45,7 @@ const TablaProductos = () => {
           <tbody>
             {productos.length > 0 &&
               productos.map((producto) => (
-                <tr>
-                  <td>{producto.nombre}</td>
-                  <td>{producto.precio}</td>
-                  <td>{producto.stock}</td>
-                  <td><button className="btn-action btn-delete">Eliminar</button></td>
-                </tr>
+                <EntradaTablaProducto key={producto.id} id={producto.id} nombre={producto.nombre} precio={producto.precio} stock={producto.stock}></EntradaTablaProducto>
               ))}
             {productos.length == 0 && (
               <tr>

@@ -78,6 +78,7 @@ public class PedidoController {
 
     @DeleteMapping("productos/{id}")
     public ResponseEntity<ProductoDTO> deleteProducto(@PathVariable Long id) {
+        deleteLineapedidoDeProducto(id);
         if (pedidoService.deleteProducto(id)) {
             return ResponseEntity.noContent().build();
         }
@@ -125,6 +126,7 @@ public class PedidoController {
 
     @DeleteMapping("pedidos/{idPedido}")
     public ResponseEntity<ProductoDTO> deletePedido(@PathVariable Long idPedido) {
+        deleteLineapedidoDePedido(idPedido);
         if (pedidoService.deletePedido(idPedido)) {
             return ResponseEntity.noContent().build();
         }
@@ -169,6 +171,22 @@ public class PedidoController {
     @DeleteMapping("lineas/{lineaId}")
     public ResponseEntity<ProductoDTO> deleteLineapedido(@PathVariable Long lineaId) {
         if (pedidoService.deleteLineapedido(lineaId)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("lineas/pedidos/{pedidoId}")
+    public ResponseEntity<ProductoDTO> deleteLineapedidoDePedido(@PathVariable Long pedidoId) {
+        if (pedidoService.deleteLineapedidoDePedido(pedidoId)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("lineas/productos/{productoId}")
+    public ResponseEntity<ProductoDTO> deleteLineapedidoDeProducto(@PathVariable Long productoId) {
+        if (pedidoService.deleteLineapedidoDeProducto(productoId)) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
