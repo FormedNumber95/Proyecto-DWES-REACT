@@ -354,4 +354,23 @@ public class PedidoService {
         }
         return lstDevolver;
     }
+
+    /**
+     * Funcion para obtener los productos que ha comprado un usuario
+     * @param idUsuario id del usuario
+     * @return lista de los productos que ha comprado
+     */
+    public List<ProductoDTO> obtenerProductosDeUsuario(Long idUsuario){
+        List<ProductoDTO> lstDevolver=new ArrayList<>();
+        List<PedidoDTO> lstPedidosUsuario=obtenerPedidosUsuario(idUsuario);
+        for(PedidoDTO pedidoDTO:lstPedidosUsuario){
+            List<LineapedidoDTO> lstLineapedidoDTOs=obtenerLineapedidosDePedido(pedidoDTO.getId());
+            for(LineapedidoDTO linea:lstLineapedidoDTOs){
+                ProductoDTO productoDTO=obtenerProducto(linea.getProductoId());
+                productoDTO.setCantidad(linea.getCantidad());
+                lstDevolver.add(productoDTO);
+            }
+        }
+        return lstDevolver;
+    }
 }

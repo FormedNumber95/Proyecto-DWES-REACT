@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
+
 @CrossOrigin(originPatterns = "http://localhost:*")
 @RestController
 @RequestMapping("/api")
@@ -84,6 +85,16 @@ public class PedidoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("productos/usuario/{usuarioId}")
+    public ResponseEntity<List<ProductoDTO>> obtenerProductosDeUsuario(@PathVariable Long usuarioId) {
+        List<ProductoDTO> lstProductoDTOs=pedidoService.obtenerProductosDeUsuario(usuarioId);
+        if(lstProductoDTOs.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok().body(lstProductoDTOs);
+    }
+    
 
     // PEDIDOS
 

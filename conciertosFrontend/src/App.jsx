@@ -18,6 +18,7 @@ import EditarProducto from './pages/grupo4/admin/EditarProducto'
 import TablaConciertosPropios from './pages/grupo4/cliente/TablaConciertosPropios'
 import TablaCompraProductos from './pages/grupo4/cliente/TablaCompraProductos'
 import CarroCompraProductos from './pages/grupo4/cliente/CarroCompraProductos'
+import HistorialProductos from './pages/grupo4/cliente/HistorialProductos'
 
 function App() {
 
@@ -42,13 +43,14 @@ function App() {
         <Route path='/conciertosCliente' element={<HomeCliente />}></Route>
         <Route path='/conciertosCliente/:idConcierto' element={<HomeCliente />}></Route>
         <Route path='/carro' element={<CarroCompra />}></Route>
-        <Route path='/historial' element={<Historial />}></Route>
+        <Route path='/historialEntradas' element={<Historial />}></Route>
         <Route path='/tablaBilletes' element={<TablaBilletes />}></Route>
         <Route path='/comprarBillete' element={<TablaCompraBillete />}></Route>
         <Route path='/comprarBillete/:idConcierto' element={<TablaCompraBillete />}></Route>
         <Route path='/conciertosFuturos' element={<TablaConciertosPropios />}></Route>
         <Route path='/comprarProductos/:idConcierto' element={<TablaCompraProductos />}></Route>
         <Route path='/carroProductos' element={<CarroCompraProductos />}></Route>
+        <Route path='/historialProductos' element={<HistorialProductos />}></Route>
         {/* ERROR 404 */}
         <Route path='/*' element={<Err404 />}></Route>
       </Routes>

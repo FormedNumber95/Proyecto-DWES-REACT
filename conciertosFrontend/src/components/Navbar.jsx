@@ -33,12 +33,12 @@ const Navbar = () => {
           {rol === "CLIENTE" && (
             <li
               className={`nav-item ${
-                location.pathname.startsWith("/historial")
+                location.pathname.startsWith("/historialEntradas")
                   ? "nav-item-active"
                   : ""
               }`}
             >
-              <Link to="/historial">Entradas compradas</Link>
+              <Link to="/historialEntradas">Entradas compradas</Link>
             </li>
           )}
           {rol === "CLIENTE" && (
@@ -60,7 +60,7 @@ const Navbar = () => {
                   : ""
               }`}
             >
-              <Link to="/comprarBillete">Comprar Billetes</Link>
+              <Link to="/comprarBillete">Comprar billetes</Link>
             </li>
           )}
           {rol === "CLIENTE" && (
@@ -71,7 +71,18 @@ const Navbar = () => {
                   : ""
               }`}
             >
-              <Link to="/conciertosFuturos">Conciertos Con entrada</Link>
+              <Link to="/conciertosFuturos">Conciertos con entrada</Link>
+            </li>
+          )}
+          {rol === "CLIENTE" && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/historialProductos")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/historialProductos">Productos comprados</Link>
             </li>
           )}
         </ul>
