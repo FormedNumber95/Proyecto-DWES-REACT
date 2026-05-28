@@ -94,4 +94,18 @@ public class ValoracionService {
         return new ValoracionDTO(id, valoracionEditada.getConcierto().getId(), valoracionEditada.getUsuarioId(),
                 valoracionEditada.getPuntuacion(), valoracionEditada.getComentario(), valoracionEditada.getFecha());
     }
+
+    /**
+     * Funcion para borrar una valoracion
+     * @param id id de la valoracion
+     * @return si se ha borrado
+     */
+    public boolean deleteValoracion(Long id){
+        Optional<Valoracion> valoracionOptional = this.repoValoracion.findById(id);
+        if (valoracionOptional.isEmpty()) {
+            return false;
+        }
+        this.repoValoracion.delete(valoracionOptional.get());
+        return true;
+    }
 }
