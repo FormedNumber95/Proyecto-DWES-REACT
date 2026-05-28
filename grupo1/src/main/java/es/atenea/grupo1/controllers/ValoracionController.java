@@ -74,13 +74,22 @@ public class ValoracionController {
     @GetMapping("/conciertos/{conciertoId}/valoraciones")
     public ResponseEntity<List<ValoracionDTO>> obtenerValoracionesDeConcierto(@PathVariable Long conciertoId) {
         List<ValoracionDTO> lstValoracionDTOs = valoracionService.obtenerValoracionesDeConcierto(conciertoId);
-        if(lstValoracionDTOs==null){
+        if (lstValoracionDTOs == null) {
             return ResponseEntity.notFound().build();
         }
         if (lstValoracionDTOs.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok().body(lstValoracionDTOs);
+    }
+
+    @GetMapping("/conciertos/{conciertoId}/puntuacion-media")
+    public ResponseEntity<Double> obtenerMediaDeConcierto(@PathVariable Long conciertoId) {
+        Double media = valoracionService.obtenerMediaDeConcierto(conciertoId);
+        if (media == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(media);
     }
 
 }

@@ -123,4 +123,19 @@ public class ValoracionService {
         }
         return lstValoracionDTOs;
     }
+
+    public Double obtenerMediaDeConcierto(Long conciertoId) {
+        Optional<Concierto> conciertoOptional = this.repoConcierto.findById(conciertoId);
+        if (conciertoOptional.isEmpty()) {
+            return null;
+        }
+        Double media = 0.0;
+        Long cont = 0L;
+        List<Valoracion> lstValoracions = this.repoValoracion.findAllByConcierto(conciertoOptional.get());
+        for (Valoracion valoracion : lstValoracions) {
+            cont++;
+            media += valoracion.getPuntuacion();
+        }
+        return media / cont;
+    }
 }
