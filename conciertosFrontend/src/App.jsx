@@ -21,6 +21,7 @@ import CarroCompraProductos from './pages/grupo4/cliente/CarroCompraProductos'
 import HistorialProductos from './pages/grupo4/cliente/HistorialProductos'
 import TablaConciertosPasados from './pages/grupo5/admin/TablaConciertosPasados'
 import ValoracionesDeConcierto from './pages/grupo5/ValoracionesDeConcierto'
+import ValoracionesDeUsuario from './pages/grupo5/ValoracionesDeUsuario'
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
         <Route path='/historialProductos' element={<HistorialProductos />}></Route>
         {/* CLIENTE Y ADMIN */}
         <Route path='/valoracionesConcierto/:id' element={<ValoracionesDeConcierto />}></Route>
+        <Route path='/valoracionesUsuario/:id' element={<ValoracionesDeUsuario />}></Route>
         {/* ERROR 404 */}
         <Route path='/*' element={<Err404 />}></Route>
       </Routes>
