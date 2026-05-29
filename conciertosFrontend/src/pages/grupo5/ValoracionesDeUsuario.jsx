@@ -64,6 +64,7 @@ const ValoracionesDeUsuario = () => {
                   fecha={valoracion.fecha}
                   puntuacion={valoracion.puntuacion}
                   id={valoracion.id}
+                  usuarioId={Number(localStorage.getItem("id"))}
                 ></Valoracion>
               ))}
             {valoraciones.length == 0 && (

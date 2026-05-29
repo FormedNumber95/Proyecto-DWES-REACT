@@ -23,6 +23,8 @@ import TablaConciertosPasados from './pages/grupo5/admin/TablaConciertosPasados'
 import ValoracionesDeConcierto from './pages/grupo5/ValoracionesDeConcierto'
 import ValoracionesDeUsuario from './pages/grupo5/ValoracionesDeUsuario'
 import TablaConciertosPasadosCliente from './pages/grupo5/cliente/TablaConciertosPasadosCliente'
+import FormuAddValoracion from './pages/grupo5/cliente/FormuAddValoracion'
+import FormuEditValoracion from './pages/grupo5/cliente/FormuEditValoracion'
 
 function App() {
 
@@ -58,6 +60,8 @@ function App() {
         <Route path='/historialProductos' element={<HistorialProductos />}></Route>
         <Route path='/conciertosPasadosCliente' element={<TablaConciertosPasadosCliente />}></Route>
         <Route path='/valoracionesUsuario' element={<ValoracionesDeUsuario />}></Route>
+        <Route path='/valorarConcierto/:id' element={<FormuAddValoracion />}></Route>
+        <Route path='/editarValoracion/:id' element={<FormuEditValoracion />}></Route>
         {/* CLIENTE Y ADMIN */}
         <Route path='/valoracionesConcierto/:id' element={<ValoracionesDeConcierto />}></Route>
         <Route path='/valoracionesUsuario/:id' element={<ValoracionesDeUsuario />}></Route>
