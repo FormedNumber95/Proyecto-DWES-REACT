@@ -9,17 +9,18 @@ const FormuEditValoracion = () => {
   const [valoracion, setValoracion] = useState({});
 
   async function obtenerValoracion() {
-    try{
-        const data=await axios.get("http://localhost:8080/api/valoraciones/"+id);
-        setValoracion(data.data);
-    }catch(error){
-        console.error(error);
+    try {
+      const data = await axios.get(
+        "http://localhost:8080/api/valoraciones/" + id,
+      );
+      setValoracion(data.data);
+    } catch (error) {
+      console.error(error);
     }
   }
 
   async function putValoracion() {
     let error = "";
-    console.log(valoracion);
     if (
       valoracion.comentario == null ||
       valoracion.comentario.trim() == "" ||
@@ -33,7 +34,7 @@ const FormuEditValoracion = () => {
       if (error == "") {
         try {
           await axios.put(
-            "http://localhost:8080/api/valoraciones/"+id,
+            "http://localhost:8080/api/valoraciones/" + id,
             valoracion,
           );
           navigate(-1);
@@ -46,7 +47,7 @@ const FormuEditValoracion = () => {
     }
   }
 
-  async function editarValoracion(event){
+  async function editarValoracion(event) {
     event.preventDefault();
     putValoracion();
   }
