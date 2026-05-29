@@ -65,6 +65,9 @@ const Valoracion = ({ comentario, fecha, puntuacion, id, usuarioId = -1 }) => {
           <button
             className="btn-action btn-delete"
             onClick={censurarValoracion}
+            disabled={
+              Number(localStorage.getItem("id")) !== usuarioId
+            }
           >
             ELIMINAR
           </button>
