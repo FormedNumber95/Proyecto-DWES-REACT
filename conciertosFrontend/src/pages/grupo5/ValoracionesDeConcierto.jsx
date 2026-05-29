@@ -7,8 +7,6 @@ import Valoracion from "../../components/grupo5/Valoracion";
 const ValoracionesDeConcierto = () => {
   let navigate = useNavigate();
   const [valoraciones, setValoraciones] = useState([]);
-  const [usuario, setUsuario] = useState(0);
-  const [usuarios, setUsuarios] = useState([]);
   const { id } = useParams();
 
   async function getValoraciones() {
@@ -21,26 +19,7 @@ const ValoracionesDeConcierto = () => {
       console.error(error);
     }
   }
-  async function getClientes() {
-    try {
-      const data = await axios.get("http://localhost:8090/api/usuarios");
-      let usuariosTodos = data.data;
-      let usuariosClientes = usuariosTodos.filter(
-        (usuario) => usuario.rol === "CLIENTE",
-      );
-      setUsuarios(usuariosClientes);
-      if(usuariosClientes.length>0){
-        setUsuario(usuariosClientes[0].id);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
-  function verValoracionesDeUsuario(event) {
-    event.preventDefault();
-    navigate("/valoracionesUsuario/" + usuario);
-  }
 
   useEffect(() => {
     if (
@@ -50,34 +29,12 @@ const ValoracionesDeConcierto = () => {
       navigate("/");
     }
     getValoraciones();
-    getClientes();
   }, []);
   return (
     <div>
       <Navbar></Navbar>
       <div className="table-container">
-        <h1>Conciertos pasados</h1>
-        <div className="form-add-container">
-          <h3>Ver valoraciones de usuario</h3>
-          <form method="post" className="form-add">
-            <select
-              name="select"
-              id="select"
-              onChange={(e) => setUsuario(Number(e.target.value))}
-            >
-              {usuarios.map((usuario) => (
-                <option key={usuario.id} value={usuario.id}>
-                  {usuario.nombre}
-                </option>
-              ))}
-            </select>
-            <div className="form-button">
-              <button className="btn-action btn-delete" onClick={verValoracionesDeUsuario}>
-                Ver valoraciones
-              </button>
-            </div>
-          </form>
-        </div>
+        <h1>Valoraciones del concierto</h1>
         <table>
           <thead>
             <tr>
