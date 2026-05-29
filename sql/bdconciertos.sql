@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2026 a las 13:52:43
+-- Tiempo de generación: 29-05-2026 a las 08:16:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -80,7 +80,7 @@ CREATE TABLE `concierto` (
 --
 
 INSERT INTO `concierto` (`id`, `estado`, `fecha`, `nombre`, `precio_base`, `recinto_id`) VALUES
-(1, 'PROGRAMADO', '2026-05-30 10:55:00.000000', 'concierto1Nombre', 5, 1),
+(1, 'PROGRAMADO', '2026-05-20 10:55:00.000000', 'concierto1Nombre', 5, 1),
 (2, 'CANCELADO', '2026-06-10 12:41:00.000000', 'afsadf', 6, 1);
 
 -- --------------------------------------------------------
@@ -195,6 +195,29 @@ INSERT INTO `transporte` (`id`, `hora_salida`, `lugar_salida`, `plazas`, `precio
 (1, '2026-05-29 11:25:00.000000', 'LugarDeSalida1', 10, 8, 'Autobus', 1),
 (2, '2026-05-27 13:01:10.000000', 'Salida Pako', 14, 3.5, 'Tren', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `valoracion`
+--
+
+CREATE TABLE `valoracion` (
+  `id` bigint(20) NOT NULL,
+  `comentario` varchar(255) DEFAULT NULL,
+  `fecha` datetime(6) DEFAULT NULL,
+  `puntuacion` int(11) DEFAULT NULL,
+  `usuario_id` bigint(20) DEFAULT NULL,
+  `concierto_id` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `valoracion`
+--
+
+INSERT INTO `valoracion` (`id`, `comentario`, `fecha`, `puntuacion`, `usuario_id`, `concierto_id`) VALUES
+(3, 'Valoracion de 6', '2026-05-21 08:15:35.000000', 6, 3, 1),
+(4, 'Valoracion de 7', '2026-05-29 08:15:35.000000', 7, 3, 1);
+
 --
 -- Índices para tablas volcadas
 --
@@ -262,6 +285,13 @@ ALTER TABLE `transporte`
   ADD KEY `FKkfr001on6nwts18xnpyian2d3` (`concierto_id`);
 
 --
+-- Indices de la tabla `valoracion`
+--
+ALTER TABLE `valoracion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK5mex2ox7y8j269x199e5iuyk7` (`concierto_id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -320,6 +350,12 @@ ALTER TABLE `transporte`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `valoracion`
+--
+ALTER TABLE `valoracion`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -365,6 +401,12 @@ ALTER TABLE `tipo_entrada`
 --
 ALTER TABLE `transporte`
   ADD CONSTRAINT `FKkfr001on6nwts18xnpyian2d3` FOREIGN KEY (`concierto_id`) REFERENCES `concierto` (`id`);
+
+--
+-- Filtros para la tabla `valoracion`
+--
+ALTER TABLE `valoracion`
+  ADD CONSTRAINT `FK5mex2ox7y8j269x199e5iuyk7` FOREIGN KEY (`concierto_id`) REFERENCES `concierto` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
