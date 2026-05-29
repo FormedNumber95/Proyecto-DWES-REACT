@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ConciertoPasado = ({ fecha, recintoId, id, nombre }) => {
+const ConciertoPasadoCliente = ({ fecha, recintoId, id, nombre }) => {
   let navigate = useNavigate();
 
   const [recinto, setRecinto] = useState([]);
@@ -43,9 +43,9 @@ const ConciertoPasado = ({ fecha, recintoId, id, nombre }) => {
         <td>
           <button
             className="btn-action btn-editar"
-            onClick={() => navigate("/valoracionesConcierto/" + id)}
+            onClick={() => navigate("/valorarConcierto/" + id)}
           >
-            Valoraciones
+            Valorar
           </button>
         </td>
       </tr>
@@ -53,4 +53,4 @@ const ConciertoPasado = ({ fecha, recintoId, id, nombre }) => {
   );
 };
 
-export default ConciertoPasado;
+export default ConciertoPasadoCliente;

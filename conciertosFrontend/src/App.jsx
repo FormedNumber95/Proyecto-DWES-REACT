@@ -22,6 +22,7 @@ import HistorialProductos from './pages/grupo4/cliente/HistorialProductos'
 import TablaConciertosPasados from './pages/grupo5/admin/TablaConciertosPasados'
 import ValoracionesDeConcierto from './pages/grupo5/ValoracionesDeConcierto'
 import ValoracionesDeUsuario from './pages/grupo5/ValoracionesDeUsuario'
+import TablaConciertosPasadosCliente from './pages/grupo5/cliente/TablaConciertosPasadosCliente'
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
         <Route path='/comprarProductos/:idConcierto' element={<TablaCompraProductos />}></Route>
         <Route path='/carroProductos' element={<CarroCompraProductos />}></Route>
         <Route path='/historialProductos' element={<HistorialProductos />}></Route>
+        <Route path='/conciertosPasadosCliente' element={<TablaConciertosPasadosCliente />}></Route>
         {/* CLIENTE Y ADMIN */}
         <Route path='/valoracionesConcierto/:id' element={<ValoracionesDeConcierto />}></Route>
         <Route path='/valoracionesUsuario/:id' element={<ValoracionesDeUsuario />}></Route>
