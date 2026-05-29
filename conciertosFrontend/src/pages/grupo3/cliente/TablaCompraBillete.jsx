@@ -89,7 +89,7 @@ const TablaCompraBillete = () => {
               ))}
             {entradas.length == 0 && (
               <tr>
-                <td colSpan={3}>No tienes entradas para conciertos futuros</td>
+                <td colSpan={3}>No hay entradas para conciertos futuros</td>
               </tr>
             )}
           </tbody>

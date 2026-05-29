@@ -18,10 +18,23 @@ const Valoracion = ({ comentario, fecha, puntuacion, id, usuarioId = -1 }) => {
     location.reload();
   }
 
+  const formatFecha = (fechaStr) => {
+    const d = new Date(fechaStr);
+    return new Intl.DateTimeFormat("es-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+      .format(d)
+      .replace(",", "");
+  };
+
   return (
     <tr>
       <td>{comentario}</td>
-      <td>{fecha}</td>
+      <td className="fecha-concierto">{formatFecha(fecha)}</td>
       <td>{puntuacion}</td>
       {localStorage.getItem("rol") == "ADMIN" && (
         <td>
@@ -38,13 +51,16 @@ const Valoracion = ({ comentario, fecha, puntuacion, id, usuarioId = -1 }) => {
           <button
             className="btn-action btn-editar"
             onClick={() => navigate("/editarValoracion/" + id)}
-            disabled={Number(localStorage.getItem("id")) !== usuarioId}
+            disabled={
+              Number(localStorage.getItem("id")) !== usuarioId ||
+              new Date() - new Date(fecha) > 2 * 60 * 60 * 1000
+            }
           >
             EDITAR
           </button>
         </td>
       )}
-            {localStorage.getItem("rol") == "CLIENTE" && (
+      {localStorage.getItem("rol") == "CLIENTE" && (
         <td>
           <button
             className="btn-action btn-delete"

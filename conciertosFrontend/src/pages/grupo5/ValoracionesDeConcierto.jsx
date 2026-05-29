@@ -41,7 +41,8 @@ const ValoracionesDeConcierto = () => {
               <th>Fecha</th>
               <th>Puntuacion</th>
               {localStorage.getItem("rol") == "ADMIN" && <th>Censurar</th>}
-              {localStorage.getItem("rol") == "CLIENTE" && <th>EDITAR</th>}
+              {localStorage.getItem("rol") == "CLIENTE" && <th>Editar</th>}
+              {localStorage.getItem("rol") == "CLIENTE" && <th>Eliminar</th>}
             </tr>
           </thead>
 
