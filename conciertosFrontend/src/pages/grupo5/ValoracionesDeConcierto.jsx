@@ -20,7 +20,6 @@ const ValoracionesDeConcierto = () => {
     }
   }
 
-
   useEffect(() => {
     if (
       localStorage.getItem("rol") != "ADMIN" &&
@@ -42,6 +41,7 @@ const ValoracionesDeConcierto = () => {
               <th>Fecha</th>
               <th>Puntuacion</th>
               {localStorage.getItem("rol") == "ADMIN" && <th>Censurar</th>}
+              {localStorage.getItem("rol") == "CLIENTE" && <th>EDITAR</th>}
             </tr>
           </thead>
 
@@ -54,6 +54,7 @@ const ValoracionesDeConcierto = () => {
                   fecha={valoracion.fecha}
                   puntuacion={valoracion.puntuacion}
                   id={valoracion.id}
+                  usuarioId={valoracion.usuarioId}
                 ></Valoracion>
               ))}
             {valoraciones.length == 0 && (

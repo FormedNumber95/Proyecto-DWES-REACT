@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Valoracion = ({ comentario, fecha, puntuacion, id }) => {
+const Valoracion = ({ comentario, fecha, puntuacion, id, usuarioId = -1 }) => {
   let navigate = useNavigate();
 
   async function borrarValoracion() {
@@ -37,7 +37,8 @@ const Valoracion = ({ comentario, fecha, puntuacion, id }) => {
         <td>
           <button
             className="btn-action btn-editar"
-            onClick={() => navigate("/editarValoracion/"+id)}
+            onClick={() => navigate("/editarValoracion/" + id)}
+            disabled={Number(localStorage.getItem("id")) !== usuarioId}
           >
             EDITAR
           </button>

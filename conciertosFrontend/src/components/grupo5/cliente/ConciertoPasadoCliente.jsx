@@ -48,6 +48,14 @@ const ConciertoPasadoCliente = ({ fecha, recintoId, id, nombre }) => {
             Valorar
           </button>
         </td>
+        <td>
+          <button
+            className="btn-action btn-tipos"
+            onClick={() => navigate("/valoracionesConcierto/" + id)}
+          >
+            Ver valoraciones
+          </button>
+        </td>
       </tr>
     </>
   );

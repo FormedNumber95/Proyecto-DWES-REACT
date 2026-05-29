@@ -47,6 +47,7 @@ const TablaConciertosPasadosCliente = () => {
               <th>Nombre</th>
               <th>Recinto</th>
               <th>Valorar</th>
+              <th>Ver valoraciones</th>
             </tr>
           </thead>
 

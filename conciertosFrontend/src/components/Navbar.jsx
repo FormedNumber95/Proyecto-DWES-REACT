@@ -110,12 +110,12 @@ const Navbar = () => {
           {rol === "CLIENTE" && (
             <li
               className={`nav-item ${
-                location.pathname.startsWith("/valoraciones")
+                location.pathname.startsWith("/valoracionesUsuario")
                   ? "nav-item-active"
                   : ""
               }`}
             >
-              <Link to="/valoraciones">Valoraciones realizadas</Link>
+              <Link to="/valoracionesUsuario">Valoraciones realizadas</Link>
             </li>
           )}
         </ul>

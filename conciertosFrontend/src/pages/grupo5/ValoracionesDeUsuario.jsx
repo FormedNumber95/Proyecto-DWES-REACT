@@ -19,7 +19,9 @@ const ValoracionesDeUsuario = () => {
         );
       } else {
         datos = await axios.get(
-          "http://localhost:8080/api/usuarios/" + Number(localStorage.getItem("id")) + "/valoraciones",
+          "http://localhost:8080/api/usuarios/" +
+            Number(localStorage.getItem("id")) +
+            "/valoraciones",
         );
       }
       setValoraciones(datos.data);
@@ -41,7 +43,7 @@ const ValoracionesDeUsuario = () => {
     <div>
       <Navbar></Navbar>
       <div className="table-container">
-        <h1>Valoraciones del concierto</h1>
+        <h1>Valoraciones del usuario</h1>
         <table>
           <thead>
             <tr>
