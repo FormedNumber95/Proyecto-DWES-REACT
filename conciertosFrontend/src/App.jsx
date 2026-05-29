@@ -20,6 +20,7 @@ import TablaCompraProductos from './pages/grupo4/cliente/TablaCompraProductos'
 import CarroCompraProductos from './pages/grupo4/cliente/CarroCompraProductos'
 import HistorialProductos from './pages/grupo4/cliente/HistorialProductos'
 import TablaConciertosPasados from './pages/grupo5/admin/TablaConciertosPasados'
+import ValoracionesDeConcierto from './pages/grupo5/ValoracionesDeConcierto'
 
 function App() {
 
@@ -53,6 +54,8 @@ function App() {
         <Route path='/comprarProductos/:idConcierto' element={<TablaCompraProductos />}></Route>
         <Route path='/carroProductos' element={<CarroCompraProductos />}></Route>
         <Route path='/historialProductos' element={<HistorialProductos />}></Route>
+        {/* CLIENTE Y ADMIN */}
+        <Route path='/valoracionesConcierto/:id' element={<ValoracionesDeConcierto />}></Route>
         {/* ERROR 404 */}
         <Route path='/*' element={<Err404 />}></Route>
       </Routes>
