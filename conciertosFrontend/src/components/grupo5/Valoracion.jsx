@@ -1,20 +1,22 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Valoracion = ({ comentario, fecha, puntuacion, id }) => {
+  let navigate = useNavigate();
 
-    async function borrarValoracion(){
-        try{
-            await axios.delete("http://localhost:8080/api/valoraciones/"+id);
-        }catch(error){
-            console.error(error);
-        }
+  async function borrarValoracion() {
+    try {
+      await axios.delete("http://localhost:8080/api/valoraciones/" + id);
+    } catch (error) {
+      console.error(error);
     }
+  }
 
-    async function censurarValoracion(event){
-        event.preventDefault();
-        borrarValoracion();
-        location.reload();
-    }
+  async function censurarValoracion(event) {
+    event.preventDefault();
+    borrarValoracion();
+    location.reload();
+  }
 
   return (
     <tr>
@@ -23,7 +25,22 @@ const Valoracion = ({ comentario, fecha, puntuacion, id }) => {
       <td>{puntuacion}</td>
       {localStorage.getItem("rol") == "ADMIN" && (
         <td>
-          <button className="btn-action btn-delete" onClick={censurarValoracion}>CENSURAR</button>
+          <button
+            className="btn-action btn-delete"
+            onClick={censurarValoracion}
+          >
+            CENSURAR
+          </button>
+        </td>
+      )}
+      {localStorage.getItem("rol") == "CLIENTE" && (
+        <td>
+          <button
+            className="btn-action btn-editar"
+            onClick={() => navigate("/editarValoracion/"+id)}
+          >
+            EDITAR
+          </button>
         </td>
       )}
     </tr>

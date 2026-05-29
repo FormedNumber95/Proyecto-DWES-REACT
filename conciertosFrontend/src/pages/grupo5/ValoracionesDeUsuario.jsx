@@ -4,23 +4,29 @@ import { useNavigate, useParams } from "react-router-dom";
 import Valoracion from "../../components/grupo5/Valoracion";
 import Navbar from "../../components/Navbar";
 
-
 const ValoracionesDeUsuario = () => {
-let navigate = useNavigate();
+  let navigate = useNavigate();
   const [valoraciones, setValoraciones] = useState([]);
   const { id } = useParams();
 
   async function getValoraciones() {
     try {
-      const datos = await axios.get(
-        "http://localhost:8080/api/usuarios/" + id + "/valoraciones",
-      );
+      let datos = "";
+
+      if (localStorage.getItem("rol") != "CLIENTE") {
+        datos = await axios.get(
+          "http://localhost:8080/api/usuarios/" + id + "/valoraciones",
+        );
+      } else {
+        datos = await axios.get(
+          "http://localhost:8080/api/usuarios/" + Number(localStorage.getItem("id")) + "/valoraciones",
+        );
+      }
       setValoraciones(datos.data);
     } catch (error) {
       console.error(error);
     }
   }
-
 
   useEffect(() => {
     if (
@@ -43,6 +49,7 @@ let navigate = useNavigate();
               <th>Fecha</th>
               <th>Puntuacion</th>
               {localStorage.getItem("rol") == "ADMIN" && <th>Censurar</th>}
+              {localStorage.getItem("rol") == "CLIENTE" && <th>EDITAR</th>}
             </tr>
           </thead>
 
@@ -69,4 +76,4 @@ let navigate = useNavigate();
   );
 };
 
-export default ValoracionesDeUsuario
+export default ValoracionesDeUsuario;

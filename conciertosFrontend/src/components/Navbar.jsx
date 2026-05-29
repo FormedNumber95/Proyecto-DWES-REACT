@@ -107,6 +107,17 @@ const Navbar = () => {
               <Link to="/conciertosPasadosCliente">Conciertos pasados</Link>
             </li>
           )}
+          {rol === "CLIENTE" && (
+            <li
+              className={`nav-item ${
+                location.pathname.startsWith("/valoraciones")
+                  ? "nav-item-active"
+                  : ""
+              }`}
+            >
+              <Link to="/valoraciones">Valoraciones realizadas</Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

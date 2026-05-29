@@ -57,6 +57,7 @@ function App() {
         <Route path='/carroProductos' element={<CarroCompraProductos />}></Route>
         <Route path='/historialProductos' element={<HistorialProductos />}></Route>
         <Route path='/conciertosPasadosCliente' element={<TablaConciertosPasadosCliente />}></Route>
+        <Route path='/valoraciones' element={<ValoracionesDeUsuario />}></Route>
         {/* CLIENTE Y ADMIN */}
         <Route path='/valoracionesConcierto/:id' element={<ValoracionesDeConcierto />}></Route>
         <Route path='/valoracionesUsuario/:id' element={<ValoracionesDeUsuario />}></Route>
