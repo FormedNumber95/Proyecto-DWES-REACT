@@ -44,6 +44,16 @@ const Valoracion = ({ comentario, fecha, puntuacion, id, usuarioId = -1 }) => {
           </button>
         </td>
       )}
+            {localStorage.getItem("rol") == "CLIENTE" && (
+        <td>
+          <button
+            className="btn-action btn-delete"
+            onClick={censurarValoracion}
+          >
+            ELIMINAR
+          </button>
+        </td>
+      )}
     </tr>
   );
 };
